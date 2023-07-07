@@ -1,3 +1,4 @@
+/* LOGIN DAFTAR OTP */
 .bgLogin {
   position: relative;
   width: 50vw;
@@ -52,4 +53,14 @@
   margin-right: 10vw;
   height: 90vh;
   overflow-y: auto;
+}
+/* LOGIN DAFTAR OTP */
+
+/* MENU PEMILIHAN */
+.tabs {
+  padding: 0 60px 0 39px;
+}
+
+.judul {
+  margin: 50px 0px 30px 30px;
 }
