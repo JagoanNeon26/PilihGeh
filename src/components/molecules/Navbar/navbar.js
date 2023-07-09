@@ -1,12 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Image from 'next/image';
 import { CircleButton } from 'components/atoms/Button/button';
-import { Row, Col } from 'react-bootstrap';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faAngleDown } from '@fortawesome/free-solid-svg-icons';
+import { Row, Col, Dropdown } from 'react-bootstrap';
 import styles from './navbar.module.css';
 
-function Navbar() {
+const Navbar = () => {
+  const [isOpen, setIsOpen] = useState(false);
+
+  const handleDropdownToggle = () => {
+    setIsOpen(!isOpen);
+  };
+
   return (
     <Row className={styles.container}>
       <Col>
@@ -19,16 +23,26 @@ function Navbar() {
           <CircleButton type="submit">
             <Image src="/Bell.png" alt="bell" width={26} height={30} />
           </CircleButton>
-          <div className={styles.verticalCenter}>
-            <CircleButton type="submit">
-              <Image src="/User.png" alt="bell" width={24} height={26} />
-            </CircleButton>
-            <FontAwesomeIcon icon={faAngleDown} style={{ fontSize: '20px' }} />
-          </div>
+          <Dropdown show={isOpen} onToggle={handleDropdownToggle}>
+            <Dropdown.Toggle
+              as={CircleButton}
+              type="submit"
+              style={{ pointerEvents: 'none' }}
+            >
+              <Image src="/User.png" alt="user" width={24} height={26} />
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {/* Dropdown menu items */}
+              <Dropdown.Item href="#profile">Profile</Dropdown.Item>
+              <Dropdown.Item href="#settings">Settings</Dropdown.Item>
+              <Dropdown.Divider />
+              <Dropdown.Item href="#logout">Logout</Dropdown.Item>
+            </Dropdown.Menu>
+          </Dropdown>
         </div>
       </Col>
     </Row>
   );
-}
+};
 
 export default Navbar;
