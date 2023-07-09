@@ -4,7 +4,7 @@ import { CircleButton } from 'components/atoms/Button/button';
 import { Row, Col, Dropdown } from 'react-bootstrap';
 import styles from './navbar.module.css';
 
-const Navbar = () => {
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   const handleDropdownToggle = () => {
@@ -43,6 +43,6 @@ const Navbar = () => {
       </Col>
     </Row>
   );
-};
+}
 
 export default Navbar;
