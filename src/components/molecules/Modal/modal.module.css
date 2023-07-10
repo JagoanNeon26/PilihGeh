@@ -1,0 +1,220 @@
+.judulModal {
+  font-weight: 500;
+  font-size: 16px;
+  padding-bottom: 10px;
+}
+
+.judulCard {
+  font-weight: 500;
+  font-size: 16px;
+  padding: 10px 0 10px 0;
+  text-align: center;
+}
+
+.header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.modal {
+  width: 50vw;
+  min-width: max-content;
+  height: 75vh;
+  min-width: max-content;
+  border-radius: 16px;
+}
+
+.modal-content {
+  background-color: #e8e8e8 !important;
+}
+.content {
+  background: #eeeeee;
+  border-radius: 16px;
+}
+
+.smallText {
+  font-weight: 400;
+  font-size: 12px;
+}
+
+/* Card */
+.normalCard {
+  width: auto;
+  height: max-content;
+  border-radius: 20px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 20px 15px 20px 15px;
+}
+
+.normalBold {
+  font-weight: 600;
+  font-size: 14px;
+}
+
+.normal {
+  font-weight: 300;
+  font-size: 14px;
+}
+
+.photoProfile {
+  width: 200px !important;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 5px solid rgb(74, 72, 72);
+  margin-right: 10px;
+  clip-path: circle(50% at 50% 50%);
+}
+
+.icon {
+  width: max-content;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-left: 20px;
+  background: none;
+}
+
+.photoEdit {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10px;
+  padding-top: 30px;
+}
+
+/* CSS */
+.icon {
+  appearance: none;
+  background-color: transparent;
+  border-radius: 15px;
+  border: 3px solid #15406a;
+  box-sizing: border-box;
+  color: #3b3b3b;
+  cursor: pointer;
+  font-size: 16px;
+  font-weight: 600;
+  line-height: normal;
+  margin: 0;
+  min-height: 60px;
+  min-width: 160px !important;
+  min-width: 0;
+  outline: none;
+  padding: 16px 24px;
+  text-align: center;
+  text-decoration: none;
+  transition: all 300ms cubic-bezier(0.23, 1, 0.32, 1);
+  -webkit-user-select: none;
+  user-select: none;
+  touch-action: manipulation;
+  width: 100%;
+  will-change: transform;
+  width: 12vw;
+}
+
+.icon:disabled {
+  pointer-events: none;
+}
+
+.icon:hover {
+  color: #fff;
+  background-color: #15406a;
+  box-shadow: rgba(0, 0, 0, 0.25) 0 8px 15px;
+  transform: translateY(-2px);
+}
+
+.icon:active {
+  box-shadow: none;
+  transform: translateY(0);
+}
+
+.photoProfile {
+  width: 20vw;
+}
+
+.modalHeaderProfile {
+  border-bottom: 2px solid #c2c2c2;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 16px 30px 16px 30px;
+  /* filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.25)); */
+}
+
+.headerEditProfile {
+  display: flex;
+  flex-direction: column;
+  font-size: 20px;
+  filter: none !important;
+}
+
+.headerEditDesc {
+  font-weight: lighter;
+  font-size: 12px;
+  padding-top: 5px;
+  filter: none !important;
+}
+
+.largeBold {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px 0 10px 0;
+  border-bottom: 2px solid #c2c2c2;
+  width: 100%;
+}
+
+.titleExpEdu {
+  font-size: 20px;
+  font-weight: bold;
+  padding: 10px;
+  width: max-content;
+  max-width: 50vw;
+}
+
+.addDivText {
+  padding-left: 10px;
+  font-weight: 500;
+}
+
+/* CSS */
+.addDiv {
+  align-items: center;
+  appearance: none;
+  background-color: #15406a;
+  border-radius: 4px;
+  border-width: 0;
+  box-sizing: border-box;
+  color: #ededed;
+  cursor: pointer;
+  display: inline-flex;
+  height: 48px;
+  justify-content: center;
+  line-height: 1;
+  padding-left: 16px;
+  padding-right: 16px;
+  transition: background-color 0.5s ease 0s;
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+.addDiv:hover,
+.addDiv:focus {
+  background-color: white;
+  color: #15406a;
+  border: 2px solid #15406a;
+}
+
+.addDiv:active {
+  box-shadow: #d6d6e7 0 3px 7px inset;
+  transform: translateY(2px);
+}
+
+.deleteBtn {
+  width: max-content;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+}

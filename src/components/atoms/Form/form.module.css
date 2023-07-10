@@ -16,6 +16,14 @@
   border: 3px solid #cad6e2;
 }
 
+.text-area-field {
+  height: 120px;
+  border-radius: 10px;
+  padding: 5px 0 5px 15px;
+  background-color: #edf1f4;
+  border: 3px solid #cad6e2;
+}
+
 .input-error {
   color: red;
 }
