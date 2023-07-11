@@ -41,14 +41,14 @@
 
 .formLogin {
   padding: 0;
-  margin-left: 5vw;
+  margin-left: 51px;
   margin-top: 6vh;
   margin-right: 11vw;
 }
 
 .formDaftar {
   padding: 0;
-  margin-left: 5vw;
+  margin-left: 51px;
   margin-top: 6vh;
   margin-right: 10vw;
   height: 90vh;
@@ -63,4 +63,13 @@
 
 .judul {
   margin: 50px 0px 30px 30px;
+}
+
+/* PROFILE */
+.bgProfile {
+  position: relative;
+  width: 50vw;
+  height: 90vh;
+  overflow-y: hidden;
+  object-fit: cover;
 }

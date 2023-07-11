@@ -33,7 +33,7 @@ function Navbar() {
             </Dropdown.Toggle>
             <Dropdown.Menu>
               {/* Dropdown menu items */}
-              <Dropdown.Item href="#profile">Profile</Dropdown.Item>
+              <Dropdown.Item href="/profile">Profile</Dropdown.Item>
               <Dropdown.Item href="#settings">Settings</Dropdown.Item>
               <Dropdown.Divider />
               <Dropdown.Item href="#logout">Logout</Dropdown.Item>
