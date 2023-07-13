@@ -41,7 +41,7 @@ function LoginForm() {
               control="input"
               name="email"
               type="email"
-              label="Email/Phone Number"
+              label="Email"
               placeholder="Enter your Email"
               formikProps={formikProps}
             />

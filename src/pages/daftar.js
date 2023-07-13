@@ -17,7 +17,6 @@ function LoginForm() {
   const initialValue = {
     email: '',
     name: '',
-    phoneNumber: '',
     password: '',
     confirmPassword: '',
   };
@@ -25,7 +24,6 @@ function LoginForm() {
   const validationSchema = Yup.object({
     email: Yup.string().email().required('Email is required'),
     name: Yup.string().required('Name is required'),
-    phoneNumber: Yup.string().required('Phone number is required'),
     password: Yup.string().required('Password is required'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Passwords must match')
@@ -33,7 +31,7 @@ function LoginForm() {
   });
 
   const onSubmit = (values) => {
-    const { email, name, phoneNumber, password, repeatPassword } = values;
+    const { email, name, password, repeatPassword } = values;
   };
 
   return (
@@ -59,14 +57,6 @@ function LoginForm() {
               type="text"
               label="Name"
               placeholder="Enter your Name"
-              formikProps={formikProps}
-            />
-            <FormController
-              control="input"
-              name="phoneNumber"
-              type="number"
-              label="Phone Number"
-              placeholder="Enter your Phone Number"
               formikProps={formikProps}
             />
             <FormController
