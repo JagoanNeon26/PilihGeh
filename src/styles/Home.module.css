@@ -73,3 +73,31 @@
   overflow-y: hidden;
   object-fit: cover;
 }
+
+/* Detail Pemilihan */
+.judulDetailPemilihan {
+  text-align: center;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 600;
+  width: 70vw;
+  margin-bottom: 20px;
+}
+
+.organisasiDetailPemilihan {
+  text-align: center;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 400;
+  margin-bottom: 20px;
+}
+
+.timeline {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 64vw;
+  height: 448px;
+  border-radius: 15px;
+  border: 1px solid #17b9f3;
+}

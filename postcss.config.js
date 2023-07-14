@@ -1,0 +1,8 @@
+module.exports = {
+  plugins: {
+    tailwindcss: {},
+    autoprefixer: {
+      overrideBrowserslist: ['last 2 versions', 'ie >= 11'],
+    },
+  },
+};
