@@ -20,3 +20,15 @@
   font-weight: 275;
   text-align: right;
 }
+
+.buttonModal {
+  color: yellowgreen;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  background-color: white;
+  border: 2px solid #17b9f3;
+  color: #17b9f3;
+}

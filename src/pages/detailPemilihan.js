@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from 'components/molecules/Navbar/navbar';
 import Card from 'components/molecules/Card/card';
-import { Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import HorizontalTimeline from 'components/atoms/Timeline/HorizontalTimeline';
 import styles from '../styles/Home.module.css';
 
@@ -54,6 +54,56 @@ function DetailPemilihan() {
         style={{ display: 'flex', justifyContent: 'center', marginTop: '45px' }}
       >
         <div className={styles.judulDetailPemilihan}>Real Time Count</div>
+      </Row>
+      <Row
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '45px',
+          gap: '27px',
+        }}
+      >
+        <div className={styles.realTimeCount}>584</div>
+        <div className={styles.textRealTimeCount}>Total Suara Masuk</div>
+      </Row>
+      <Row
+        style={{ display: 'flex', justifyContent: 'center', marginTop: '45px' }}
+      >
+        <div className={styles.realTimeCountSmallWrapper}>
+          <Col
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              gap: '27px',
+            }}
+          >
+            <div className={styles.realTimeCountSmall}>584</div>
+            <div className={styles.textRealTimeCountSmall}>Paslon 1</div>
+          </Col>
+          <Col
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              gap: '27px',
+            }}
+          >
+            <div className={styles.realTimeCountSmall}>584</div>
+            <div className={styles.textRealTimeCountSmall}>Paslon 2</div>
+          </Col>
+          <Col
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              flexDirection: 'column',
+              gap: '27px',
+            }}
+          >
+            <div className={styles.realTimeCountSmall}>584</div>
+            <div className={styles.textRealTimeCountSmall}>Paslon 3</div>
+          </Col>
+        </div>
       </Row>
     </div>
   );

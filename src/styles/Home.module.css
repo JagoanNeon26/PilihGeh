@@ -101,3 +101,53 @@
   border-radius: 15px;
   border: 1px solid #17b9f3;
 }
+
+.realTimeCount {
+  width: 378px;
+  height: 378px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #65c9ff;
+  font-size: 58px;
+  font-style: normal;
+  font-weight: 700;
+  color: #17b9f3;
+}
+
+.textRealTimeCount {
+  color: #374049;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+}
+
+.realTimeCountSmall {
+  width: 252px;
+  height: 252px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: 1px solid #65c9ff;
+  font-size: 38px;
+  font-style: normal;
+  font-weight: 700;
+  color: #17b9f3;
+}
+
+.textRealTimeCountSmall {
+  color: #374049;
+  font-size: 36px;
+  font-style: normal;
+  font-weight: 700;
+  text-align: center;
+}
+
+.realTimeCountSmallWrapper {
+  width: 70vw;
+  display: flex;
+  flex-direction: row;
+}
