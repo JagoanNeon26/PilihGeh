@@ -16,16 +16,22 @@ function LoginForm() {
 
   const initialValue = {
     email: '',
+    name: '',
     password: '',
+    confirmPassword: '',
   };
 
   const validationSchema = Yup.object({
     email: Yup.string().email().required('Email is required'),
+    name: Yup.string().required('Name is required'),
     password: Yup.string().required('Password is required'),
+    confirmPassword: Yup.string()
+      .oneOf([Yup.ref('password'), null], 'Passwords must match')
+      .required('Confirm Password is required'),
   });
 
   const onSubmit = (values) => {
-    const { email, password } = values;
+    const { email, name, password, repeatPassword } = values;
   };
 
   return (
@@ -41,8 +47,16 @@ function LoginForm() {
               control="input"
               name="email"
               type="email"
-              label="Email"
+              label="Email/Phone Number"
               placeholder="Enter your Email"
+              formikProps={formikProps}
+            />
+            <FormController
+              control="input"
+              name="name"
+              type="text"
+              label="Name"
+              placeholder="Enter your Name"
               formikProps={formikProps}
             />
             <FormController
@@ -53,8 +67,16 @@ function LoginForm() {
               placeholder="Enter your Password"
               formikProps={formikProps}
             />
+            <FormController
+              control="input"
+              name="confirmPassword"
+              type="password"
+              label="Confirm Password"
+              placeholder="Confirm your Password"
+              formikProps={formikProps}
+            />
             <BaseButton variant="primary" type="submit" disabled={isLoading}>
-              {isLoading ? 'Loading...' : 'Sign In'}
+              {isLoading ? 'Loading...' : 'Sign Up'}
             </BaseButton>
           </Stack>
         </Form>
@@ -67,21 +89,21 @@ export default function Home() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>PilihGeh-Login</title>
+        <title>PilihGeh-Sign Up</title>
         <link rel="icon" href="/Logo 3.png" />
       </Head>
 
       <Container fluid>
-        <Row>
-          <Col className={styles.formLogin}>
+        <Row className={styles.bgLoginDaftar}>
+          <Col className={styles.formDaftar}>
             <div className={styles.logoLogin}>
               <Image src="/Logo.png" alt="logo-login" layout="fill" />
             </div>
-            <div className={styles.TeksLogin}>Sign In</div>
+            <div className={styles.TeksLogin}>Sign Up</div>
             <div className={styles.teksDaftar}>
-              Dont Have Account?&nbsp;
+              Already Have Account?&nbsp;
               <div className={styles.linkDaftar}>
-                <Link href="/daftar">Create an Account</Link>
+                <Link href="/#">Sign In</Link>
               </div>
             </div>
             <LoginForm />
