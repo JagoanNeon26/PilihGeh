@@ -11,7 +11,7 @@ import * as Yup from 'yup';
 import Link from 'next/link';
 import styles from '../styles/Home.module.css';
 
-function LoginForm() {
+function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   const initialValue = {
@@ -42,7 +42,7 @@ function LoginForm() {
     >
       {(formikProps) => (
         <Form>
-          <Stack gap={4}>
+          <Stack gap={3}>
             <FormController
               control="input"
               name="email"
@@ -85,32 +85,35 @@ function LoginForm() {
   );
 }
 
-export default function Home() {
+export default function Daftar() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>PilihGeh-Sign Up</title>
+        <title>PilihGeh-Login</title>
         <link rel="icon" href="/Logo 3.png" />
       </Head>
 
       <Container fluid>
-        <Row className={styles.bgLoginDaftar}>
-          <Col className={styles.formDaftar}>
-            <div className={styles.logoLogin}>
-              <Image src="/Logo.png" alt="logo-login" layout="fill" />
-            </div>
-            <div className={styles.TeksLogin}>Sign Up</div>
-            <div className={styles.teksDaftar}>
-              Already Have Account?&nbsp;
-              <div className={styles.linkDaftar}>
-                <Link href="/#">Sign In</Link>
+        <Row>
+          <Col style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className={styles.formLoginDaftarOTP}>
+              <div className={styles.logoLoginRegisterOtp}>
+                <Image src="/Logo.png" alt="logo-login" layout="fill" />
               </div>
-            </div>
-            <LoginForm />
-          </Col>
-          <Col className="d-none d-md-block p-0">
-            <div className={styles.bgLogin}>
-              <Image src="/Bg login.png" alt="banner-login" layout="fill" />
+              <div className={styles.TeksLoginDaftarOtp}>Sign Up</div>
+              <div className={styles.containerLoginDaftarOTPForm}>
+                <div style={{ width: '250px' }}>
+                  <RegisterForm />
+                </div>
+              </div>
+              <div className={styles.containerAlready}>
+                <div className={styles.teksAlready}>
+                  Already have account?&nbsp;
+                  <div className={styles.linkAlready}>
+                    <Link href="/">Sign In</Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </Col>
         </Row>

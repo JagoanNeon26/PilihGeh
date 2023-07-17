@@ -1,49 +1,64 @@
 /* LOGIN DAFTAR OTP */
-.bgLogin {
-  position: relative;
-  width: 50vw;
-  height: 100vh;
-  overflow-y: hidden;
-  object-fit: cover;
+.formLoginDaftarOTP {
+  padding: 0;
+  margin-top: 6vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 30px;
 }
 
-.bgLoginDaftar {
-  overflow-y: hidden;
-  height: 100vh;
-}
-
-.logoLogin {
+.logoLoginRegisterOtp {
   position: relative;
   width: 145px;
   height: 36px;
-  margin-bottom: 40px;
 }
 
-.TeksLogin {
-  font-size: 40px;
-  font-weight: 700;
-  padding-bottom: 15px;
+.TeksLoginDaftarOtp {
+  color: #e6edf3;
+  text-align: center;
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 300;
+  line-height: normal;
 }
 
-.linkDaftar {
-  color: #17b9f3;
+.containerLoginDaftarOTPForm {
+  width: 300px;
+  height: max-content;
+  border-radius: 10px;
+  background: #161b22;
+  display: flex;
+  justify-content: center;
+  padding: 19px 0 24px 0;
 }
 
-.teksDaftar {
+.containerAlready {
+  width: 300px;
+  height: max-content;
+  border-radius: 10px;
+  border: 1px solid #30363d;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 58px;
+  margin-bottom: 20px;
+}
+
+.teksAlready {
   display: flex;
   flex-direction: row;
-  padding-bottom: 33px;
+  font-size: 12px;
+  color: #e6edf3;
+  text-align: center;
+}
+
+.linkAlready {
+  color: #17b9f3;
 }
 
 .teksOtp {
   padding-bottom: 33px;
-}
-
-.formLogin {
-  padding: 0;
-  margin-left: 51px;
-  margin-top: 6vh;
-  margin-right: 11vw;
 }
 
 .formOtp {
@@ -51,15 +66,6 @@
   margin-left: 51px;
   margin-top: 6vh;
   margin-right: 20vw;
-}
-
-.formDaftar {
-  padding: 0;
-  margin-left: 51px;
-  margin-top: 6vh;
-  margin-right: 10vw;
-  height: 90vh;
-  overflow-y: auto;
 }
 /* LOGIN DAFTAR OTP */
 

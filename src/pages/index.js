@@ -73,22 +73,25 @@ export default function Home() {
 
       <Container fluid>
         <Row>
-          <Col className={styles.formLogin}>
-            <div className={styles.logoLogin}>
-              <Image src="/Logo.png" alt="logo-login" layout="fill" />
-            </div>
-            <div className={styles.TeksLogin}>Sign In</div>
-            <div className={styles.teksDaftar}>
-              Dont Have Account?&nbsp;
-              <div className={styles.linkDaftar}>
-                <Link href="/daftar">Create an Account</Link>
+          <Col style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className={styles.formLoginDaftarOTP}>
+              <div className={styles.logoLoginRegisterOtp}>
+                <Image src="/Logo.png" alt="logo-login" layout="fill" />
               </div>
-            </div>
-            <LoginForm />
-          </Col>
-          <Col className="d-none d-md-block p-0">
-            <div className={styles.bgLogin}>
-              <Image src="/Bg login.png" alt="banner-login" layout="fill" />
+              <div className={styles.TeksLoginDaftarOtp}>Sign In</div>
+              <div className={styles.containerLoginDaftarOTPForm}>
+                <div style={{ width: '250px' }}>
+                  <LoginForm />
+                </div>
+              </div>
+              <div className={styles.containerAlready}>
+                <div className={styles.linkAlready}>
+                  Dont Have Account?&nbsp;
+                  <div className={styles.linkAlready}>
+                    <Link href="/daftar">Create an Account</Link>
+                  </div>
+                </div>
+              </div>
             </div>
           </Col>
         </Row>
