@@ -115,7 +115,7 @@ function LoginForm() {
               formikProps={formikProps}
             />
             <BaseButton variant="primary" type="submit" disabled={isLoading}>
-              {isLoading ? 'Loading...' : 'Sign Up'}
+              {isLoading ? 'Loading...' : 'Submit'}
             </BaseButton>
           </Stack>
         </Form>
@@ -135,13 +135,10 @@ export default function Home() {
       <Container fluid>
         <Navbar />
         <Row>
-          <Col className={styles.formDaftar}>
-            <div className={styles.TeksLogin}>Profile</div>
-            <LoginForm />
-          </Col>
-          <Col className="d-none d-md-block p-0">
-            <div className={styles.bgProfile}>
-              <Image src="/Bg login.png" alt="banner-login" layout="fill" />
+          <Col style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className={styles.formProfile}>
+              <div className={styles.teksProfile}>Profile</div>
+              <LoginForm />
             </div>
           </Col>
         </Row>

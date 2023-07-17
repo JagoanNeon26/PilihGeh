@@ -64,9 +64,7 @@ function MenuPemilihan() {
       <div style={{ overflowX: 'hidden' }}>
         <Navbar />
         <Row>
-          <Col className={styles.judul}>
-            <h1>My Voting</h1>
-          </Col>
+          <Col className={styles.judul}>My Voting</Col>
         </Row>
         <Row>
           <Col className={styles.tabs}>
@@ -77,7 +75,7 @@ function MenuPemilihan() {
                 marginBottom: '-30px',
               }}
             >
-              <Button onClick={handleShow}>
+              <Button onClick={handleShow} className={styles.buttonAddVote}>
                 <div style={{ width: '60px' }}>Add</div>
               </Button>
             </div>

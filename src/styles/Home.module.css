@@ -70,6 +70,20 @@
 
 .judul {
   margin: 50px 0px 30px 30px;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 600;
+}
+
+.buttonAddVote {
+  background-color: white;
+  border: 2px solid #17b9f3;
+  color: #17b9f3;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
 }
 
 /* PROFILE */
@@ -79,6 +93,17 @@
   height: 90vh;
   overflow-y: hidden;
   object-fit: cover;
+}
+
+.formProfile {
+  width: 40vw;
+}
+
+.teksProfile {
+  font-size: 40px;
+  font-weight: 700;
+  padding-bottom: 30px;
+  text-align: center;
 }
 
 /* Detail Pemilihan */
