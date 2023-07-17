@@ -21,9 +21,7 @@ function FormAddVoting() {
     // fullName: Yup.string().required('Harga Tawar diperlukan!'),
   });
 
-  const onSubmit = (values) => {
-    console.log(values);
-  };
+  const onSubmit = (values) => {};
 
   return (
     <Formik
