@@ -7,16 +7,15 @@
 }
 
 .primary {
-  background-color: #00bcff;
+  background-color: #142b38;
   color: white;
   font-size: 12px;
   font-weight: 500;
 }
 
 .black {
-  background-color: white;
-  border: 1px solid black;
-  color: black;
+  border: 1px solid white;
+  color: white;
 }
 
 .circleButton {
