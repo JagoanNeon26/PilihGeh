@@ -13,7 +13,7 @@ import Link from 'next/link';
 import Navbar from 'components/molecules/Navbar/navbar';
 import styles from '../styles/Home.module.css';
 
-function LoginForm() {
+function ProfileForm() {
   const [isLoading, setIsLoading] = useState(false);
 
   const choices = [
@@ -64,7 +64,7 @@ function LoginForm() {
     >
       {(formikProps) => (
         <Form>
-          <Stack gap={4}>
+          <Stack gap={3}>
             <FormController
               control="input"
               name="email"
@@ -133,12 +133,16 @@ export default function Home() {
       </Head>
 
       <Container fluid>
-        <Navbar />
         <Row>
+          <Navbar />
           <Col style={{ display: 'flex', justifyContent: 'center' }}>
-            <div className={styles.formProfile}>
-              <div className={styles.teksProfile}>Profile</div>
-              <LoginForm />
+            <div className={styles.formLoginDaftarOTP}>
+              <div className={styles.TeksLoginDaftarOtp}>Profile</div>
+              <div className={styles.containerLoginDaftarOTPForm}>
+                <div style={{ width: '250px' }}>
+                  <ProfileForm />
+                </div>
+              </div>
             </div>
           </Col>
         </Row>

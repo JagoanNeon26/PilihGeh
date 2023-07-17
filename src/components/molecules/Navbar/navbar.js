@@ -1,23 +1,42 @@
-import React, { useState } from 'react';
-import Image from 'next/image';
+import React, { useState, useEffect } from 'react';
 import { CircleButton } from 'components/atoms/Button/button';
-import { Row, Col, Dropdown } from 'react-bootstrap';
+import { Row, Col, Dropdown, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faArrowLeft, faBell, faGear } from '@fortawesome/free-solid-svg-icons';
 import styles from './navbar.module.css';
+import { useRouter } from 'next/router';
 
 function Navbar() {
+  const router = useRouter();
   const [isOpen, setIsOpen] = useState(false);
+  const [isProfilePage, setIsProfilePage] = useState(false);
 
   const handleDropdownToggle = () => {
     setIsOpen(!isOpen);
   };
 
+  useEffect(() => {
+    setIsProfilePage(router.pathname === '/profile');
+  }, [router.pathname]);
+
+  const handleGoBack = () => {
+    router.push();
+  };
+
   return (
     <Row className={styles.container}>
       <Col>
-        <div className={styles.logo}>
-          <Image src="/Logo.png" alt="logo" layout="fill" />
+        <div className={styles.leftNavbar}>
+          {isProfilePage && (
+            <CircleButton
+              type="submit"
+              onClick={handleGoBack}
+              style={{ marginLeft: 10 }}
+            >
+              <FontAwesomeIcon icon={faArrowLeft} />
+            </CircleButton>
+          )}
+          <Image src="/Logo.png" alt="logo" className={styles.logo} />
         </div>
       </Col>
       <Col className={styles.icon}>

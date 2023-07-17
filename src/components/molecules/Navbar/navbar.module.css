@@ -5,11 +5,17 @@
   align-items: center;
 }
 
+.leftNavbar {
+  margin-left: 39px;
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+  height: 36px;
+}
+
 .logo {
-  position: relative;
   width: 137px;
   height: 36px;
-  margin-left: 39px;
 }
 
 .icon {
