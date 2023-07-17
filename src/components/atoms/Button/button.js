@@ -1,6 +1,6 @@
 import React from 'react';
 import styles from 'components/atoms/Button/button.module.css';
-import { Button } from 'react-bootstrap';
+import { Button, Dropdown } from 'react-bootstrap';
 
 function BaseButton(props) {
   const {
@@ -18,6 +18,7 @@ function BaseButton(props) {
       className={[
         [styles.btn],
         [variant === 'primary' && styles.primary],
+        [variant === 'black' && styles.black],
         [active && styles.primary],
         'btn-check:active',
       ]}
@@ -28,3 +29,20 @@ function BaseButton(props) {
   );
 }
 export default BaseButton;
+
+export function CircleButton(props) {
+  const { variant = 'black', children } = props;
+
+  return (
+    <Dropdown.Toggle
+      variant={variant}
+      className={[
+        styles.circleButton,
+        variant === 'black' ? styles.black : '',
+        styles.hideCaret, // Add the hideCaret class
+      ]}
+    >
+      {children}
+    </Dropdown.Toggle>
+  );
+}

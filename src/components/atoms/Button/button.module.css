@@ -11,3 +11,22 @@
   border: 2px solid #17b9f3;
   color: #17b9f3;
 }
+
+.black {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+}
+
+.circleButton {
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+}
+
+.hideCaret::after {
+  display: none;
+}
