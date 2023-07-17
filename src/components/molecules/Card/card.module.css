@@ -1,0 +1,34 @@
+.card {
+  width: 331px;
+}
+
+.cardImg {
+  width: 331px;
+  height: 431px;
+  border-radius: 10px;
+}
+
+.textPaslon {
+  font-size: 18px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.textDesc {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 275;
+  text-align: right;
+}
+
+.buttonModal {
+  color: yellowgreen;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 46px;
+  background-color: white;
+  border: 2px solid #17b9f3;
+  color: #17b9f3;
+}
