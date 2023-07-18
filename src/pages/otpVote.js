@@ -5,7 +5,6 @@ import Head from 'next/head';
 import { Col, Container, Row, Stack } from 'react-bootstrap';
 import Image from 'next/image';
 import BaseButton from 'components/atoms/Button/button';
-import Link from 'next/link';
 import OTPInput from 'react-otp-input';
 import styles from '../styles/Home.module.css';
 
