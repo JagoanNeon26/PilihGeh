@@ -6,6 +6,35 @@ import HorizontalTimeline from 'components/atoms/Timeline/HorizontalTimeline';
 import styles from '../styles/Home.module.css';
 
 function DetailPemilihan() {
+  const cardsData = [
+    {
+      id: 1,
+      paslon1: 'Holau',
+      paslon2: 'Akram',
+      image: '/Paslon 1.png',
+      realtimecount: 584,
+    },
+    {
+      id: 2,
+      paslon1: 'Holau',
+      paslon2: 'Akram',
+      image: '/Paslon 2.png',
+      realtimecount: 443,
+    },
+    {
+      id: 3,
+      paslon1: 'Holau',
+      paslon2: 'Akram',
+      image: '/Paslon 3.png',
+      realtimecount: 222,
+    },
+  ];
+
+  const totalCount = cardsData.reduce(
+    (total, item) => total + item.realtimecount,
+    0
+  );
+
   const timelineItems = [
     {
       date: 'January 1, 2023',
@@ -34,19 +63,22 @@ function DetailPemilihan() {
         </div>
       </Row>
       <Row>
-        <div
-          style={{ display: 'flex', justifyContent: 'center', gap: '100px ' }}
-        >
-          <Card paslon1="Holau" paslon2="Akram" image="/Paslon 1.png" />
-          <Card paslon1="Holau" paslon2="Akram" image="/Paslon 2.png" />
-          <Card paslon1="Holau" paslon2="Akram" image="/Paslon 3.png" />
+        <div className={styles.cardContainer}>
+          {cardsData.map((item) => (
+            <Card
+              key={item.id}
+              paslon1={item.paslon1}
+              paslon2={item.paslon2}
+              image={item.image}
+            />
+          ))}
         </div>
       </Row>
       <Row
         style={{ display: 'flex', justifyContent: 'center', marginTop: '45px' }}
       >
         <div className={styles.judulDetailPemilihan}>Timeline</div>
-        <div className={styles.timeline}>
+        <div className={styles.timelineBox}>
           <HorizontalTimeline timelineItems={timelineItems} />
         </div>
       </Row>
@@ -63,14 +95,20 @@ function DetailPemilihan() {
           gap: '27px',
         }}
       >
-        <div className={styles.realTimeCount}>584</div>
+        <div className={styles.realTimeCount}>{totalCount}</div>
         <div className={styles.textRealTimeCount}>Total Suara Masuk</div>
       </Row>
       <Row
-        style={{ display: 'flex', justifyContent: 'center', marginTop: '45px' }}
+        style={{
+          display: 'flex',
+          justifyContent: 'center',
+          marginTop: '45px',
+          gap: '27px',
+        }}
       >
-        <div className={styles.realTimeCountSmallWrapper}>
+        {cardsData.map((item) => (
           <Col
+            key={item.id}
             style={{
               display: 'flex',
               alignItems: 'center',
@@ -78,32 +116,14 @@ function DetailPemilihan() {
               gap: '27px',
             }}
           >
-            <div className={styles.realTimeCountSmall}>584</div>
-            <div className={styles.textRealTimeCountSmall}>Paslon 1</div>
+            <div className={styles.realTimeCountSmall}>
+              {item.realtimecount}
+            </div>
+            <div className={styles.textRealTimeCountSmall}>
+              Paslon {item.id}
+            </div>
           </Col>
-          <Col
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column',
-              gap: '27px',
-            }}
-          >
-            <div className={styles.realTimeCountSmall}>584</div>
-            <div className={styles.textRealTimeCountSmall}>Paslon 2</div>
-          </Col>
-          <Col
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              flexDirection: 'column',
-              gap: '27px',
-            }}
-          >
-            <div className={styles.realTimeCountSmall}>584</div>
-            <div className={styles.textRealTimeCountSmall}>Paslon 3</div>
-          </Col>
-        </div>
+        ))}
       </Row>
     </div>
   );

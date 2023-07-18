@@ -1,3 +1,17 @@
 .timeline {
   width: 15vw;
 }
+
+.timelineTitle {
+  color: #e6edf3;
+}
+
+.timelineTime {
+  color: #e6edf3;
+}
+
+@media (max-width: 768px) {
+  .timeline {
+    width: 100%;
+  }
+}

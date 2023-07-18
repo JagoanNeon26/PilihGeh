@@ -37,9 +37,9 @@ function Card({ paslon1, paslon2, image }) {
             </BootstrapCard.Text>
           </Col>
         </Row>
-        <Row style={{ width: '331px', margin: '0' }}>
+        <Row style={{ width: '299px', margin: '0' }}>
           <Button className={styles.buttonModal} onClick={handleShow}>
-            <div style={{ width: '60px' }}>Add</div>
+            <div style={{ width: '60px' }}>Info</div>
           </Button>
         </Row>
         <ModalVote show={modalShow} onHide={() => handleClose()} />

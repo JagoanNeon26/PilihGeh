@@ -1,9 +1,13 @@
 .card {
-  width: 331px;
+  width: 300px;
+  background-color: #0d1117;
+  color: #e6edf3;
+  border: 1px solid #e6edf3;
+  border-radius: 10px;
 }
 
 .cardImg {
-  width: 331px;
+  width: 300px;
   height: 431px;
   border-radius: 10px;
 }
@@ -22,13 +26,18 @@
 }
 
 .buttonModal {
-  color: yellowgreen;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
   height: 46px;
-  background-color: white;
-  border: 2px solid #17b9f3;
-  color: #17b9f3;
+  background-color: #0d1117;
+  border: 1px solid #e6edf3;
+  color: #e6edf3;
+  border-radius: 10px;
+  border-top: unset;
+  border-top-left-radius: 0px;
+  border-top-right-radius: 0px;
+  border-left: 1px;
+  border-bottom: 1px;
 }
