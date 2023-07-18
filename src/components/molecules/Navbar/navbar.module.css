@@ -6,11 +6,7 @@
 }
 
 .leftNavbar {
-  margin-left: 39px;
-  display: flex;
-  flex-direction: row;
-  gap: 20px;
-  height: 36px;
+  margin-left: 25px;
 }
 
 .logo {
@@ -21,7 +17,6 @@
 .icon {
   display: flex;
   justify-content: flex-end;
-  margin-right: 20px;
 }
 
 .iconWrapper {
@@ -36,4 +31,11 @@
   flex-direction: row;
   align-items: center;
   gap: 8px;
+}
+
+@media (max-width: 425px) {
+  .logo {
+    width: 30px;
+    height: 30px;
+  }
 }

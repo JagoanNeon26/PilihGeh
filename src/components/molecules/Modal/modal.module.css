@@ -29,8 +29,26 @@
 .accordionBody {
   visibility: visible;
   text-align: justify;
+  background-color: #0d1117;
+}
+
+.accordionHeader {
+  background-color: #0d1117;
 }
 
 .accordion {
   width: 50vw;
+  color: #e6edf3;
+}
+
+@media (max-width: 576px) {
+  .modal {
+    width: 96vw;
+    height: max-content;
+  }
+
+  .accordion {
+    width: 80vw;
+    color: #e6edf3;
+  }
 }

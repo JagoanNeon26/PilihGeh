@@ -1,13 +1,15 @@
 /* eslint-disable no-unused-vars */
 import { React } from 'react';
-import { Modal, Accordion } from 'react-bootstrap';
+import { Modal, Accordion, ModalFooter } from 'react-bootstrap';
 import BaseButton from 'components/atoms/Button/button';
 import styles from './modal.module.css';
 
-export default function ModalProfil(props) {
+export default function ModalVote(props) {
+  const { show, onHide } = props;
   return (
     <Modal
-      {...props}
+      show={show}
+      onHide={onHide}
       dialogClassName={styles.modal}
       contentClassName={styles.modal}
       size="md"
@@ -20,31 +22,39 @@ export default function ModalProfil(props) {
           fontWeight: 'bold',
           fontSize: '18px',
           padding: '16px 30px 16px 30px',
+          backgroundColor: '#0D1117',
+          color: '#e6edf3',
         }}
         closeButton
       >
         <div className={styles.headerEditProfile}>
-          Edit Profil
+          Add Voting
           <div className={styles.headerEditDesc}>
-            Isilah form dibawah ini untuk mengubah profil
+            Fill Form Below to Add Voting
           </div>
         </div>
       </Modal.Header>
       <Modal.Body
         style={{
-          padding: '10px 30px 50px 30px',
+          padding: '10px 30px 30px 30px',
           overflowY: 'auto',
+          backgroundColor: '#0D1117',
+          color: '#e6edf3',
         }}
       >
         <Accordion defaultActiveKey="0" className={styles.accordion}>
           <Accordion.Item eventKey="0">
-            <Accordion.Header>Visi</Accordion.Header>
+            <Accordion.Header className={styles.accordionHeader}>
+              Visi
+            </Accordion.Header>
             <Accordion.Body className={styles.accordionBody}>
               Test
             </Accordion.Body>
           </Accordion.Item>
           <Accordion.Item eventKey="1">
-            <Accordion.Header>Misi</Accordion.Header>
+            <Accordion.Header className={styles.accordionHeader}>
+              Misi
+            </Accordion.Header>
             <Accordion.Body className={styles.accordionBody}>
               Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
               eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
@@ -57,11 +67,11 @@ export default function ModalProfil(props) {
           </Accordion.Item>
         </Accordion>
       </Modal.Body>
-      <Modal.Footer>
+      <ModalFooter style={{ backgroundColor: '#0D1117', color: '#e6edf3' }}>
         <BaseButton type="submit" to="/verifPhotoVote">
           <div style={{ width: '100px' }}>Vote</div>
         </BaseButton>
-      </Modal.Footer>
+      </ModalFooter>
     </Modal>
   );
 }

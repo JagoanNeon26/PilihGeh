@@ -115,22 +115,31 @@
 /* Detail Pemilihan */
 .judulDetailPemilihan {
   text-align: center;
-  font-size: 36px;
+  font-size: 40px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 500;
   width: 70vw;
   margin-bottom: 20px;
+  color: #e6edf3;
 }
 
 .organisasiDetailPemilihan {
   text-align: center;
   font-size: 16px;
   font-style: normal;
-  font-weight: 400;
+  font-weight: 300;
   margin-bottom: 20px;
+  color: #e6edf3;
 }
 
-.timeline {
+.cardContainer {
+  display: flex;
+  justify-content: center;
+  gap: 100px;
+  flex-wrap: wrap;
+}
+
+.timelineBox {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -155,7 +164,7 @@
 }
 
 .textRealTimeCount {
-  color: #374049;
+  color: #e6edf3;
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
@@ -177,17 +186,11 @@
 }
 
 .textRealTimeCountSmall {
-  color: #374049;
+  color: #e6edf3;
   font-size: 36px;
   font-style: normal;
   font-weight: 700;
   text-align: center;
-}
-
-.realTimeCountSmallWrapper {
-  width: 70vw;
-  display: flex;
-  flex-direction: row;
 }
 
 .buttonUploadPhoto {
@@ -212,4 +215,47 @@
   margin-bottom: 32px;
   width: 720px;
   height: 1280px;
+}
+
+@media (max-width: 768px) {
+  .cardContainer {
+    flex-wrap: wrap;
+    gap: 20px;
+    padding-right: 0;
+  }
+
+  .judulDetailPemilihan {
+    font-size: 20px;
+    width: 95vw;
+  }
+
+  .timelineBox {
+    width: 95vw;
+    padding: 0;
+  }
+
+  .realTimeCount {
+    width: 278px;
+    height: 278px;
+    border-radius: 50%;
+    font-size: 36px;
+    font-weight: 500;
+  }
+
+  .textRealTimeCount {
+    font-size: 20px;
+    font-weight: 500;
+  }
+
+  .realTimeCountSmall {
+    width: 200px;
+    height: 200px;
+    font-size: 24px;
+    font-weight: 500;
+  }
+
+  .textRealTimeCountSmall {
+    font-size: 20px;
+    font-weight: 500;
+  }
 }
