@@ -106,7 +106,6 @@ export default function ModalAddVoting(props) {
       >
         <FormAddVoting />
       </Modal.Body>
-      <Modal.Footer />
     </Modal>
   );
 }

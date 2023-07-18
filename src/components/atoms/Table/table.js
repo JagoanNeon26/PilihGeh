@@ -58,7 +58,15 @@ function TableVote() {
       <tbody className={styles.tableBody}>
         {data.map((item) => (
           <tr key={data.id} style={{ verticalAlign: 'middle' }}>
-            <td style={{ textAlign: 'left', width: '40vw' }}>{item.name}</td>
+            <td
+              style={{
+                textAlign: 'left',
+                width: '40vw',
+                textOverflow: 'ellipsis',
+              }}
+            >
+              {item.name}
+            </td>
             <td style={{ width: '15vw' }}>{item.date}</td>
             <td style={{ width: '8vw' }}>
               {voteStatusToLogo(item.voteStatus)}
