@@ -5,7 +5,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
 import styles from './navbar.module.css';
 
-const Navbar = () => {
+function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [width, setWidth] = useState(0);
 
@@ -59,6 +59,6 @@ const Navbar = () => {
       </Col>
     </Row>
   );
-};
+}
 
 export default Navbar;
