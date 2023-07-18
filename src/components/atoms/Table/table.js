@@ -57,7 +57,7 @@ function TableVote() {
       </thead>
       <tbody className={styles.tableBody}>
         {data.map((item) => (
-          <tr key={data.id} style={{ verticalAlign: 'middle' }}>
+          <tr key={item.id} style={{ verticalAlign: 'middle' }}>
             <td
               style={{
                 textAlign: 'left',
