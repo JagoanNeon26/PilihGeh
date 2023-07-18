@@ -85,7 +85,7 @@ export default function Home() {
                 </div>
               </div>
               <div className={styles.containerAlready}>
-                <div className={styles.linkAlready}>
+                <div className={styles.teksAlready}>
                   Dont Have Account?&nbsp;
                   <div className={styles.linkAlready}>
                     <Link href="/daftar">Create an Account</Link>
