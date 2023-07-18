@@ -16,3 +16,13 @@
   font-weight: 400;
   height: 66px;
 }
+
+@media (max-width: 768px) {
+  .tableHead {
+    font-size: 12px;
+  }
+
+  .tableBody {
+    font-size: 12px;
+  }
+}

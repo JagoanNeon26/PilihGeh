@@ -28,10 +28,14 @@ function MenuPemilihan() {
               }}
             >
               <Button onClick={handleShow} className={styles.buttonAddVote}>
-                <div style={{ width: '60px' }}>Add</div>
+                <div className={styles.widthButtonAddVote}>Add</div>
               </Button>
             </div>
-            <Tabs defaultActiveKey="voters" id="uncontrolled-tab-example">
+            <Tabs
+              defaultActiveKey="voters"
+              id="uncontrolled-tab-example"
+              className={styles.tab}
+            >
               <Tab eventKey="voters" title="Voters">
                 <TableVote />
               </Tab>
