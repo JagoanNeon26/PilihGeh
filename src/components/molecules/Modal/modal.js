@@ -84,6 +84,8 @@ export default function ModalAddVoting(props) {
           fontWeight: 'bold',
           fontSize: '18px',
           padding: '16px 30px 16px 30px',
+          backgroundColor: '#0D1117',
+          color: '#e6edf3',
         }}
         closeButton
       >
@@ -98,11 +100,12 @@ export default function ModalAddVoting(props) {
         style={{
           padding: '10px 30px 30px 30px',
           overflowY: 'auto',
+          backgroundColor: '#0D1117',
+          color: '#e6edf3',
         }}
       >
         <FormAddVoting />
       </Modal.Body>
-      <Modal.Footer />
     </Modal>
   );
 }

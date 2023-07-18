@@ -44,11 +44,13 @@ function OtpForm() {
           renderInput={(props) => <input {...props} />}
           shouldAutoFocus
           inputStyle={{
-            width: '53px',
-            height: '53px',
-            backgroundColor: '#EDF1F4',
-            border: '3px solid #CAD6E2',
+            width: '40px',
+            height: '40px',
+            backgroundColor: '#0D1117',
+            border: '1px solid #30363D',
             borderRadius: '6px',
+            color: '#edf1f4',
+            fontSize: '16px',
           }}
           containerStyle={{
             display: 'flex',
@@ -56,7 +58,12 @@ function OtpForm() {
             gap: '10px',
           }}
         />
-        <BaseButton variant="primary" type="submit" disabled={isLoading}>
+        <BaseButton
+          variant="primary"
+          type="submit"
+          disabled={isLoading}
+          to="/menuPemilihan"
+        >
           {isLoading ? 'Loading...' : 'Sign In'}
         </BaseButton>
       </Stack>
@@ -64,30 +71,33 @@ function OtpForm() {
   );
 }
 
-export default function Home() {
+export default function OtpVerif() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>PilihGeh-Verification</title>
+        <title>PilihGeh-Verification OTP</title>
         <link rel="icon" href="/Logo 3.png" />
       </Head>
 
       <Container fluid>
         <Row>
-          <Col className={styles.formLogin}>
-            <div className={styles.logoLogin}>
-              <Image src="/Logo.png" alt="logo-login" layout="fill" />
-            </div>
-            <div className={styles.TeksLogin}>Verification Code</div>
-            <div className={styles.teksOtp}>
-              We have sent the code verification to <br />
-              <b>Your WhatsApp Number or Email</b>
-            </div>
-            <OtpForm />
-          </Col>
-          <Col className="d-none d-md-block p-0">
-            <div className={styles.bgLogin}>
-              <Image src="/Bg login.png" alt="banner-login" layout="fill" />
+          <Col style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className={styles.formLoginDaftarOTP}>
+              <div className={styles.logoLoginRegisterOtp}>
+                <Image src="/Logo.png" alt="logo-login" layout="fill" />
+              </div>
+              <div className={styles.TeksLoginDaftarOtp}>Verification Code</div>
+              <div className={styles.containerAlready}>
+                <div className={styles.teksAlready}>
+                  We have sent the code verification to Your WhatsApp Number or
+                  Email
+                </div>
+              </div>
+              <div className={styles.containerLoginDaftarOTPForm}>
+                <div style={{ width: '250px' }}>
+                  <OtpForm />
+                </div>
+              </div>
             </div>
           </Col>
         </Row>
