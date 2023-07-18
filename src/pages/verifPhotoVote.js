@@ -73,20 +73,23 @@ export default function Home() {
 
       <Container fluid>
         <Row>
-          <Col className={styles.formOtp}>
-            <div className={styles.logoLogin}>
-              <Image src="/Logo.png" alt="logo-login" layout="fill" />
-            </div>
-            <div className={styles.TeksLogin}>Photo Verification</div>
-            <div className={styles.teksOtp}>
-              Please take a photo using your ID card <br />
-              to verify that you are voting.
-            </div>
-            <PhotoUploader />
-          </Col>
-          <Col className="d-none d-md-block p-0">
-            <div className={styles.bgLogin}>
-              <Image src="/Bg login.png" alt="banner-login" layout="fill" />
+          <Col style={{ display: 'flex', justifyContent: 'center' }}>
+            <div className={styles.formLoginDaftarOTP}>
+              <div className={styles.logoLoginRegisterOtp}>
+                <Image src="/Logo.png" alt="logo-login" layout="fill" />
+              </div>
+              <div className={styles.TeksLoginDaftarOtp}>
+                Photo Verification
+              </div>
+              <div className={styles.containerAlready}>
+                <div className={styles.teksAlready}>
+                  Please take a photo using your ID card to verify that you are
+                  voting.
+                </div>
+              </div>
+              <div className={styles.containerPhotoUploader}>
+                <PhotoUploader />
+              </div>
             </div>
           </Col>
         </Row>
