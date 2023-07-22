@@ -3,6 +3,8 @@
   height: 60px;
   display: flex;
   align-items: center;
+  background-color: black;
+  margin: 0;
 }
 
 .leftNavbar {
@@ -17,6 +19,7 @@
 .icon {
   display: flex;
   justify-content: flex-end;
+  margin-right: 25px;
 }
 
 .iconWrapper {
@@ -33,9 +36,38 @@
   gap: 8px;
 }
 
+.containerTabs {
+  width: 100vw;
+  height: max-content;
+  margin: 0;
+  background-color: black;
+  border-bottom: 1px solid #e6edf3;
+  padding-left: 18px;
+  overflow-x: auto;
+  white-space: nowrap;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for IE and Edge */
+}
+
+.containerTabs::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Opera */
+}
+
 @media (max-width: 425px) {
   .logo {
     width: 30px;
     height: 30px;
+  }
+
+  .icon {
+    margin-right: 10px;
+  }
+
+  .leftNavbar {
+    margin-left: 10px;
+  }
+
+  .containerTabs {
+    padding-left: 2px;
   }
 }

@@ -21,7 +21,7 @@ function BaseButton(props) {
         className={[
           [styles.btn],
           [variant === 'primary' && styles.primary],
-          [variant === 'black' && styles.black],
+          [variant === 'white' && styles.white],
           [active && styles.primary],
           'btn-check:active',
         ]}
@@ -35,14 +35,14 @@ function BaseButton(props) {
 export default BaseButton;
 
 export function CircleButton(props) {
-  const { variant = 'black', children } = props;
+  const { variant = 'white', children } = props;
 
   return (
     <Dropdown.Toggle
       variant={variant}
       className={[
         styles.circleButton,
-        variant === 'black' ? styles.black : '',
+        variant === 'white' ? styles.white : '',
         styles.hideCaret, // Add the hideCaret class
       ]}
     >

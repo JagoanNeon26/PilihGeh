@@ -10,14 +10,19 @@
   font-weight: 400;
 }
 
+.input-required {
+  color: red;
+}
+
 .input-field {
   height: 36px;
   border-radius: 5px;
-  padding: 5px 0 5px 15px;
+  padding: 5px 15px 5px 15px;
   background-color: #0d1117;
   border: 1px solid #30363d;
   color: #edf1f4;
   font-size: 13px;
+  color-scheme: dark;
 }
 
 .text-area-field {
