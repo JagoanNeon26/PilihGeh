@@ -5,11 +5,21 @@
 }
 
 .modal {
-  width: 50vw;
-  min-width: max-content;
-  height: 75vh;
+  width: 30vw;
   min-width: max-content;
   border-radius: 16px;
+}
+
+.modalAddCandidate {
+  width: 30vw;
+  min-width: max-content;
+  height: 70vh;
+  overflow-y: visible;
+  border-radius: 16px;
+}
+
+.modalDelete {
+  width: max-content;
 }
 
 .headerEditProfile {
@@ -20,6 +30,14 @@
 }
 
 .headerEditDesc {
+  font-weight: lighter;
+  font-size: 12px;
+  padding-top: 5px;
+  filter: none !important;
+}
+
+.headerRequired {
+  display: flex;
   font-weight: lighter;
   font-size: 12px;
   padding-top: 5px;
@@ -41,6 +59,12 @@
   color: #e6edf3;
 }
 
+.emailDelete {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 700;
+}
+
 @media (max-width: 576px) {
   .modal {
     width: 96vw;
@@ -50,5 +74,9 @@
   .accordion {
     width: 80vw;
     color: #e6edf3;
+  }
+
+  .modalDelete {
+    width: 95vw;
   }
 }

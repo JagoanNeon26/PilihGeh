@@ -125,6 +125,7 @@
   width: 70vw;
   margin-bottom: 20px;
   color: #e6edf3;
+  margin-top: 20px;
 }
 
 .organisasiDetailPemilihan {
@@ -139,8 +140,11 @@
 .cardContainer {
   display: flex;
   justify-content: center;
+  align-items: center;
   gap: 100px;
   flex-wrap: wrap;
+  height: 599px;
+  padding: 0;
 }
 
 .timelineBox {
@@ -229,6 +233,55 @@
   margin-bottom: 32px;
 }
 
+/* Admin */
+.containerNoValue {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: #e6edf3;
+}
+
+.buttonNoValueWrapper {
+  display: flex;
+  justify-content: center;
+}
+
+.editButtonWrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 36vw;
+  margin-bottom: 20px;
+}
+
+.tableAdminWrapper {
+  margin-top: 20px;
+  padding: 0 60px 0 39px;
+}
+
+.containerSettings {
+  width: 380px;
+  border-radius: 10px;
+  border: 1px solid #e6edf3;
+  height: max-content;
+  padding: 20px 30px 20px 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  color: #e6edf3;
+}
+
+.judulContainerSettings {
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 500;
+}
+
+.descContainerSettings {
+  font-size: 14px;
+  font-style: normal;
+  font-weight: 300;
+}
+
 @media (max-width: 768px) {
   .judul {
     margin: 30px 0px 30px 30px;
@@ -283,5 +336,13 @@
   .textRealTimeCountSmall {
     font-size: 20px;
     font-weight: 500;
+  }
+
+  .editButtonWrapper {
+    margin-right: 5vw;
+  }
+
+  .containerSettings {
+    width: 300px;
   }
 }

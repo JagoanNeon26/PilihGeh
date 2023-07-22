@@ -6,6 +6,9 @@
   font-weight: 400;
   height: 66px;
   vertical-align: middle;
+  border-top: 1px solid #edf1f4;
+  border-left: 1px solid #edf1f4;
+  border-right: 1px solid #edf1f4;
 }
 
 .tableBody {
@@ -15,6 +18,27 @@
   font-style: normal;
   font-weight: 400;
   height: 66px;
+  border-left: 1px solid #edf1f4;
+  border-right: 1px solid #edf1f4;
+  height: 20vh;
+}
+
+.buttonDelete:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 576px) {
+  .tableBody {
+    height: 10vh;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 200;
+  }
+  .tableHead {
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 200;
+  }
 }
 
 @media (max-width: 768px) {
