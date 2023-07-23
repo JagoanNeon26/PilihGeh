@@ -1,8 +1,10 @@
+/* eslint-disable consistent-return */
 import React, { useState, useEffect } from 'react';
 import { CircleButton } from 'components/atoms/Button/button';
 import { Row, Col, Dropdown, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
+import Link from 'next/link';
 import styles from './navbar.module.css';
 
 function Navbar() {
@@ -14,25 +16,28 @@ function Navbar() {
   };
 
   useEffect(() => {
-    const handleResize = () => {
+    if (typeof window !== 'undefined') {
       setWidth(window.innerWidth);
-    };
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
+      const handleResize = () => {
+        setWidth(window.innerWidth);
+      };
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }
   }, []);
 
   const isSmallLogo = width <= 425;
 
   return (
-    <Row className={styles.container}>
-      <Col>
-        <div className={styles.leftNavbar}>
+    <Row className={styles.containerNavbarUser}>
+      <Col className={styles.leftNavbar}>
+        <Link href="/menuPemilihan">
           <Image
             src={isSmallLogo ? '/Small Logo.png' : '/Logo.png'}
             alt="logo"
             className={styles.logo}
           />
-        </div>
+        </Link>
       </Col>
       <Col className={styles.icon}>
         <div className={styles.iconWrapper}>

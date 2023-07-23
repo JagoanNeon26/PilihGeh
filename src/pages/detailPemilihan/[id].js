@@ -3,7 +3,7 @@ import Navbar from 'components/molecules/Navbar/navbar';
 import Card from 'components/molecules/Card/card';
 import { Col, Row } from 'react-bootstrap';
 import HorizontalTimeline from 'components/atoms/Timeline/HorizontalTimeline';
-import styles from '../styles/Home.module.css';
+import styles from '../../styles/Home.module.css';
 
 function DetailPemilihan() {
   const cardsData = [
@@ -98,14 +98,7 @@ function DetailPemilihan() {
         <div className={styles.realTimeCount}>{totalCount}</div>
         <div className={styles.textRealTimeCount}>Total Suara Masuk</div>
       </Row>
-      <Row
-        style={{
-          display: 'flex',
-          justifyContent: 'center',
-          marginTop: '45px',
-          gap: '27px',
-        }}
-      >
+      <Row className={styles.realTimeCountSmallWrapper}>
         {cardsData.map((item) => (
           <Col
             key={item.id}

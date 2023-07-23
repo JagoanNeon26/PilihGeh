@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Table } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import styles from './table.module.css';
 
 function TableVote() {
@@ -14,20 +15,30 @@ function TableVote() {
   //   });
   // }, []);
 
+  const router = useRouter();
+
+  const handleTableRowClick = (id) => {
+    // Replace '/path/to/another/page' with the actual URL you want to navigate to
+    router.push(`/detailPemilihan/${id}`);
+  };
+
   const [data, setData] = useState([
     {
+      id: 1,
       name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
       date: '30.6.2023-12-7-2023',
       voteStatus: 'YES',
       votingStatus: 'Active',
     },
     {
+      id: 2,
       name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
       date: '30.6.2023-12-7-2023',
       voteStatus: 'NO',
       votingStatus: 'Active',
     },
     {
+      id: 3,
       name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
       date: '30.6.2023-12-7-2023',
       voteStatus: 'YES',
@@ -57,20 +68,14 @@ function TableVote() {
       </thead>
       <tbody className={styles.tableBody}>
         {data.map((item) => (
-          <tr key={item.id} style={{ verticalAlign: 'middle' }}>
-            <td
-              style={{
-                textAlign: 'left',
-                width: '40vw',
-                textOverflow: 'ellipsis',
-              }}
-            >
-              {item.name}
-            </td>
-            <td style={{ width: '15vw' }}>{item.date}</td>
-            <td style={{ width: '8vw' }}>
-              {voteStatusToLogo(item.voteStatus)}
-            </td>
+          <tr
+            key={item.id}
+            style={{ verticalAlign: 'middle' }}
+            onClick={() => handleTableRowClick(item.id)} // Call the click handler on row click
+          >
+            <td className={styles.nameRow}>{item.name}</td>
+            <td className={styles.dateRow}>{item.date}</td>
+            <td>{voteStatusToLogo(item.voteStatus)}</td>
             <td>{item.votingStatus}</td>
           </tr>
         ))}

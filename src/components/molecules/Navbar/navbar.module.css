@@ -7,6 +7,14 @@
   margin: 0;
 }
 
+.containerNavbarUser {
+  width: 100vw;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  margin: 0;
+}
+
 .leftNavbar {
   margin-left: 25px;
 }
@@ -14,6 +22,7 @@
 .logo {
   width: 137px;
   height: 36px;
+  cursor: pointer;
 }
 
 .icon {

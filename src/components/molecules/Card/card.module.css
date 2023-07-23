@@ -1,5 +1,5 @@
 .card {
-  width: 300px;
+  width: max-content;
   background-color: #0d1117;
   color: #e6edf3;
   border: 1px solid #e6edf3;

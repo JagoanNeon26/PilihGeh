@@ -21,6 +21,16 @@
   border-left: 1px solid #edf1f4;
   border-right: 1px solid #edf1f4;
   height: 20vh;
+  cursor: pointer;
+}
+
+.nameRow {
+  text-align: left;
+  width: 40vw;
+}
+
+.dateRow {
+  width: 15vw;
 }
 
 .buttonDelete:hover {
@@ -38,6 +48,10 @@
     font-size: 12px;
     font-style: normal;
     font-weight: 200;
+  }
+
+  .nameRow {
+    display: block;
   }
 }
 

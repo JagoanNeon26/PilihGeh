@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
 import TabButton from 'components/atoms/Button/tabNav';
 import { useRouter } from 'next/router';
+import Link from 'next/link';
 import styles from './navbar.module.css';
 
 function NavbarAdmin() {
@@ -60,11 +61,13 @@ function NavbarAdmin() {
       <Row className={styles.container}>
         <Col>
           <div className={styles.leftNavbar}>
-            <Image
-              src={isSmallLogo ? '/Small Logo.png' : '/Logo.png'}
-              alt="logo"
-              className={styles.logo}
-            />
+            <Link href="/menuPemilihan">
+              <Image
+                src={isSmallLogo ? '/Small Logo.png' : '/Logo.png'}
+                alt="logo"
+                className={styles.logo}
+              />
+            </Link>
           </div>
         </Col>
         <Col className={styles.icon}>
