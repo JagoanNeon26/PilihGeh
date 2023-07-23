@@ -4,8 +4,8 @@ import { CircleButton } from 'components/atoms/Button/button';
 import { Row, Col, Dropdown, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
-import styles from './navbar.module.css';
 import Link from 'next/link';
+import styles from './navbar.module.css';
 
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);

@@ -1,8 +1,8 @@
 /* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
-import styles from './table.module.css';
 import { useRouter } from 'next/router';
+import styles from './table.module.css';
 
 function TableAdmin() {
   // const [data, setData] = useState([]);

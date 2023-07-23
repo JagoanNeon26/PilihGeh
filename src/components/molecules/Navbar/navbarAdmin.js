@@ -6,8 +6,8 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
 import TabButton from 'components/atoms/Button/tabNav';
 import { useRouter } from 'next/router';
-import styles from './navbar.module.css';
 import Link from 'next/link';
+import styles from './navbar.module.css';
 
 function NavbarAdmin() {
   const [isOpen, setIsOpen] = useState(false);

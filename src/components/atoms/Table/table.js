@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Table } from 'react-bootstrap';
-import styles from './table.module.css';
 import { useRouter } from 'next/router';
+import styles from './table.module.css';
 
 function TableVote() {
   // const [data, setData] = useState([]);
