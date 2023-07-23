@@ -7,6 +7,7 @@ import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
 import TabButton from 'components/atoms/Button/tabNav';
 import { useRouter } from 'next/router';
 import styles from './navbar.module.css';
+import Link from 'next/link';
 
 function NavbarAdmin() {
   const [isOpen, setIsOpen] = useState(false);
@@ -60,11 +61,13 @@ function NavbarAdmin() {
       <Row className={styles.container}>
         <Col>
           <div className={styles.leftNavbar}>
-            <Image
-              src={isSmallLogo ? '/Small Logo.png' : '/Logo.png'}
-              alt="logo"
-              className={styles.logo}
-            />
+            <Link href="/menuPemilihan">
+              <Image
+                src={isSmallLogo ? '/Small Logo.png' : '/Logo.png'}
+                alt="logo"
+                className={styles.logo}
+              />
+            </Link>
           </div>
         </Col>
         <Col className={styles.icon}>

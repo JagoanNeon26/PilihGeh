@@ -77,7 +77,7 @@
   margin: 50px 0px 30px 30px;
   font-size: 40px;
   font-style: normal;
-  font-weight: 600;
+  font-weight: 400;
   color: #e6edf3;
 }
 
@@ -139,7 +139,7 @@
   align-items: center;
   gap: 100px;
   flex-wrap: wrap;
-  height: 599px;
+  height: max-content;
   padding: 0;
 }
 
@@ -197,6 +197,15 @@
   text-align: center;
 }
 
+.realTimeCountSmallWrapper {
+  display: 'flex';
+  justify-content: 'center';
+  margin-top: 60px;
+  gap: '27px';
+  margin-bottom: 30px;
+}
+
+/* Photo Verification */
 .buttonUploadPhoto {
   display: flex;
   flex-direction: row;
@@ -296,27 +305,27 @@
   }
 
   .realTimeCount {
-    width: 278px;
-    height: 278px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    font-size: 36px;
-    font-weight: 500;
-  }
-
-  .textRealTimeCount {
-    font-size: 20px;
-    font-weight: 500;
-  }
-
-  .realTimeCountSmall {
-    width: 200px;
-    height: 200px;
     font-size: 24px;
     font-weight: 500;
   }
 
+  .textRealTimeCount {
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .realTimeCountSmall {
+    width: 100px;
+    height: 100px;
+    font-size: 18px;
+    font-weight: 500;
+  }
+
   .textRealTimeCountSmall {
-    font-size: 20px;
+    font-size: 16px;
     font-weight: 500;
   }
 
@@ -326,5 +335,9 @@
 
   .containerSettings {
     width: 300px;
+  }
+
+  .tabs {
+    font-size: 12px;
   }
 }

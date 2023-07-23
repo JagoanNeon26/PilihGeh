@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import { Table } from 'react-bootstrap';
 import styles from './table.module.css';
+import { useRouter } from 'next/router';
 
 function TableAdmin() {
   // const [data, setData] = useState([]);
@@ -11,6 +12,13 @@ function TableAdmin() {
   //     setData(response.data);
   //   });
   // }, []);
+
+  const router = useRouter();
+
+  const handleTableRowClick = (id) => {
+    // Replace '/path/to/another/page' with the actual URL you want to navigate to
+    router.push(`/detailPemilihanAdmin/${id}`);
+  };
 
   const [data, setData] = useState([
     {
@@ -41,9 +49,13 @@ function TableAdmin() {
       </thead>
       <tbody className={styles.tableBody}>
         {data.map((item) => (
-          <tr key={data.id} style={{ verticalAlign: 'middle' }}>
-            <td style={{ textAlign: 'left', width: '40vw' }}>{item.name}</td>
-            <td style={{ width: '15vw' }}>{item.date}</td>
+          <tr
+            key={item.id}
+            style={{ verticalAlign: 'middle' }}
+            onClick={() => handleTableRowClick(item.id)} // Call the click handler on row click
+          >
+            <td className={styles.nameRow}>{item.name}</td>
+            <td className={styles.dateRow}>{item.date}</td>
             <td>{item.votingStatus}</td>
           </tr>
         ))}
