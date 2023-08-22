@@ -1,20 +1,22 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { Col, Container, Row, Stack } from 'react-bootstrap';
 import Image from 'next/image';
-import BaseButton from 'components/atoms/Button/button';
 import FormController from 'components/atoms/Form/formController';
 import { Form, Formik } from 'formik';
+import AuthService from 'services/auth-services';
 import * as Yup from 'yup';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
+import BaseButton from 'components/atoms/Button/button';
+import Swal from 'sweetalert2';
 import styles from '../styles/Home.module.css';
 
 function LoginForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const initialValue = {
+  const initialValues = {
     email: '',
     password: '',
   };
@@ -24,13 +26,25 @@ function LoginForm() {
     password: Yup.string().required('Password is required'),
   });
 
-  const onSubmit = (values) => {
-    const { email, password } = values;
+  const onSubmit = async (values) => {
+    setIsLoading(true);
+    try {
+      await AuthService.login(values);
+      setIsLoading(false);
+      router.push('/otpLoginRegister');
+    } catch (error) {
+      setIsLoading(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.response.data.message,
+      });
+    }
   };
 
   return (
     <Formik
-      initialValues={initialValue}
+      initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
@@ -53,8 +67,12 @@ function LoginForm() {
               placeholder="Enter your Password"
               formikProps={formikProps}
             />
-            <BaseButton variant="primary" type="submit" disabled={isLoading}>
-              {isLoading ? 'Loading...' : 'Sign In'}
+            <BaseButton
+              type="submit"
+              isLoading={isLoading}
+              disabled={isLoading}
+            >
+              Sign In
             </BaseButton>
           </Stack>
         </Form>
@@ -78,8 +96,8 @@ export default function Home() {
               <div className={styles.logoLoginRegisterOtp}>
                 <Image src="/Logo.png" alt="logo-login" layout="fill" />
               </div>
-              <div className={styles.TeksLoginDaftarOtp}>Sign In</div>
-              <div className={styles.containerLoginDaftarOTPForm}>
+              <div className={styles.TitleCenter}>Sign In</div>
+              <div className={styles.containerForm}>
                 <div style={{ width: '250px' }}>
                   <LoginForm />
                 </div>

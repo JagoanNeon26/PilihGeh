@@ -7,13 +7,19 @@ import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
 import TabButton from 'components/atoms/Button/tabNav';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
+import AuthService from 'services/auth-services';
 import styles from './navbar.module.css';
 
 function NavbarAdmin() {
   const [isOpen, setIsOpen] = useState(false);
   const [width, setWidth] = useState(0);
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('');
   const router = useRouter();
+
+  const handleLogout = () => {
+    AuthService.logout();
+    router.push('/');
+  };
 
   /* Logo Navbar */
   useEffect(() => {
@@ -40,18 +46,18 @@ function NavbarAdmin() {
   useEffect(() => {
     const { pathname } = router;
 
-    if (pathname === '/detailPemilihanAdmin') {
-      setActiveTab('dashboard');
-    } else if (pathname === '/detailPemilihanAdmin/realTimeCount') {
+    if (pathname.includes('realTimeCount')) {
       setActiveTab('realTimeCount');
-    } else if (pathname === '/detailPemilihanAdmin/timeline') {
+    } else if (pathname.includes('timeline')) {
       setActiveTab('timeline');
-    } else if (pathname === '/detailPemilihanAdmin/manageVoters') {
+    } else if (pathname.includes('manageVoters')) {
       setActiveTab('manageVoters');
-    } else if (pathname === '/detailPemilihanAdmin/manageAdmin') {
+    } else if (pathname.includes('manageAdmin')) {
       setActiveTab('manageAdmin');
-    } else if (pathname === '/detailPemilihanAdmin/settings') {
+    } else if (pathname.includes('settings')) {
       setActiveTab('settings');
+    } else {
+      setActiveTab('dashboard');
     }
   }, [router.pathname]);
   /* Tabs Navbar */
@@ -83,12 +89,11 @@ function NavbarAdmin() {
               >
                 <FontAwesomeIcon icon={faGear} />
               </Dropdown.Toggle>
-              <Dropdown.Menu>
+              <Dropdown.Menu variant="dark" style={{ fontSize: '14px' }}>
                 {/* Dropdown menu items */}
                 <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-                <Dropdown.Item href="#settings">Settings</Dropdown.Item>
                 <Dropdown.Divider />
-                <Dropdown.Item href="#logout">Logout</Dropdown.Item>
+                <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
           </div>
@@ -98,42 +103,42 @@ function NavbarAdmin() {
       <Row className={styles.containerTabs}>
         <Col>
           <TabButton
-            to="/detailPemilihanAdmin"
+            to={`/detailPemilihanAdmin/${router.query.id}`}
             active={activeTab === 'dashboard'}
             onClick={() => setActiveTab('dashboard')}
           >
             Dashboard
           </TabButton>
           <TabButton
-            to="/detailPemilihanAdmin/realTimeCount"
+            to={`/detailPemilihanAdmin/${router.query.id}/realTimeCount`}
             active={activeTab === 'realTimeCount'}
             onClick={() => setActiveTab('realTimeCount')}
           >
             Real Time Count
           </TabButton>
           <TabButton
-            to="/detailPemilihanAdmin/timeline"
+            to={`/detailPemilihanAdmin/${router.query.id}/timeline`}
             active={activeTab === 'timeline'}
             onClick={() => setActiveTab('timeline')}
           >
             Timeline
           </TabButton>
           <TabButton
-            to="/detailPemilihanAdmin/manageVoters"
+            to={`/detailPemilihanAdmin/${router.query.id}/manageVoters`}
             active={activeTab === 'manageVoters'}
             onClick={() => setActiveTab('manageVoters')}
           >
             Manage Voters
           </TabButton>
           <TabButton
-            to="/detailPemilihanAdmin/manageAdmin"
+            to={`/detailPemilihanAdmin/${router.query.id}/manageAdmin`}
             active={activeTab === 'manageAdmin'}
             onClick={() => setActiveTab('manageAdmin')}
           >
             Manage Admin
           </TabButton>
           <TabButton
-            to="/detailPemilihanAdmin/settings"
+            to={`/detailPemilihanAdmin/${router.query.id}/settings`}
             active={activeTab === 'settings'}
             onClick={() => setActiveTab('settings')}
           >

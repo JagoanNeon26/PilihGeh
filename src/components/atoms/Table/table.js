@@ -1,86 +1,78 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Table } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import BootstrapTable from 'react-bootstrap-table-next';
 import { useRouter } from 'next/router';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import votingServices from 'services/voting-services';
 import styles from './table.module.css';
 
 function TableVote() {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get("https://api.example.com/data").then((response) => {
-  //     setData(response.data);
-  //   });
-  // }, []);
-
   const router = useRouter();
+  const [data, setData] = useState([]);
 
   const handleTableRowClick = (id) => {
-    // Replace '/path/to/another/page' with the actual URL you want to navigate to
     router.push(`/detailPemilihan/${id}`);
   };
 
-  const [data, setData] = useState([
-    {
-      id: 1,
-      name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
-      date: '30.6.2023-12-7-2023',
-      voteStatus: 'YES',
-      votingStatus: 'Active',
-    },
-    {
-      id: 2,
-      name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
-      date: '30.6.2023-12-7-2023',
-      voteStatus: 'NO',
-      votingStatus: 'Active',
-    },
-    {
-      id: 3,
-      name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
-      date: '30.6.2023-12-7-2023',
-      voteStatus: 'YES',
-      votingStatus: 'Active',
-    },
-  ]);
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await votingServices.getVoting();
+        const pemilihanData = response.data.pemilihan;
+        const formattedData = pemilihanData.map((item) => item.Pemilihan);
+        setData(formattedData);
+      } catch (error) {
+        console.error('Error fetching voting data:', error);
+      }
+    };
+    fetchData();
+  }, []);
 
-  const voteStatusToLogo = (voteStatus) => {
-    if (voteStatus === 'YES') {
-      return <FontAwesomeIcon icon={faCheck} />;
-    }
-    if (voteStatus === 'NO') {
-      return <FontAwesomeIcon icon={faTimes} />;
-    }
-    return voteStatus;
-  };
+  const columns = [
+    {
+      dataField: 'title',
+      text: 'Name',
+      headerStyle: { width: '200px' },
+    },
+    {
+      dataField: 'organization',
+      text: 'Organization',
+      headerStyle: { width: '150px' },
+    },
+    {
+      dataField: 'date',
+      text: 'Date',
+      headerStyle: { width: '100px' },
+    },
+    {
+      dataField: 'status',
+      text: 'Voting Status',
+      headerStyle: { width: '100px' },
+    },
+  ];
 
   return (
-    <Table hover responsive>
-      <thead className={styles.tableHead}>
-        <tr style={{ verticalAlign: 'middle' }}>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Vote Status</th>
-          <th>Voting Status</th>
-        </tr>
-      </thead>
-      <tbody className={styles.tableBody}>
-        {data.map((item) => (
-          <tr
-            key={item.id}
-            style={{ verticalAlign: 'middle' }}
-            onClick={() => handleTableRowClick(item.id)} // Call the click handler on row click
-          >
-            <td className={styles.nameRow}>{item.name}</td>
-            <td className={styles.dateRow}>{item.date}</td>
-            <td>{voteStatusToLogo(item.voteStatus)}</td>
-            <td>{item.votingStatus}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <div className={styles.table}>
+      {Array.isArray(data) && data.length > 0 ? (
+        <div className="table-responsive">
+          <BootstrapTable
+            keyField="id"
+            data={data}
+            columns={columns}
+            rowEvents={{
+              onClick: (e, row) => handleTableRowClick(row.id),
+            }}
+            rowClasses={styles.tableBody}
+            headerClasses={styles.tableHead}
+            hover
+          />
+        </div>
+      ) : (
+        <p style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
+          You have not followed any voting.
+        </p>
+      )}
+    </div>
   );
 }
 

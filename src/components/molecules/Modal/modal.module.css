@@ -10,12 +10,28 @@
   border-radius: 16px;
 }
 
-.modalAddCandidate {
+.modalCandidate {
   width: 30vw;
   min-width: max-content;
   height: 70vh;
   overflow-y: visible;
   border-radius: 16px;
+}
+
+.modalHeader {
+  border-bottom: 2px solid #c2c2c2;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 16px 30px 16px 30px;
+  background-color: #0d1117;
+  color: #e6edf3;
+}
+
+.modalBody {
+  padding: 16px 30px 30px 30px;
+  overflow-y: auto;
+  background-color: #0d1117;
+  color: #e6edf3;
 }
 
 .modalDelete {
@@ -65,7 +81,32 @@
   font-weight: 700;
 }
 
-@media (max-width: 576px) {
+.loadingForm {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonModalEdit {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.buttonDelete {
+  border: 0;
+  background-color: #ff0000;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.buttonDelete:hover {
+  border: #950101;
+  background-color: #950101;
+}
+
+@media (max-width: 768px) {
   .modal {
     width: 96vw;
     height: max-content;

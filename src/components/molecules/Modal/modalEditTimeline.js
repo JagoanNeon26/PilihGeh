@@ -1,7 +1,5 @@
-/* eslint-disable no-unused-vars */
-/* eslint-enable no-console */
-import { React, useState } from 'react';
-import { Modal, Stack } from 'react-bootstrap';
+import { React, useEffect, useState } from 'react';
+import { Modal, Spinner, Stack } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import votingServices from 'services/voting-services';
@@ -11,29 +9,21 @@ import FormController from '../../atoms/Form/formController';
 import BaseButton from '../../atoms/Button/button';
 import styles from './modal.module.css';
 
-function FormAddTimeline() {
+function FormEditTimeline({ initialValues }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
-  const userTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-  const initialValues = {
-    start_vote: '',
-    end_vote: '',
-    show_count: '',
-    timezone: userTimezone,
-  };
 
   const validationSchema = Yup.object({
-    start_vote: Yup.date().required('Voting Day is required'),
-    end_vote: Yup.date().required('Final Count Day is required'),
-    show_count: Yup.date().required('Closing Day is required'),
+    start_vote: Yup.string().required('Voting Day is required'),
+    end_vote: Yup.string().required('Final Count Day is required'),
+    show_count: Yup.string().required('Closing Day is required'),
   });
 
   const onSubmit = async (values) => {
     setIsLoading(true);
     try {
-      const response = await votingServices.addTimeline(id, values);
+      const response = await votingServices.updateTimeline(id, values);
       setIsLoading(false);
       Swal.fire({
         icon: 'success',
@@ -73,7 +63,6 @@ function FormAddTimeline() {
               name="start_vote"
               type="datetime-local"
               label="Voting Day"
-              placeholder="12/12/2012"
               formikProps={formikProps}
               required
             />
@@ -82,7 +71,6 @@ function FormAddTimeline() {
               name="end_vote"
               type="datetime-local"
               label="Final Count Day"
-              placeholder="12/12/2012"
               formikProps={formikProps}
               required
             />
@@ -91,7 +79,6 @@ function FormAddTimeline() {
               name="show_count"
               type="datetime-local"
               label="Closing Day"
-              placeholder="12/12/2012"
               formikProps={formikProps}
               required
             />
@@ -109,8 +96,36 @@ function FormAddTimeline() {
   );
 }
 
-export default function ModalAddTimeline(props) {
+export default function ModalEditTimeline(props) {
   const { show, onHide } = props;
+  const router = useRouter();
+  const { id } = router.query;
+
+  const [setIsLoading] = useState(false);
+  const [timelineItems, setTimelineItems] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        setIsLoading(true);
+        const response = await votingServices.getTimeline(id);
+        setTimelineItems(response.data.timeline);
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error fetching timeline data',
+          text: error.response.data.message,
+        });
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    if (id) {
+      fetchData();
+    }
+  }, [id]);
+
   return (
     <Modal
       show={show}
@@ -133,7 +148,7 @@ export default function ModalAddTimeline(props) {
         closeButton
       >
         <div className={styles.headerEditProfile}>
-          Add Timeline
+          Edit Timeline
           <div className={styles.headerRequired}>
             <div style={{ color: 'red' }}>*</div>
             Required
@@ -148,7 +163,17 @@ export default function ModalAddTimeline(props) {
           color: '#e6edf3',
         }}
       >
-        <FormAddTimeline />
+        {timelineItems !== null ? (
+          <FormEditTimeline
+            initialValues={{
+              start_vote: timelineItems.start,
+              end_vote: timelineItems.end,
+              show_count: timelineItems.show,
+            }}
+          />
+        ) : (
+          <Spinner animation="border" variant="dark" />
+        )}
       </Modal.Body>
     </Modal>
   );

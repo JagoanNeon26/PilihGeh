@@ -2,6 +2,8 @@
 import React, { useState, useEffect } from 'react';
 import { CircleButton } from 'components/atoms/Button/button';
 import { Row, Col, Dropdown, Image } from 'react-bootstrap';
+import AuthService from 'services/auth-services';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
@@ -10,9 +12,15 @@ import styles from './navbar.module.css';
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
   const [width, setWidth] = useState(0);
+  const router = useRouter();
 
   const handleDropdownToggle = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    AuthService.logout();
+    router.push('/');
   };
 
   useEffect(() => {
@@ -52,12 +60,10 @@ function Navbar() {
             >
               <FontAwesomeIcon icon={faGear} />
             </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {/* Dropdown menu items */}
+            <Dropdown.Menu variant="dark" style={{ fontSize: '14px' }}>
               <Dropdown.Item href="/profile">Profile</Dropdown.Item>
-              <Dropdown.Item href="#settings">Settings</Dropdown.Item>
               <Dropdown.Divider />
-              <Dropdown.Item href="#logout">Logout</Dropdown.Item>
+              <Dropdown.Item onClick={handleLogout}>Logout</Dropdown.Item>
             </Dropdown.Menu>
           </Dropdown>
         </div>

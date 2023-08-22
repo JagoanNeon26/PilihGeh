@@ -1,7 +1,7 @@
 import React from 'react';
 import { Row, Col } from 'react-bootstrap';
 import NavbarAdmin from 'components/molecules/Navbar/navbarAdmin';
-import styles from '../../styles/Home.module.css';
+import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihan() {
   const candidateData = [

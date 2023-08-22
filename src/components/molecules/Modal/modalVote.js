@@ -68,7 +68,7 @@ export default function ModalVote(props) {
         </Accordion>
       </Modal.Body>
       <ModalFooter style={{ backgroundColor: '#0D1117', color: '#e6edf3' }}>
-        <BaseButton type="submit" to="/verifPhotoVote">
+        <BaseButton type="submit">
           <div style={{ width: '100px' }}>Vote</div>
         </BaseButton>
       </ModalFooter>

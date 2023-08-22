@@ -1,38 +1,38 @@
-/* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
 import Head from 'next/head';
 import { Col, Container, Row, Stack } from 'react-bootstrap';
 import Image from 'next/image';
-import BaseButton from 'components/atoms/Button/button';
+import { useRouter } from 'next/router';
+import AuthService from 'services/auth-services';
 import Link from 'next/link';
+import BaseButton from 'components/atoms/Button/button';
 import OTPInput from 'react-otp-input';
+import Swal from 'sweetalert2';
 import styles from '../styles/Home.module.css';
 
 function OtpForm() {
   const [otp, setOtp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
 
-    // Log the OTP value
-    // eslint-disable-next-line no-console
-    console.log(otp);
-
-    // Reset the OTP input
-    setOtp('');
-
-    // Perform any other actions related to form submission
-    // For example, you can make an API call or trigger loading state
     setIsLoading(true);
-
-    // Simulating an asynchronous action with setTimeout
-    setTimeout(() => {
-      // Reset the loading state
-      setIsLoading(false);
-    }, 2000);
+    try {
+      await AuthService.verifyOtp({ otp });
+      setOtp('');
+      router.push('/menuPemilihan');
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error verifying OTP',
+        text: error.message.data.message,
+      });
+    }
+    setIsLoading(false);
   };
+
   return (
     <form onSubmit={handleSubmit}>
       <Stack gap={4}>
@@ -58,13 +58,8 @@ function OtpForm() {
             gap: '10px',
           }}
         />
-        <BaseButton
-          variant="primary"
-          type="submit"
-          disabled={isLoading}
-          to="/menuPemilihan"
-        >
-          {isLoading ? 'Loading...' : 'Sign In'}
+        <BaseButton type="submit" isLoading={isLoading} disabled={isLoading}>
+          Submit
         </BaseButton>
       </Stack>
     </form>
@@ -83,17 +78,19 @@ export default function OtpVerif() {
         <Row>
           <Col style={{ display: 'flex', justifyContent: 'center' }}>
             <div className={styles.formLoginDaftarOTP}>
-              <div className={styles.logoLoginRegisterOtp}>
-                <Image src="/Logo.png" alt="logo-login" layout="fill" />
-              </div>
-              <div className={styles.TeksLoginDaftarOtp}>Verification Code</div>
+              <Link href="/">
+                <div className={styles.logoLoginRegisterOtp}>
+                  <Image src="/Logo.png" alt="logo-login" layout="fill" />
+                </div>
+              </Link>
+              <div className={styles.TitleCenter}>Verification Code</div>
               <div className={styles.containerAlready}>
                 <div className={styles.teksAlready}>
                   We have sent the code verification to Your WhatsApp Number or
                   Email
                 </div>
               </div>
-              <div className={styles.containerLoginDaftarOTPForm}>
+              <div className={styles.containerForm}>
                 <div style={{ width: '250px' }}>
                   <OtpForm />
                 </div>

@@ -1,7 +1,7 @@
 /* eslint-disable no-unused-vars */
 /* eslint-enable no-console */
-import { React, useState } from 'react';
-import { Modal, Stack } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Button, Modal, Spinner, Stack } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import votingServices from 'services/voting-services';
@@ -11,20 +11,49 @@ import FormController from '../../atoms/Form/formController';
 import BaseButton from '../../atoms/Button/button';
 import styles from './modal.module.css';
 
-function FormAddCandidate() {
+function FormEditCandidate({ noCandidate }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [submitLoadingButton, setSubmitLoadingButton] = useState(false);
+  const [deleteLoadingButton, setDeleteLoadingButton] = useState(false);
+  const [candidateData, setCandidateData] = useState({});
   const router = useRouter();
   const { id } = router.query;
 
+  useEffect(() => {
+    setIsLoading(true);
+    votingServices
+      .getCandidateById(id, noCandidate.candidateNumber)
+      .then((response) => {
+        setCandidateData(response.data.getKandidat);
+        setIsLoading(false);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error fetching candidate data',
+          text: error.response.data.message,
+        });
+        setIsLoading(false);
+      });
+  }, [noCandidate, id]);
+
+  if (isLoading) {
+    return (
+      <div className={styles.loadingForm}>
+        <Spinner animation="border" role="status" size="md" variant="light" />
+      </div>
+    );
+  }
+
   const initialValues = {
-    candidateNumber: '',
-    candidate1Name: '',
-    candidate2Name: '',
-    candidate1Tag: '',
-    candidate2Tag: '',
-    visi: '',
-    misi: '',
-    photo: '',
+    candidateNumber: candidateData.candidateNumber || '',
+    candidate1Name: candidateData.candidate1Name || '',
+    candidate2Name: candidateData.candidate2Name || '',
+    candidate1Tag: candidateData.candidate1Tag || '',
+    candidate2Tag: candidateData.candidate2Tag || '',
+    visi: candidateData.visi || '',
+    misi: candidateData.misi || '',
+    // photo: candidateData.photo || '',
   };
 
   const validationSchema = Yup.object({
@@ -38,18 +67,42 @@ function FormAddCandidate() {
   });
 
   const onSubmit = async (values) => {
-    setIsLoading(true);
+    setSubmitLoadingButton(true);
     try {
-      const response = await votingServices.addCandidate(id, values);
-      setIsLoading(false);
+      const response = await votingServices.updateCandidate(
+        id,
+        noCandidate.candidateNumber,
+        values
+      );
+      setSubmitLoadingButton(false);
       Swal.fire({
         icon: 'success',
         title: 'Success',
         text: response.data.message,
       });
+    } catch (error) {
+      setSubmitLoadingButton(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.response.data.message,
+      });
+    }
+  };
+
+  const handleDelete = async () => {
+    setDeleteLoadingButton(true);
+    try {
+      await votingServices.deleteCandidateById(id, noCandidate.candidateNumber);
+      setDeleteLoadingButton(false);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'Candidate deleted successfully.',
+      });
       router.reload();
     } catch (error) {
-      setIsLoading(false);
+      setDeleteLoadingButton(false);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
@@ -135,13 +188,24 @@ function FormAddCandidate() {
               accept="image/*"
               formikProps={formikProps}
             />
-            <BaseButton
-              type="submit"
-              isLoading={isLoading}
-              disabled={isLoading}
-            >
-              Submit
-            </BaseButton>
+            <div className={styles.buttonModalEdit}>
+              <Button
+                type="button"
+                className={styles.buttonDelete}
+                isLoading={deleteLoadingButton}
+                disabled={deleteLoadingButton}
+                onClick={handleDelete}
+              >
+                <div style={{ width: '100px' }}>Delete</div>
+              </Button>
+              <BaseButton
+                type="submit"
+                isLoading={submitLoadingButton}
+                disabled={submitLoadingButton}
+              >
+                <div style={{ width: '100px' }}>Submit</div>
+              </BaseButton>
+            </div>
           </Stack>
         </Form>
       )}
@@ -149,29 +213,46 @@ function FormAddCandidate() {
   );
 }
 
-export default function ModalAddCandidate(props) {
-  const { show, onHide } = props;
+export default function ModalEditCandidate(props) {
+  const { show, onHide, candidateNumber } = props;
   return (
     <Modal
       show={show}
       onHide={onHide}
-      dialogClassName={styles.modalAddCandidate}
-      contentClassName={styles.modalAddCandidate}
+      dialogClassName={styles.modalCandidate}
+      contentClassName={styles.modalCandidate}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header className={styles.modalHeader} closeButton>
+      <Modal.Header
+        style={{
+          borderBottom: '2px solid #C2C2C2',
+          fontWeight: 'bold',
+          fontSize: '18px',
+          padding: '16px 30px 16px 30px',
+          backgroundColor: '#0D1117',
+          color: '#e6edf3',
+        }}
+        closeButton
+      >
         <div className={styles.headerEditProfile}>
-          Add Voting
+          Edit Voting
           <div className={styles.headerRequired}>
             <div style={{ color: 'red' }}>*</div>
             Required
           </div>
         </div>
       </Modal.Header>
-      <Modal.Body className={styles.modalBody}>
-        <FormAddCandidate />
+      <Modal.Body
+        style={{
+          padding: '10px 30px 30px 30px',
+          overflowY: 'auto',
+          backgroundColor: '#0D1117',
+          color: '#e6edf3',
+        }}
+      >
+        {show && <FormEditCandidate noCandidate={{ candidateNumber }} />}
       </Modal.Body>
     </Modal>
   );

@@ -3,7 +3,7 @@ import { Button, Row, Col } from 'react-bootstrap';
 import NavbarAdmin from 'components/molecules/Navbar/navbarAdmin';
 import TableManageVoters from 'components/atoms/Table/tableManageVoters';
 import ModalAddVoters from 'components/molecules/Modal/modalAddVoters';
-import styles from '../../styles/Home.module.css';
+import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihan() {
   const [modalShow, setModalShow] = useState(false);

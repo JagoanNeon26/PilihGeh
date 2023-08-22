@@ -2,7 +2,7 @@ import React from 'react';
 import NavbarAdmin from 'components/molecules/Navbar/navbarAdmin';
 import { Row } from 'react-bootstrap';
 import BaseButton from 'components/atoms/Button/button';
-import styles from '../../styles/Home.module.css';
+import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihan() {
   return (
