@@ -1,35 +1,39 @@
 import React from 'react';
 import styles from 'components/atoms/Button/button.module.css';
-import { Button, Dropdown } from 'react-bootstrap';
-import Link from 'next/link';
+import { Button, Dropdown, Spinner } from 'react-bootstrap';
 
 function BaseButton(props) {
   const {
     variant = 'primary',
     type = 'submit',
     active,
-    to = '',
     children,
     disabled = false,
+    isLoading = false,
   } = props;
 
   return (
-    <Link href={to}>
-      <Button
-        type={type}
-        active={active}
-        className={[
-          [styles.btn],
-          [variant === 'primary' && styles.primary],
-          [variant === 'white' && styles.white],
-          [active && styles.primary],
-          'btn-check:active',
-        ]}
-        disabled={disabled}
-      >
-        {children}
-      </Button>
-    </Link>
+    <Button
+      type={type}
+      active={active}
+      className={[
+        [styles.btn],
+        [variant === 'primary' && styles.primary],
+        [variant === 'white' && styles.white],
+        [variant === 'red' && styles.red],
+        [active && styles.primary],
+        'btn-check:active',
+      ]}
+      disabled={disabled || isLoading}
+    >
+      {isLoading ? (
+        <Spinner animation="border" role="status" size="sm">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      ) : (
+        children
+      )}
+    </Button>
   );
 }
 export default BaseButton;

@@ -1,66 +1,83 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { Table } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import BootstrapTable from 'react-bootstrap-table-next';
 import { useRouter } from 'next/router';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import votingServices from 'services/voting-services';
+import Swal from 'sweetalert2';
 import styles from './table.module.css';
 
 function TableAdmin() {
-  // const [data, setData] = useState([]);
-
-  // useEffect(() => {
-  //   axios.get("https://api.example.com/data").then((response) => {
-  //     setData(response.data);
-  //   });
-  // }, []);
-
   const router = useRouter();
+  const [data, setData] = useState([]);
 
   const handleTableRowClick = (id) => {
-    // Replace '/path/to/another/page' with the actual URL you want to navigate to
     router.push(`/detailPemilihanAdmin/${id}`);
   };
 
-  const [data, setData] = useState([
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await votingServices.getAdminVoting();
+        const pemilihanData = response.data.pemilihan;
+        const formattedData = pemilihanData.map((item) => item.Pemilihan);
+        setData(formattedData);
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error fetching voting data',
+          text: error.response.data.message,
+        });
+      }
+    };
+    fetchData();
+  }, []);
+
+  const columns = [
     {
-      name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
-      date: '30.6.2023-12-7-2023',
-      votingStatus: 'Active',
+      dataField: 'title',
+      text: 'Name',
+      headerStyle: { width: '200px' },
     },
     {
-      name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
-      date: '30.6.2023-12-7-2023',
-      votingStatus: 'Active',
+      dataField: 'organization',
+      text: 'Organization',
+      headerStyle: { width: '150px' },
     },
     {
-      name: 'Pemilihan Ketua Umum Himpunan Mahasiswa Teknik Elektro Universitas Lampung',
-      date: '30.6.2023-12-7-2023',
-      votingStatus: 'Active',
+      dataField: 'date',
+      text: 'Date',
+      headerStyle: { width: '100px' },
     },
-  ]);
+    {
+      dataField: 'status',
+      text: 'Voting Status',
+      headerStyle: { width: '100px' },
+    },
+  ];
 
   return (
-    <Table hover responsive>
-      <thead className={styles.tableHead}>
-        <tr style={{ verticalAlign: 'middle' }}>
-          <th>Name</th>
-          <th>Date</th>
-          <th>Voting Status</th>
-        </tr>
-      </thead>
-      <tbody className={styles.tableBody}>
-        {data.map((item) => (
-          <tr
-            key={item.id}
-            style={{ verticalAlign: 'middle' }}
-            onClick={() => handleTableRowClick(item.id)} // Call the click handler on row click
-          >
-            <td className={styles.nameRow}>{item.name}</td>
-            <td className={styles.dateRow}>{item.date}</td>
-            <td>{item.votingStatus}</td>
-          </tr>
-        ))}
-      </tbody>
-    </Table>
+    <div className={styles.table}>
+      {Array.isArray(data) && data.length > 0 ? (
+        <div className="table-responsive">
+          <BootstrapTable
+            keyField="id"
+            data={data}
+            columns={columns}
+            rowEvents={{
+              onClick: (e, row) => handleTableRowClick(row.id),
+            }}
+            rowClasses={styles.tableBody}
+            headerClasses={styles.tableHead}
+            hover
+          />
+        </div>
+      ) : (
+        <p style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
+          You have not followed any voting.
+        </p>
+      )}
+    </div>
   );
 }
 

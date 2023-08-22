@@ -78,9 +78,7 @@ export default function Home() {
               <div className={styles.logoLoginRegisterOtp}>
                 <Image src="/Logo.png" alt="logo-login" layout="fill" />
               </div>
-              <div className={styles.TeksLoginDaftarOtp}>
-                Photo Verification
-              </div>
+              <div className={styles.TitleCenter}>Photo Verification</div>
               <div className={styles.containerAlready}>
                 <div className={styles.teksAlready}>
                   Please take a photo using your ID card to verify that you are

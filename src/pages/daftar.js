@@ -1,20 +1,22 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-/* eslint-disable no-unused-vars */
 import React, { useState } from 'react';
-import Head from 'next/head';
-import { Col, Container, Row, Stack } from 'react-bootstrap';
+import { Button, Col, Container, Row, Stack } from 'react-bootstrap';
 import Image from 'next/image';
-import BaseButton from 'components/atoms/Button/button';
-import FormController from 'components/atoms/Form/formController';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
+import Swal from 'sweetalert2';
 import Link from 'next/link';
+import Head from 'next/head';
+import AuthService from 'services/auth-services';
+import FormController from 'components/atoms/Form/formController';
+import { useRouter } from 'next/router';
 import styles from '../styles/Home.module.css';
 
 function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
 
-  const initialValue = {
+  const initialValues = {
     email: '',
     name: '',
     password: '',
@@ -30,13 +32,25 @@ function RegisterForm() {
       .required('Confirm Password is required'),
   });
 
-  const onSubmit = (values) => {
-    const { email, name, password, repeatPassword } = values;
+  const onSubmit = async (values) => {
+    setIsLoading(true);
+    try {
+      await AuthService.register(values);
+      setIsLoading(false);
+      router.push('/otpLoginRegister');
+    } catch (error) {
+      setIsLoading(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.response.data.message,
+      });
+    }
   };
 
   return (
     <Formik
-      initialValues={initialValue}
+      initialValues={initialValues}
       validationSchema={validationSchema}
       onSubmit={onSubmit}
     >
@@ -75,9 +89,11 @@ function RegisterForm() {
               placeholder="Confirm your Password"
               formikProps={formikProps}
             />
-            <BaseButton variant="primary" type="submit" disabled={isLoading}>
-              {isLoading ? 'Loading...' : 'Sign Up'}
-            </BaseButton>
+            <Button variant="primary" type="submit" disabled={isLoading}>
+              <div style={{ fontSize: '12px' }}>
+                {isLoading ? 'Loading...' : 'Sign Up'}
+              </div>
+            </Button>
           </Stack>
         </Form>
       )}
@@ -100,15 +116,15 @@ export default function Daftar() {
               <div className={styles.logoLoginRegisterOtp}>
                 <Image src="/Logo.png" alt="logo-login" layout="fill" />
               </div>
-              <div className={styles.TeksLoginDaftarOtp}>Sign Up</div>
-              <div className={styles.containerLoginDaftarOTPForm}>
+              <div className={styles.TitleCenter}>Sign Up</div>
+              <div className={styles.containerForm}>
                 <div style={{ width: '250px' }}>
                   <RegisterForm />
                 </div>
               </div>
               <div className={styles.containerAlready}>
                 <div className={styles.teksAlready}>
-                  Already have account?&nbsp;
+                  Already have an account?&nbsp;
                   <div className={styles.linkAlready}>
                     <Link href="/">Sign In</Link>
                   </div>

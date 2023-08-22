@@ -14,7 +14,7 @@
   height: 36px;
 }
 
-.TeksLoginDaftarOtp {
+.TitleCenter {
   color: #e6edf3;
   text-align: center;
   font-size: 32px;
@@ -23,7 +23,7 @@
   line-height: normal;
 }
 
-.containerLoginDaftarOTPForm {
+.containerForm {
   width: 300px;
   height: max-content;
   border-radius: 10px;
@@ -91,25 +91,33 @@
   color: white;
   font-size: 12px;
   font-weight: 500;
+  border: 0;
 }
 
 /* PROFILE */
 .formProfile {
   padding: 0;
-  margin-top: 6vh;
+  margin-top: 3vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 30px;
-  width: 40vw;
 }
 
-.teksProfile {
-  font-size: 40px;
-  font-weight: 700;
-  padding-bottom: 30px;
-  text-align: center;
-  color: #e6edf3;
+.containerFormProfile {
+  width: 300px;
+  height: max-content;
+  border-radius: 10px;
+  background: #161b22;
+  display: flex;
+  justify-content: center;
+  padding: 19px 0 24px 0;
+  margin-bottom: 2vh;
+}
+
+.loadingForm {
+  display: flex;
+  justify-content: center;
 }
 
 /* Detail Pemilihan */
@@ -137,10 +145,10 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 100px;
+  gap: 60px;
   flex-wrap: wrap;
   height: max-content;
-  padding: 0;
+  padding: 0 100px 0 100px;
 }
 
 .timelineBox {
@@ -246,6 +254,13 @@
   color: #e6edf3;
 }
 
+.buttonYesValue {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+  gap: 20px;
+}
+
 .buttonNoValueWrapper {
   display: flex;
   justify-content: center;
@@ -256,6 +271,19 @@
   justify-content: flex-end;
   margin-right: 36vw;
   margin-bottom: 20px;
+}
+
+.buttonDelete {
+  border: 0;
+  background-color: #ff0000;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.buttonDelete:hover {
+  border: 0;
+  background-color: maroon;
 }
 
 .tableAdminWrapper {
@@ -291,7 +319,7 @@
   .cardContainer {
     flex-wrap: wrap;
     gap: 20px;
-    padding-right: 0;
+    padding: 0;
   }
 
   .judulDetailPemilihan {

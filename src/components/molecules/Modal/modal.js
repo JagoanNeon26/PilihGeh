@@ -1,27 +1,43 @@
-/* eslint-disable no-unused-vars */
-/* eslint-enable no-console */
-import { React, useState } from 'react';
+import React, { useState } from 'react';
 import { Modal, Stack } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
+import votingServices from 'services/voting-services';
+import Swal from 'sweetalert2';
+import BaseButton from '../../atoms/Button/button';
 import FormController from '../../atoms/Form/formController';
 import styles from './modal.module.css';
-import BaseButton from '../../atoms/Button/button';
 
 function FormAddVoting() {
   const [isLoading, setIsLoading] = useState(false);
 
   const initialValues = {
-    votingName: '',
-    organizationName: '',
-    description: '',
+    title: '',
+    organization: '',
+    detail: '',
   };
 
   const validationSchema = Yup.object({
-    // fullName: Yup.string().required('Harga Tawar diperlukan!'),
+    title: Yup.string().required('Title is required'),
+    organization: Yup.string().required('Organization is required'),
+    detail: Yup.string().required('Description is required'),
   });
 
-  const onSubmit = (values) => {};
+  const onSubmit = async (values) => {
+    setIsLoading(true);
+    try {
+      await votingServices.addVoting(values);
+      setIsLoading(false);
+      votingServices.getAdminVoting();
+    } catch (error) {
+      setIsLoading(false);
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.message,
+      });
+    }
+  };
 
   return (
     <Formik
@@ -34,7 +50,7 @@ function FormAddVoting() {
           <Stack gap={4}>
             <FormController
               control="input"
-              name="votingName"
+              name="title"
               type="input"
               label="Voting Name"
               placeholder="Enter your Voting Name"
@@ -42,7 +58,7 @@ function FormAddVoting() {
             />
             <FormController
               control="input"
-              name="organizationName"
+              name="organization"
               type="input"
               label="Organization Name"
               placeholder="Enter your Organization Name"
@@ -50,14 +66,18 @@ function FormAddVoting() {
             />
             <FormController
               control="textArea"
-              name="description"
+              name="detail"
               type="input"
               label="Description"
               placeholder="Enter your Description"
               formikProps={formikProps}
             />
-            <BaseButton variant="primary" type="submit" disabled={isLoading}>
-              {isLoading ? 'Loading...' : 'Add'}
+            <BaseButton
+              type="submit"
+              isLoading={isLoading}
+              disabled={isLoading}
+            >
+              Add
             </BaseButton>
           </Stack>
         </Form>
@@ -66,8 +86,9 @@ function FormAddVoting() {
   );
 }
 
-export default function ModalAddVoting(props) {
+function ModalAddVoting(props) {
   const { show, onHide } = props;
+
   return (
     <Modal
       show={show}
@@ -78,17 +99,7 @@ export default function ModalAddVoting(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header
-        style={{
-          borderBottom: '2px solid #C2C2C2',
-          fontWeight: 'bold',
-          fontSize: '18px',
-          padding: '16px 30px 16px 30px',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-        closeButton
-      >
+      <Modal.Header closeButton className={styles.modalHeader}>
         <div className={styles.headerEditProfile}>
           Add Voting
           <div className={styles.headerEditDesc}>
@@ -96,16 +107,11 @@ export default function ModalAddVoting(props) {
           </div>
         </div>
       </Modal.Header>
-      <Modal.Body
-        style={{
-          padding: '10px 30px 30px 30px',
-          overflowY: 'auto',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-      >
+      <Modal.Body className={styles.modalBody}>
         <FormAddVoting />
       </Modal.Body>
     </Modal>
   );
 }
+
+export default ModalAddVoting;

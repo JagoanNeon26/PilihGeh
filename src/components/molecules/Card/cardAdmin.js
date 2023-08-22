@@ -3,11 +3,19 @@ import PropTypes from 'prop-types';
 import { Card as BootstrapCard, Button, Col, Row } from 'react-bootstrap';
 import styles from './card.module.css';
 import ModalVote from '../Modal/modalVote';
+import ModalEditCandidate from '../Modal/modalEditCandidate';
 
-function Card({ paslon1, paslon2, tag1, tag2 }) {
+function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate }) {
   const [modalShow, setModalShow] = useState(false);
+  const [modalAddShow, setModalAddShow] = useState(false);
+
   const handleShow = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
+
+  const handleAddShow = () => {
+    setModalAddShow(true);
+  };
+  const handleAddClose = () => setModalAddShow(false);
 
   return (
     <BootstrapCard className={styles.card}>
@@ -41,22 +49,31 @@ function Card({ paslon1, paslon2, tag1, tag2 }) {
             </BootstrapCard.Text>
           </Col>
         </Row>
-        <Row className={styles.cardFooter}>
+        <Row className={styles.cardFooterAdmin}>
+          <Button className={styles.buttonModalEdit} onClick={handleAddShow}>
+            <div style={{ width: '60px' }}>Edit</div>
+          </Button>
           <Button className={styles.buttonModal} onClick={handleShow}>
             <div style={{ width: '60px' }}>Info</div>
           </Button>
         </Row>
-        <ModalVote show={modalShow} onHide={() => handleClose()} />
+        <ModalEditCandidate
+          show={modalAddShow}
+          onHide={handleAddClose}
+          candidateNumber={noCandidate}
+        />
+        <ModalVote show={modalShow} onHide={handleClose} />
       </BootstrapCard.Body>
     </BootstrapCard>
   );
 }
 
-Card.propTypes = {
+CardAdmin.propTypes = {
   paslon1: PropTypes.string.isRequired,
   paslon2: PropTypes.string.isRequired,
   tag1: PropTypes.string.isRequired,
   tag2: PropTypes.string.isRequired,
+  noCandidate: PropTypes.number.isRequired,
 };
 
-export default Card;
+export default CardAdmin;

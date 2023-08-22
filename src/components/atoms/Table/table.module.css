@@ -1,3 +1,7 @@
+.table {
+  margin-bottom: 5vh;
+}
+
 .tableHead {
   color: #edf1f4;
   text-align: center;
@@ -6,21 +10,16 @@
   font-weight: 400;
   height: 66px;
   vertical-align: middle;
-  border-top: 1px solid #edf1f4;
-  border-left: 1px solid #edf1f4;
-  border-right: 1px solid #edf1f4;
 }
 
 .tableBody {
   color: #edf1f4;
   text-align: center;
+  vertical-align: middle;
   font-size: 16px;
   font-style: normal;
   font-weight: 400;
   height: 66px;
-  border-left: 1px solid #edf1f4;
-  border-right: 1px solid #edf1f4;
-  height: 20vh;
   cursor: pointer;
 }
 

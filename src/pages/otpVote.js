@@ -57,12 +57,7 @@ function OtpForm() {
             gap: '10px',
           }}
         />
-        <BaseButton
-          variant="primary"
-          type="submit"
-          disabled={isLoading}
-          to="/menuPemilihan"
-        >
+        <BaseButton variant="primary" type="submit" disabled={isLoading}>
           {isLoading ? 'Loading...' : 'Sign In'}
         </BaseButton>
       </Stack>
@@ -85,14 +80,14 @@ export default function OtpVerif() {
               <div className={styles.logoLoginRegisterOtp}>
                 <Image src="/Logo.png" alt="logo-login" layout="fill" />
               </div>
-              <div className={styles.TeksLoginDaftarOtp}>Verification Code</div>
+              <div className={styles.TitleCenter}>Verification Code</div>
               <div className={styles.containerAlready}>
                 <div className={styles.teksAlready}>
                   We have sent the code verification to Your WhatsApp Number or
                   Email
                 </div>
               </div>
-              <div className={styles.containerLoginDaftarOTPForm}>
+              <div className={styles.containerForm}>
                 <div style={{ width: '250px' }}>
                   <OtpForm />
                 </div>
