@@ -94,6 +94,10 @@
   border: 0;
 }
 
+.widthButtonAddVote {
+  width: 60px;
+}
+
 /* PROFILE */
 .formProfile {
   padding: 0;
@@ -316,6 +320,20 @@
 }
 
 @media (max-width: 768px) {
+  .judul {
+    margin: 30px 0px 30px 30px;
+    font-size: 30px;
+    font-weight: 500;
+  }
+
+  .widthButtonAddVote {
+    width: 25px;
+  }
+
+  .tab {
+    font-size: 12px;
+  }
+
   .cardContainer {
     flex-wrap: wrap;
     gap: 20px;
