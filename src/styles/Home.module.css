@@ -81,7 +81,7 @@
   color: #e6edf3;
 }
 
-.buttonAddVote {
+.baseButton {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -214,18 +214,6 @@
 }
 
 /* Photo Verification */
-.buttonUploadPhoto {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: center;
-  height: 36px;
-  background-color: #142b38;
-  color: white;
-  font-size: 12px;
-  font-weight: 500;
-}
-
 .containerPhotoUploader {
   height: max-content;
   border-radius: 10px;
@@ -288,7 +276,7 @@
 
 .tableAdminWrapper {
   margin-top: 20px;
-  padding: 0 60px 0 39px;
+  padding: 0 39px 0 39px;
 }
 
 .containerSettings {
@@ -303,6 +291,12 @@
   color: #e6edf3;
 }
 
+.containerSettingsGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .judulContainerSettings {
   font-size: 16px;
   font-style: normal;
@@ -315,6 +309,12 @@
   font-weight: 300;
 }
 
+.settingTitle {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
 @media (max-width: 768px) {
   .cardContainer {
     flex-wrap: wrap;
@@ -325,6 +325,7 @@
   .judulDetailPemilihan {
     font-size: 20px;
     width: 95vw;
+    margin-bottom: 0px;
   }
 
   .timelineBox {

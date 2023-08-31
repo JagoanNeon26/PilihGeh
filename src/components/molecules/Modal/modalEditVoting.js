@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { Modal, Stack } from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Modal, Spinner, Stack } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
 import votingServices from 'services/voting-services';
@@ -9,14 +9,39 @@ import BaseButton from '../../atoms/Button/button';
 import FormController from '../../atoms/Form/formController';
 import styles from './modal.module.css';
 
-function FormAddVoting() {
+function FormEditVoting() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+  const { id } = router.query;
+  const [dataVoting, setDataVoting] = useState(null);
+
+  useEffect(() => {
+    votingServices
+      .getAdminVotingById(id)
+      .then((response) => {
+        setDataVoting(response.data.getPemilihan);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error fetching user data',
+          text: error,
+        });
+      });
+  }, []);
+
+  if (!dataVoting) {
+    return (
+      <div className={styles.loadingForm}>
+        <Spinner animation="border" role="status" size="md" variant="light" />
+      </div>
+    );
+  }
 
   const initialValues = {
-    title: '',
-    organization: '',
-    detail: '',
+    title: dataVoting?.title || '',
+    organization: dataVoting?.organization || '',
+    detail: dataVoting?.detail || '',
   };
 
   const validationSchema = Yup.object({
@@ -28,7 +53,7 @@ function FormAddVoting() {
   const onSubmit = async (values) => {
     setIsLoading(true);
     try {
-      await votingServices.addVoting(values);
+      await votingServices.editVoting(id, values);
       setIsLoading(false);
       router.reload();
     } catch (error) {
@@ -88,7 +113,7 @@ function FormAddVoting() {
   );
 }
 
-function ModalAddVoting(props) {
+function ModalEditVoting(props) {
   const { show, onHide } = props;
 
   return (
@@ -103,17 +128,17 @@ function ModalAddVoting(props) {
     >
       <Modal.Header closeButton className={styles.modalHeader}>
         <div className={styles.headerEditProfile}>
-          Add Voting
+          Edit Detail Voting
           <div className={styles.headerEditDesc}>
-            Fill Form Below to Add Voting
+            Fill Form Below to Edit Detail Voting
           </div>
         </div>
       </Modal.Header>
       <Modal.Body className={styles.modalBody}>
-        <FormAddVoting />
+        <FormEditVoting />
       </Modal.Body>
     </Modal>
   );
 }
 
-export default ModalAddVoting;
+export default ModalEditVoting;

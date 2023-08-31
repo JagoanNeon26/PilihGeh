@@ -1,11 +1,9 @@
-const authHeader = () => {
+export default function authHeaderFile() {
   const Token = localStorage.getItem('auth-token');
 
   return {
-    'Content-Type': 'application/json',
+    'Content-Type': 'application/x-www-form-urlencoded',
     Accept: 'application/json',
     Token,
   };
-};
-
-export default authHeader;
+}

@@ -9,9 +9,10 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import FormController from '../../atoms/Form/formController';
 import BaseButton from '../../atoms/Button/button';
+import ModalAddCandidatePhoto from './modalAddCandidatePhoto';
 import styles from './modal.module.css';
 
-function FormEditCandidate({ noCandidate }) {
+function FormEditCandidate({ noCandidate, setShowAddPhotoModal }) {
   const [isLoading, setIsLoading] = useState(false);
   const [submitLoadingButton, setSubmitLoadingButton] = useState(false);
   const [deleteLoadingButton, setDeleteLoadingButton] = useState(false);
@@ -53,7 +54,6 @@ function FormEditCandidate({ noCandidate }) {
     candidate2Tag: candidateData.candidate2Tag || '',
     visi: candidateData.visi || '',
     misi: candidateData.misi || '',
-    // photo: candidateData.photo || '',
   };
 
   const validationSchema = Yup.object({
@@ -181,13 +181,6 @@ function FormEditCandidate({ noCandidate }) {
               formikProps={formikProps}
               required
             />
-            <FormController
-              control="fileUpload"
-              type="file"
-              name="photo"
-              accept="image/*"
-              formikProps={formikProps}
-            />
             <div className={styles.buttonModalEdit}>
               <Button
                 type="button"
@@ -196,14 +189,21 @@ function FormEditCandidate({ noCandidate }) {
                 disabled={deleteLoadingButton}
                 onClick={handleDelete}
               >
-                <div style={{ width: '100px' }}>Delete</div>
+                <div style={{ width: '50px' }}>Delete</div>
+              </Button>
+              <Button
+                type="button"
+                className={styles.buttonEditPhoto}
+                onClick={() => setShowAddPhotoModal(true)}
+              >
+                <div style={{ width: '100px' }}>Add/Edit Photo</div>
               </Button>
               <BaseButton
                 type="submit"
                 isLoading={submitLoadingButton}
                 disabled={submitLoadingButton}
               >
-                <div style={{ width: '100px' }}>Submit</div>
+                <div style={{ width: '50px' }}>Submit</div>
               </BaseButton>
             </div>
           </Stack>
@@ -215,27 +215,18 @@ function FormEditCandidate({ noCandidate }) {
 
 export default function ModalEditCandidate(props) {
   const { show, onHide, candidateNumber } = props;
+  const [showAddPhotoModal, setShowAddPhotoModal] = useState(false);
   return (
     <Modal
       show={show}
       onHide={onHide}
-      dialogClassName={styles.modalCandidate}
-      contentClassName={styles.modalCandidate}
+      dialogClassName={styles.modalAddCandidate}
+      contentClassName={styles.modalAddCandidate}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header
-        style={{
-          borderBottom: '2px solid #C2C2C2',
-          fontWeight: 'bold',
-          fontSize: '18px',
-          padding: '16px 30px 16px 30px',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-        closeButton
-      >
+      <Modal.Header className={styles.modalHeader} closeButton>
         <div className={styles.headerEditProfile}>
           Edit Voting
           <div className={styles.headerRequired}>
@@ -244,16 +235,19 @@ export default function ModalEditCandidate(props) {
           </div>
         </div>
       </Modal.Header>
-      <Modal.Body
-        style={{
-          padding: '10px 30px 30px 30px',
-          overflowY: 'auto',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-      >
-        {show && <FormEditCandidate noCandidate={{ candidateNumber }} />}
+      <Modal.Body className={styles.modalBody}>
+        {show && (
+          <FormEditCandidate
+            noCandidate={{ candidateNumber }}
+            setShowAddPhotoModal={setShowAddPhotoModal}
+          />
+        )}
       </Modal.Body>
+      <ModalAddCandidatePhoto
+        show={showAddPhotoModal}
+        onHide={() => setShowAddPhotoModal(false)}
+        candidateNumber={candidateNumber}
+      />
     </Modal>
   );
 }

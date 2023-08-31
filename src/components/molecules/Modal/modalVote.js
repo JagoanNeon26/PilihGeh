@@ -16,17 +16,7 @@ export default function ModalVote(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header
-        style={{
-          borderBottom: '2px solid #C2C2C2',
-          fontWeight: 'bold',
-          fontSize: '18px',
-          padding: '16px 30px 16px 30px',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-        closeButton
-      >
+      <Modal.Header className={styles.modalHeader} closeButton>
         <div className={styles.headerEditProfile}>
           Add Voting
           <div className={styles.headerEditDesc}>
@@ -34,14 +24,7 @@ export default function ModalVote(props) {
           </div>
         </div>
       </Modal.Header>
-      <Modal.Body
-        style={{
-          padding: '10px 30px 30px 30px',
-          overflowY: 'auto',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-      >
+      <Modal.Body className={styles.modalBody}>
         <Accordion defaultActiveKey="0" className={styles.accordion}>
           <Accordion.Item eventKey="0">
             <Accordion.Header className={styles.accordionHeader}>

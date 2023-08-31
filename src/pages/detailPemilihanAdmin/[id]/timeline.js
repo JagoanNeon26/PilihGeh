@@ -45,11 +45,7 @@ function TimelineAdmin() {
 
         setTimelineItems(formattedTimelineItems);
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error fetching timeline data',
-          text: error.response.data.message,
-        });
+        // Intentionally ignoring this error
       }
     };
 
@@ -66,16 +62,11 @@ function TimelineAdmin() {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'Candidate deleted successfully.',
+        text: 'Timeline deleted successfully.',
       });
       router.reload();
     } catch (error) {
       setDeleteLoadingButton(false);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error.response.data.message,
-      });
     }
   };
 
@@ -98,7 +89,7 @@ function TimelineAdmin() {
             <div className={styles.containerNoValue}>
               <div>No timeline available</div>
               <div className={styles.buttonNoValueWrapper}>
-                <Button onClick={handleShow} className={styles.buttonAddVote}>
+                <Button onClick={handleShow} className={styles.baseButton}>
                   <div style={{ width: '60px' }}>Add</div>
                 </Button>
               </div>
@@ -107,7 +98,7 @@ function TimelineAdmin() {
         ) : (
           <>
             <div className={styles.buttonYesValue}>
-              <Button onClick={handleEditShow} className={styles.buttonAddVote}>
+              <Button onClick={handleEditShow} className={styles.baseButton}>
                 <div style={{ width: '60px' }}>Edit</div>
               </Button>
               <Button
@@ -130,7 +121,6 @@ function TimelineAdmin() {
         show={editModalShow}
         onHide={() => handleEditClose()}
       />{' '}
-      {/* Pass the show state and onHide function */}
     </div>
   );
 }

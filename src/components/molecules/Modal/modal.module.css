@@ -10,7 +10,7 @@
   border-radius: 16px;
 }
 
-.modalCandidate {
+.modalAddCandidate {
   width: 30vw;
   min-width: max-content;
   height: 70vh;
@@ -25,6 +25,8 @@
   padding: 16px 30px 16px 30px;
   background-color: #0d1117;
   color: #e6edf3;
+  border-top-right-radius: 15px;
+  border-top-left-radius: 15px;
 }
 
 .modalBody {
@@ -32,6 +34,8 @@
   overflow-y: auto;
   background-color: #0d1117;
   color: #e6edf3;
+  border-bottom-right-radius: 15px;
+  border-bottom-left-radius: 15px;
 }
 
 .modalDelete {
@@ -106,10 +110,54 @@
   background-color: #950101;
 }
 
+.buttonEditPhoto {
+  border: 0;
+  background-color: #142b38;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.buttonNoOnModal {
+  border: 0;
+  background-color: #142b38;
+  color: white;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+.dropzone {
+  height: 150px;
+  cursor: pointer;
+  border: 1px solid #e6edf3;
+  border-radius: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin-bottom: 20px;
+  background-color: #142b38;
+  width: 100%;
+  padding: 10px;
+}
+
+.backdropModal {
+  background-color: rgba(0, 0, 0, 10);
+}
+
+@media (max-width: 1024px) {
+  .modalAddCandidate {
+    width: 50vw;
+  }
+}
+
 @media (max-width: 768px) {
   .modal {
-    width: 96vw;
-    height: max-content;
+    width: 95vw;
+  }
+
+  .modalAddCandidate {
+    width: 95vw;
   }
 
   .accordion {
@@ -119,5 +167,9 @@
 
   .modalDelete {
     width: 95vw;
+  }
+
+  .dropzone {
+    width: 80vw;
   }
 }

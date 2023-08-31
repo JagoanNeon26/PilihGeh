@@ -27,7 +27,7 @@ function MenuPemilihan() {
                 marginBottom: '-30px',
               }}
             >
-              <Button onClick={handleShow} className={styles.buttonAddVote}>
+              <Button onClick={handleShow} className={styles.baseButton}>
                 <div style={{ width: '60px' }}>Add</div>
               </Button>
             </div>

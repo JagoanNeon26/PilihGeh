@@ -4,20 +4,54 @@ import { React, useState } from 'react';
 import { Modal, Stack } from 'react-bootstrap';
 import * as Yup from 'yup';
 import { Formik, Form } from 'formik';
+import votingServices from 'services/voting-services';
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 import FormController from '../../atoms/Form/formController';
-import styles from './modal.module.css';
 import BaseButton from '../../atoms/Button/button';
+import styles from './modal.module.css';
 
 function FormAddVoters() {
   const [isLoading, setIsLoading] = useState(false);
+  const router = useRouter();
+  const { id } = router.query;
 
-  const initialValues = {};
+  const initialValues = {
+    email: '',
+  };
 
   const validationSchema = Yup.object({
-    // fullName: Yup.string().required('Harga Tawar diperlukan!'),
+    email: Yup.string().email().required('Email is required'),
   });
 
-  const onSubmit = (values) => {};
+  const onSubmit = async (values) => {
+    setIsLoading(true);
+    try {
+      const response = await votingServices.addVoters(id, values);
+      setIsLoading(false);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: response.data.message,
+      });
+      router.reload();
+    } catch (error) {
+      setIsLoading(false);
+      if (error.response.data.message) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response.data.message,
+        });
+      } else {
+        Swal.fire({
+          icon: 'error',
+          title: 'An error occurred',
+          text: error.response.data.message,
+        });
+      }
+    }
+  };
 
   return (
     <Formik
@@ -44,13 +78,12 @@ function FormAddVoters() {
                 gap: '10px',
               }}
             >
-              <BaseButton variant="primary" type="submit" disabled={isLoading}>
-                {isLoading ? 'Loading...' : 'Check Email'}
-              </BaseButton>
-              <BaseButton variant="primary" type="submit" disabled={isLoading}>
-                <div style={{ width: '60px' }}>
-                  {isLoading ? 'Loading...' : 'Add'}
-                </div>
+              <BaseButton
+                type="submit"
+                isLoading={isLoading}
+                disabled={isLoading}
+              >
+                Submit
               </BaseButton>
             </div>
           </Stack>
@@ -72,17 +105,7 @@ export default function ModalAddVoters(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header
-        style={{
-          borderBottom: '2px solid #C2C2C2',
-          fontWeight: 'bold',
-          fontSize: '18px',
-          padding: '16px 30px 16px 30px',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-        closeButton
-      >
+      <Modal.Header className={styles.modalHeader} closeButton>
         <div className={styles.headerEditProfile}>
           Add Voters
           <div className={styles.headerRequired}>
@@ -91,14 +114,7 @@ export default function ModalAddVoters(props) {
           </div>
         </div>
       </Modal.Header>
-      <Modal.Body
-        style={{
-          padding: '10px 30px 30px 30px',
-          overflowY: 'auto',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-      >
+      <Modal.Body className={styles.modalBody}>
         <FormAddVoters />
       </Modal.Body>
     </Modal>

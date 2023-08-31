@@ -1,5 +1,6 @@
 import axios from 'axios';
 import authHeader from './auth-header';
+import authHeaderFile from './auth-header-file';
 
 const API_URL = process.env.NEXT_PUBLIC_ENV;
 
@@ -84,6 +85,140 @@ const deleteTimeline = (id) =>
     })
     .then((response) => response);
 
+const getAllVoters = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/get-list`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const addVoters = (id, data) =>
+  axios
+    .post(`${API_URL}/admin/pemilihan/${id}/add-user`, data, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const deleteVoters = (id, id_pemilihan_user) =>
+  axios
+    .delete(
+      `${API_URL}/admin/pemilihan/${id}/delete-user/${id_pemilihan_user}`,
+      {
+        headers: authHeader(),
+      }
+    )
+    .then((response) => response);
+
+const sendTokenVoters = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/send-token-all`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const joinVoters = (id, token) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}/join/${token}`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const sendTokenVotersById = (id, id_pemilihan_user) =>
+  axios
+    .get(
+      `${API_URL}/admin/pemilihan/${id}/send-token-pemilihan/${id_pemilihan_user}`,
+      {
+        headers: authHeader(),
+      }
+    )
+    .then((response) => response);
+
+const addVotersByFile = (id, data) =>
+  axios
+    .post(`${API_URL}/admin/pemilihan/${id}/add-user-excel`, data, {
+      headers: authHeaderFile(),
+    })
+    .then((response) => response);
+
+const getAllAdmin = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/get-list-admin`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const addAdmin = (id, data) =>
+  axios
+    .post(`${API_URL}/admin/pemilihan/${id}/add-admin`, data, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const deleteAdmin = (id, user_id) =>
+  axios
+    .delete(`${API_URL}/admin/pemilihan/${id}/delete-admin/${user_id}`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const getAdminById = (id, user_id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/get-list-admin/${user_id}`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const addAdminByFile = (id, data) =>
+  axios
+    .post(`${API_URL}/admin/pemilihan/${id}/add-admin-excel`, data, {
+      headers: authHeaderFile(),
+    })
+    .then((response) => response);
+
+const joinAdmin = (id, token) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/join-admin/${token}`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const addCandidatePhoto = (id, data, no_kandidat) =>
+  axios
+    .put(
+      `${API_URL}/admin/pemilihan/${id}/add-edit-photo-kandidat/${no_kandidat}`,
+      data,
+      {
+        headers: authHeaderFile(),
+      }
+    )
+    .then((response) => response);
+
+const editVoting = (id, data) =>
+  axios
+    .post(`${API_URL}/admin/pemilihan/${id}/change-title`, data, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const setEmergency = (id) =>
+  axios
+    .put(`${API_URL}/admin/pemilihan/${id}/set-emergency`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const setStop = (id) =>
+  axios
+    .put(`${API_URL}/admin/pemilihan/${id}/set-stop`, { headers: authHeader() })
+    .then((response) => response);
+
+const resetVote = (id) =>
+  axios
+    .delete(`${API_URL}/admin/pemilihan/${id}/delete-all-votes`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
 const votingServices = {
   addVoting,
   getAdminVoting,
@@ -97,5 +232,23 @@ const votingServices = {
   getTimeline,
   updateTimeline,
   deleteTimeline,
+  getAllVoters,
+  addVoters,
+  deleteVoters,
+  sendTokenVoters,
+  joinVoters,
+  sendTokenVotersById,
+  addVotersByFile,
+  getAllAdmin,
+  addAdmin,
+  deleteAdmin,
+  getAdminById,
+  addAdminByFile,
+  joinAdmin,
+  addCandidatePhoto,
+  editVoting,
+  setEmergency,
+  setStop,
+  resetVote,
 };
 export default votingServices;
