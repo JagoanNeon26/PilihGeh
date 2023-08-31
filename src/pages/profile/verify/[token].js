@@ -28,7 +28,7 @@ export default function Home() {
           text: err.message,
         });
       });
-  }, [router]);
+  });
 
   return (
     <div className={styles.container}>

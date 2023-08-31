@@ -147,7 +147,7 @@ function TableManageVoters({ onDataReady }) {
         <button
           onClick={() => {
             setSelectedId(cell);
-            handleSendInvitation(id, row.id);
+            handleSendInvitation(row.id);
           }}
           onKeyDown={(e) => {
             if (e.key === 'Enter') {

@@ -55,14 +55,27 @@ function TableManageAdmin({ onDataReady }) {
 
   const sortCaret = (order) => {
     if (order === 'asc') {
-      return <FontAwesomeIcon icon={faSortUp} style={{ marginLeft: '10px' }} />;
+      return (
+        <FontAwesomeIcon
+          icon={faSortUp}
+          style={{ marginLeft: '10px', fontSize: 'initial' }}
+        />
+      );
     }
     if (order === 'desc') {
       return (
-        <FontAwesomeIcon icon={faSortDown} style={{ marginLeft: '10px' }} />
+        <FontAwesomeIcon
+          icon={faSortDown}
+          style={{ marginLeft: '10px', fontSize: 'initial' }}
+        />
       );
     }
-    return <FontAwesomeIcon icon={faSort} style={{ marginLeft: '10px' }} />;
+    return (
+      <FontAwesomeIcon
+        icon={faSort}
+        style={{ marginLeft: '10px', fontSize: 'initial' }}
+      />
+    );
   };
 
   const columns = [
