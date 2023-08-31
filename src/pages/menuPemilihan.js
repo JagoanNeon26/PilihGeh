@@ -29,8 +29,6 @@ function MenuPemilihan() {
             >
               <Button onClick={handleShow} className={styles.baseButton}>
                 <div style={{ width: '60px' }}>Add</div>
-              <Button onClick={handleShow} className={styles.buttonAddVote}>
-                <div className={styles.widthButtonAddVote}>Add</div>
               </Button>
             </div>
             <Tabs
