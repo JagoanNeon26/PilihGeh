@@ -29,7 +29,6 @@ function DetailPemilihanAdmin() {
           votingServices
             .getCandidate(id)
             .then((candidateResponse) => {
-              // Renamed the parameter to candidateResponse
               const fetchedCandidates = candidateResponse.data.kandidat;
               setCardsData(fetchedCandidates);
             })
@@ -37,7 +36,7 @@ function DetailPemilihanAdmin() {
               Swal.fire({
                 icon: 'error',
                 title: 'Error Fetching Candidates',
-                text: error.response.data.message,
+                text: error.response.data.message.data.message,
               });
             });
         })
@@ -45,7 +44,7 @@ function DetailPemilihanAdmin() {
           Swal.fire({
             icon: 'error',
             title: 'Error Fetching Data',
-            text: error.response.data.message,
+            text: error.response.data.message.data.message,
           });
         });
     }
@@ -65,7 +64,7 @@ function DetailPemilihanAdmin() {
           <div className={styles.buttonYesValue}>
             <Button
               onClick={() => setModalShow(true)}
-              className={styles.buttonAddVote}
+              className={styles.baseButton}
             >
               <div style={{ width: '60px' }}>Add</div>
             </Button>
@@ -89,7 +88,7 @@ function DetailPemilihanAdmin() {
               <div className={styles.buttonNoValueWrapper}>
                 <Button
                   onClick={() => setModalShow(true)}
-                  className={styles.buttonAddVote}
+                  className={styles.baseButton}
                 >
                   <div style={{ width: '60px' }}>Add</div>
                 </Button>

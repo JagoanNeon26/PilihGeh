@@ -34,7 +34,7 @@ function PhotoUploader() {
       )}
       <div>
         {!isPreviewMode && (
-          <Button className={styles.buttonUploadPhoto} onClick={capturePhoto}>
+          <Button className={styles.baseButton} onClick={capturePhoto}>
             Capture Photo
           </Button>
         )}
@@ -46,14 +46,10 @@ function PhotoUploader() {
               justifyContent: 'space-between',
             }}
           >
-            <Button className={styles.buttonUploadPhoto} onClick={deletePhoto}>
+            <Button className={styles.baseButton} onClick={deletePhoto}>
               Delete Photo
             </Button>
-            <Button
-              type="submit"
-              className={styles.buttonUploadPhoto}
-              href="/otpVote"
-            >
+            <Button type="submit" className={styles.baseButton} href="/otpVote">
               Upload
             </Button>
           </div>

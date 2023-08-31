@@ -22,7 +22,7 @@ function TableVote() {
         const formattedData = pemilihanData.map((item) => item.Pemilihan);
         setData(formattedData);
       } catch (error) {
-        console.error('Error fetching voting data:', error);
+        // Intentionally ignoring this error
       }
     };
     fetchData();

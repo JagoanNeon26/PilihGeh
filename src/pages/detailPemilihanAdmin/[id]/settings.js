@@ -1,14 +1,78 @@
-import React from 'react';
+import React, { useState } from 'react';
 import NavbarAdmin from 'components/molecules/Navbar/navbarAdmin';
-import { Row } from 'react-bootstrap';
+import { Button, Row, Spinner } from 'react-bootstrap';
 import BaseButton from 'components/atoms/Button/button';
+import ModalEditVoting from 'components/molecules/Modal/modalEditVoting';
+import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
+import votingServices from 'services/voting-services';
 import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihan() {
+  const [isLoading, setIsLoading] = useState(false);
+  const [isModalVisible, setIsModalVisible] = useState(false);
+  const router = useRouter();
+  const { id } = router.query;
+
+  const handleShowModal = () => {
+    setIsModalVisible(true);
+  };
+  const handleCloseModal = () => {
+    setIsModalVisible(false);
+  };
+
+  const handleEmergencyStop = async () => {
+    setIsLoading(true);
+    try {
+      await votingServices.setEmergency(id);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'The voting is now emergency stopping',
+      });
+    } catch (error) {
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleResetVote = async () => {
+    setIsLoading(true);
+    try {
+      await votingServices.resetVote(id);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'The voting is done resetting',
+      });
+    } catch (error) {
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleStopVote = async () => {
+    setIsLoading(true);
+    try {
+      await votingServices.setStop(id);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: 'The voting is now stopping',
+      });
+    } catch (error) {
+      setIsLoading(false);
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   return (
     <div>
       <NavbarAdmin />
-      <Row style={{ display: 'flex', justifyContent: 'center' }}>
+      <Row className={styles.settingTitle}>
         <div className={styles.judulDetailPemilihan}>Settings</div>
       </Row>
       <Row
@@ -17,7 +81,7 @@ function DetailPemilihan() {
           alignItems: 'center',
           gap: '20px',
           flexDirection: 'column',
-          marginBottom: '30px',
+          marginBottom: '40px',
         }}
       >
         {/* Download */}
@@ -34,14 +98,21 @@ function DetailPemilihan() {
         </div>
         {/* Change Name */}
         <div className={styles.containerSettings}>
-          <div className={styles.judulContainerSettings}>Change Name</div>
+          <div className={styles.judulContainerSettings}>
+            Change Detail Voting
+          </div>
           <div className={styles.descContainerSettings}>
-            Click this button to change name this voting
+            Click this button to change name, organization, and/or detail of
+            this voting
           </div>
           <div>
-            <BaseButton type="submit">
+            <Button
+              className={styles.baseButton}
+              type="button"
+              onClick={handleShowModal}
+            >
               <div style={{ width: '60px' }}>Change</div>
-            </BaseButton>
+            </Button>
           </div>
         </div>
         {/* Emergency Stop */}
@@ -53,9 +124,20 @@ function DetailPemilihan() {
             Click this button to emergency stop this voting
           </div>
           <div>
-            <BaseButton type="submit">
-              <div style={{ width: '60px' }}>Stop</div>
-            </BaseButton>
+            <Button
+              type="button"
+              onClick={handleEmergencyStop}
+              disabled={isLoading}
+              className={styles.baseButton}
+            >
+              <div style={{ width: '60px' }}>
+                {isLoading ? (
+                  <Spinner animation="border" role="status" size="sm" />
+                ) : (
+                  'Stop'
+                )}
+              </div>
+            </Button>
           </div>
         </div>
         {/* Reset Vote */}
@@ -65,9 +147,20 @@ function DetailPemilihan() {
             Click this button to reset this voting
           </div>
           <div>
-            <BaseButton type="submit">
-              <div style={{ width: '60px' }}>Reset</div>
-            </BaseButton>
+            <Button
+              type="button"
+              onClick={handleResetVote}
+              disabled={isLoading}
+              className={styles.baseButton}
+            >
+              <div style={{ width: '60px' }}>
+                {isLoading ? (
+                  <Spinner animation="border" role="status" size="sm" />
+                ) : (
+                  'Reset'
+                )}
+              </div>
+            </Button>
           </div>
         </div>
         {/* Close Vote */}
@@ -77,24 +170,24 @@ function DetailPemilihan() {
             Click this button to close this voting
           </div>
           <div>
-            <BaseButton type="submit">
-              <div style={{ width: '60px' }}>Close</div>
-            </BaseButton>
-          </div>
-        </div>
-        {/* Delete Vote */}
-        <div className={styles.containerSettings}>
-          <div className={styles.judulContainerSettings}>Delete Vote</div>
-          <div className={styles.descContainerSettings}>
-            Click this button to delete this voting
-          </div>
-          <div>
-            <BaseButton type="submit">
-              <div style={{ width: '60px' }}>Delete</div>
-            </BaseButton>
+            <Button
+              type="button"
+              onClick={handleStopVote}
+              disabled={isLoading}
+              className={styles.baseButton}
+            >
+              <div style={{ width: '60px' }}>
+                {isLoading ? (
+                  <Spinner animation="border" role="status" size="sm" />
+                ) : (
+                  'Close'
+                )}
+              </div>
+            </Button>
           </div>
         </div>
       </Row>
+      <ModalEditVoting show={isModalVisible} onHide={handleCloseModal} />
     </div>
   );
 }

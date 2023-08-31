@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import votingServices from 'services/voting-services';
-import Swal from 'sweetalert2';
 import styles from './table.module.css';
 
 function TableAdmin() {
@@ -23,11 +22,7 @@ function TableAdmin() {
         const formattedData = pemilihanData.map((item) => item.Pemilihan);
         setData(formattedData);
       } catch (error) {
-        Swal.fire({
-          icon: 'error',
-          title: 'Error fetching voting data',
-          text: error.response.data.message,
-        });
+        // Intentionally ignoring this error
       }
     };
     fetchData();

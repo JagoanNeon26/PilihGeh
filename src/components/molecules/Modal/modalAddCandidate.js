@@ -10,8 +10,9 @@ import { useRouter } from 'next/router';
 import FormController from '../../atoms/Form/formController';
 import BaseButton from '../../atoms/Button/button';
 import styles from './modal.module.css';
+import ModalAddCandidatePhoto from './modalAddCandidatePhoto';
 
-function FormAddCandidate() {
+function FormAddCandidate({ onAddCandidateSuccess }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
@@ -24,7 +25,6 @@ function FormAddCandidate() {
     candidate2Tag: '',
     visi: '',
     misi: '',
-    photo: '',
   };
 
   const validationSchema = Yup.object({
@@ -47,13 +47,13 @@ function FormAddCandidate() {
         title: 'Success',
         text: response.data.message,
       });
-      router.reload();
+      onAddCandidateSuccess(values.candidateNumber);
     } catch (error) {
       setIsLoading(false);
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error.response.data.message,
+        text: error.response.data.message.data.message,
       });
     }
   };
@@ -128,13 +128,6 @@ function FormAddCandidate() {
               formikProps={formikProps}
               required
             />
-            <FormController
-              control="fileUpload"
-              type="file"
-              name="photo"
-              accept="image/*"
-              formikProps={formikProps}
-            />
             <BaseButton
               type="submit"
               isLoading={isLoading}
@@ -151,6 +144,14 @@ function FormAddCandidate() {
 
 export default function ModalAddCandidate(props) {
   const { show, onHide } = props;
+  const [showPhotoModal, setShowPhotoModal] = useState(false);
+  const [candidateNumber, setCandidateNumber] = useState(null);
+
+  const handleAddCandidateSuccess = (number) => {
+    setCandidateNumber(number);
+    setShowPhotoModal(true);
+  };
+
   return (
     <Modal
       show={show}
@@ -171,8 +172,15 @@ export default function ModalAddCandidate(props) {
         </div>
       </Modal.Header>
       <Modal.Body className={styles.modalBody}>
-        <FormAddCandidate />
+        <FormAddCandidate onAddCandidateSuccess={handleAddCandidateSuccess} />
       </Modal.Body>
+      {showPhotoModal && (
+        <ModalAddCandidatePhoto
+          show={showPhotoModal}
+          onHide={() => setShowPhotoModal(false)}
+          candidateNumber={candidateNumber}
+        />
+      )}
     </Modal>
   );
 }

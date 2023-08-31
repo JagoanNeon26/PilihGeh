@@ -24,10 +24,11 @@ function OtpForm() {
       setOtp('');
       router.push('/menuPemilihan');
     } catch (error) {
+      setIsLoading(false);
       Swal.fire({
         icon: 'error',
         title: 'Error verifying OTP',
-        text: error.message.data.message,
+        text: error.response.data.message,
       });
     }
     setIsLoading(false);

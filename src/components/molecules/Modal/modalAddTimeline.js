@@ -43,7 +43,7 @@ function FormAddTimeline() {
       router.reload();
     } catch (error) {
       setIsLoading(false);
-      if (error.response) {
+      if (error.response.data.message) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
@@ -121,17 +121,7 @@ export default function ModalAddTimeline(props) {
       aria-labelledby="contained-modal-title-vcenter"
       centered
     >
-      <Modal.Header
-        style={{
-          borderBottom: '2px solid #C2C2C2',
-          fontWeight: 'bold',
-          fontSize: '18px',
-          padding: '16px 30px 16px 30px',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-        closeButton
-      >
+      <Modal.Header className={styles.modalHeader} closeButton>
         <div className={styles.headerEditProfile}>
           Add Timeline
           <div className={styles.headerRequired}>
@@ -140,14 +130,7 @@ export default function ModalAddTimeline(props) {
           </div>
         </div>
       </Modal.Header>
-      <Modal.Body
-        style={{
-          padding: '10px 30px 30px 30px',
-          overflowY: 'auto',
-          backgroundColor: '#0D1117',
-          color: '#e6edf3',
-        }}
-      >
+      <Modal.Body className={styles.modalBody}>
         <FormAddTimeline />
       </Modal.Body>
     </Modal>

@@ -7,15 +7,15 @@ import { Button, Modal } from 'react-bootstrap';
 import Swal from 'sweetalert2';
 import styles from './modal.module.css';
 
-export default function ModalDeleteEmail(props) {
+export default function ModalDeleteEmailAdmin(props) {
   const { show, onHide, selectedId, selectedEmail } = props;
   const router = useRouter();
-  const id_pemilihan_user = selectedId;
+  const user_id = selectedId;
   const { id } = router.query;
 
   const handleDelete = async () => {
     try {
-      const response = await votingServices.deleteVoters(id, id_pemilihan_user);
+      const response = await votingServices.deleteAdmin(id, user_id);
       Swal.fire({
         icon: 'success',
         title: 'Success',

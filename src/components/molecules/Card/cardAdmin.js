@@ -5,7 +5,7 @@ import styles from './card.module.css';
 import ModalVote from '../Modal/modalVote';
 import ModalEditCandidate from '../Modal/modalEditCandidate';
 
-function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate }) {
+function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate, image }) {
   const [modalShow, setModalShow] = useState(false);
   const [modalAddShow, setModalAddShow] = useState(false);
 
@@ -21,7 +21,7 @@ function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate }) {
     <BootstrapCard className={styles.card}>
       <BootstrapCard.Img
         variant="top"
-        src="/Paslon 1.png"
+        src={image || '/Paslon 1.png'}
         className={styles.cardImg}
       />
       <BootstrapCard.Body style={{ padding: '0' }}>
@@ -74,6 +74,11 @@ CardAdmin.propTypes = {
   tag1: PropTypes.string.isRequired,
   tag2: PropTypes.string.isRequired,
   noCandidate: PropTypes.number.isRequired,
+  image: PropTypes.string,
+};
+
+CardAdmin.defaultProps = {
+  image: '/Paslon 1.png',
 };
 
 export default CardAdmin;

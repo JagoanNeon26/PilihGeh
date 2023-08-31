@@ -1,93 +1,164 @@
-/* eslint-disable no-unused-vars */
-import React, { useState } from 'react';
-import { faCheck, faTimes } from '@fortawesome/free-solid-svg-icons';
+import React, { useState, useEffect } from 'react';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { Table } from 'react-bootstrap';
-import ModalDeleteEmail from 'components/molecules/Modal/modalDeleteEmail';
+import {
+  faSort,
+  faSortUp,
+  faSortDown,
+} from '@fortawesome/free-solid-svg-icons';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
+import votingServices from 'services/voting-services';
+import Swal from 'sweetalert2';
+import ModalDeleteEmailAdmin from 'components/molecules/Modal/modalDeleteEmailAdmin';
 import styles from './table.module.css';
 
-function TableManageAdmin() {
-  // const [data, setData] = useState([]);
+function TableManageAdmin({ onDataReady }) {
+  const router = useRouter();
+  const [data, setData] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedId, setSelectedId] = useState(null);
+  const [selectedEmail, setSelectedEmail] = useState('');
+  const { id } = router.query;
 
-  // useEffect(() => {
-  //   axios.get("https://api.example.com/data").then((response) => {
-  //     setData(response.data);
-  //   });
-  // }, []);
-
-  const [modalShow, setModalShow] = useState(false);
-  const handleShow = () => setModalShow(true);
-  const handleClose = () => setModalShow(false);
-
-  const [data, setData] = useState([
-    {
-      name: 'Jonh Doe',
-      invitationStatus: 'YES',
-      email: 'johndoe@gmail.com',
-    },
-    {
-      name: 'Jonh Doe',
-      invitationStatus: 'NO',
-      email: 'johndoe@gmail.com',
-    },
-    {
-      name: 'Jonh Doe',
-      invitationStatus: 'YES',
-      email: 'johndoe@gmail.com',
-    },
-  ]);
-
-  const invitationStatusToLogo = (invitationStatus) => {
-    if (invitationStatus === 'YES') {
-      return <FontAwesomeIcon icon={faCheck} />;
+  useEffect(() => {
+    if (id) {
+      const fetchData = async () => {
+        try {
+          const response = await votingServices.getAllAdmin(id);
+          const userData = response.data.admin;
+          setData(userData);
+          onDataReady(userData);
+          if (selectedId !== null) {
+            setSelectedId((prevSelectedId) => {
+              const selectedRow = userData.find(
+                (row) => row.user_id === prevSelectedId
+              );
+              if (selectedRow) {
+                setSelectedEmail(selectedRow.email);
+              }
+              return prevSelectedId;
+            });
+          }
+        } catch (error) {
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops..',
+            text: error.message,
+          });
+        }
+      };
+      fetchData();
     }
-    if (invitationStatus === 'NO') {
-      return <FontAwesomeIcon icon={faTimes} />;
+  }, [id, selectedId]);
+
+  const sortCaret = (order) => {
+    if (order === 'asc') {
+      return <FontAwesomeIcon icon={faSortUp} style={{ marginLeft: '10px' }} />;
     }
-    return invitationStatus;
+    if (order === 'desc') {
+      return (
+        <FontAwesomeIcon icon={faSortDown} style={{ marginLeft: '10px' }} />
+      );
+    }
+    return <FontAwesomeIcon icon={faSort} style={{ marginLeft: '10px' }} />;
+  };
+
+  const columns = [
+    {
+      dataField: 'name',
+      text: 'Name',
+      formatter: (cell) => {
+        if (!cell) {
+          return 'User belum terdaftar';
+        }
+        return cell;
+      },
+      headerStyle: { width: '150px' },
+      classes: styles.overflowCell,
+      sort: true,
+      sortCaret,
+    },
+    {
+      dataField: 'isJoin',
+      text: 'Status',
+      headerStyle: { width: '100px' },
+      sort: true,
+      sortCaret,
+    },
+    {
+      dataField: 'email',
+      text: 'Email',
+      headerStyle: { width: '150px' },
+      classes: styles.overflowCell,
+      sort: true,
+      sortCaret,
+    },
+    {
+      dataField: 'user_id',
+      text: 'Delete',
+      classes: styles.deleteCell,
+      formatter: (cell) => (
+        <span
+          onClick={() => {
+            setSelectedId(cell);
+            setShowModal(true);
+          }}
+          onKeyDown={(e) => {
+            if (e.key === 'Enter') {
+              setSelectedId(cell);
+              setShowModal(true);
+            }
+          }}
+          role="button"
+          tabIndex={0} // This makes the span focusable
+        >
+          Delete
+        </span>
+      ),
+      headerStyle: { width: '70px' },
+    },
+  ];
+
+  const renderNoDataMessage = () => {
+    if (data.length === 0) {
+      return 'Currently no data voters.';
+    }
+    if (id) {
+      return 'Loading data...';
+    }
+    return 'No ID provided.';
   };
 
   return (
-    <>
-      <Table responsive>
-        <thead className={styles.tableHead}>
-          <tr style={{ verticalAlign: 'middle' }}>
-            <th>VOTERS NAME</th>
-            <th>INVITATION STATUS</th>
-            <th>EMAIL</th>
-            <th>ACTION</th>
-          </tr>
-        </thead>
-        <tbody className={styles.tableBody}>
-          {data.map((item) => (
-            <tr key={item.id} style={{ verticalAlign: 'middle' }}>
-              <td
-                style={{
-                  width: '25vw',
-                  textOverflow: 'ellipsis',
-                }}
-              >
-                {item.name}
-              </td>
-              <td style={{ width: '25vw' }}>
-                {invitationStatusToLogo(item.invitationStatus)}
-              </td>
-              <td style={{ width: '25vw' }}>{item.email}</td>
-              <td style={{ width: '25vw' }}>
-                <button
-                  type="button"
-                  onClick={handleShow}
-                  className={styles.buttonDelete}
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </Table>
-      <ModalDeleteEmail show={modalShow} onHide={() => handleClose()} />
-    </>
+    <div className={styles.table}>
+      {Array.isArray(data) && data.length > 0 ? (
+        <div className="table-responsive">
+          <BootstrapTable
+            keyField="id"
+            data={data}
+            columns={columns}
+            rowClasses={styles.tableBodyManage}
+            headerClasses={styles.tableHead}
+            sort={{ dataField: 'name', order: 'asc' }}
+          />
+        </div>
+      ) : (
+        <p style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
+          {renderNoDataMessage()}
+        </p>
+      )}
+      <ModalDeleteEmailAdmin
+        show={showModal}
+        onHide={() => {
+          setShowModal(false);
+          setSelectedId(null);
+        }}
+        selectedId={selectedId}
+        selectedEmail={selectedEmail}
+      />
+    </div>
   );
 }
 

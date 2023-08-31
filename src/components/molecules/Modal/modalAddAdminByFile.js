@@ -1,39 +1,32 @@
 /* eslint-disable no-unused-vars */
 /* eslint-enable no-console */
 import { React, useState } from 'react';
-import { Modal, Stack } from 'react-bootstrap';
-import * as Yup from 'yup';
-import { Formik, Form } from 'formik';
+import { Modal } from 'react-bootstrap';
 import votingServices from 'services/voting-services';
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
-import FormController from '../../atoms/Form/formController';
-import BaseButton from '../../atoms/Button/button';
+import { useDropzone } from 'react-dropzone';
 import styles from './modal.module.css';
+import BaseButton from '../../atoms/Button/button';
 
-function FormAddAdmin() {
+function FormAddAdminByFile() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
 
-  const initialValues = {
-    email: '',
-  };
-
-  const validationSchema = Yup.object({
-    email: Yup.string().email().required('Email is required'),
-  });
-
-  const onSubmit = async (values) => {
+  const onDrop = async (acceptedFiles) => {
     setIsLoading(true);
     try {
-      const response = await votingServices.addAdmin(id, values);
+      const formData = new FormData();
+      formData.append('file', acceptedFiles[0]);
+      const response = await votingServices.addAdminByFile(id, formData);
       setIsLoading(false);
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'Check the email to can join voting as admin',
+        text: response.data.message,
       });
+      router.reload();
     } catch (error) {
       setIsLoading(false);
       if (error.response.data.message) {
@@ -52,47 +45,43 @@ function FormAddAdmin() {
     }
   };
 
+  const { getRootProps, getInputProps, isDragActive } = useDropzone({
+    onDrop,
+    accept: '.xlsx, .xls',
+    multiple: false,
+  });
+
   return (
-    <Formik
-      initialValues={initialValues}
-      validationSchema={validationSchema}
-      onSubmit={onSubmit}
-    >
-      {({ formikProps }) => (
-        <Form>
-          <Stack gap={4}>
-            <FormController
-              control="input"
-              name="email"
-              type="input"
-              label="Email Voters"
-              placeholder="johndoe@gmail.com"
-              formikProps={formikProps}
-              required
-            />
-            <div
-              style={{
-                display: 'flex',
-                justifyContent: 'flex-end',
-                gap: '10px',
-              }}
-            >
-              <BaseButton
-                type="submit"
-                isLoading={isLoading}
-                disabled={isLoading}
-              >
-                Submit
-              </BaseButton>
-            </div>
-          </Stack>
-        </Form>
-      )}
-    </Formik>
+    <div>
+      <div {...getRootProps()} className={styles.dropzone}>
+        <input {...getInputProps()} />
+        {isDragActive ? (
+          <p>Drop the file here...</p>
+        ) : (
+          <p>Drag and drop a file here, or click to select a file</p>
+        )}
+      </div>
+      <div
+        style={{
+          display: 'flex',
+          justifyContent: 'flex-end',
+          gap: '10px',
+        }}
+      >
+        <BaseButton
+          type="button"
+          isLoading={isLoading}
+          disabled={isLoading}
+          onClick={onDrop}
+        >
+          Submit
+        </BaseButton>
+      </div>
+    </div>
   );
 }
 
-export default function ModalAddAdmin(props) {
+export default function ModalAddAdminByFile(props) {
   const { show, onHide } = props;
   return (
     <Modal
@@ -114,7 +103,7 @@ export default function ModalAddAdmin(props) {
         </div>
       </Modal.Header>
       <Modal.Body className={styles.modalBody}>
-        <FormAddAdmin />
+        <FormAddAdminByFile />
       </Modal.Body>
     </Modal>
   );

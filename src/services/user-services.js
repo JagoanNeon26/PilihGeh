@@ -8,11 +8,10 @@ const getUser = () =>
     .get(`${API_URL}/users/get-profile`, { headers: authHeader() })
     .then((response) => response);
 
-const editProfile = (data) => {
-  return axios.patch(`${API_URL}/users/edit-profile`, data, {
+const editProfile = (data) =>
+  axios.patch(`${API_URL}/users/edit-profile`, data, {
     headers: authHeader(),
   });
-};
 
 const verifEditProfile = async (data, token) => {
   try {
