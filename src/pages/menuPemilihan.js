@@ -24,7 +24,7 @@ function MenuPemilihan() {
               style={{
                 display: 'flex',
                 justifyContent: 'flex-end',
-                marginBottom: '-30px',
+                marginBottom: '-29px',
               }}
             >
               <Button onClick={handleShow} className={styles.baseButton}>
