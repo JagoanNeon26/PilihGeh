@@ -88,3 +88,13 @@
     display: block;
   }
 }
+
+@media (max-width: 768px) {
+  .tableHead {
+    font-size: 12px;
+  }
+
+  .tableBody {
+    font-size: 12px;
+  }
+}
