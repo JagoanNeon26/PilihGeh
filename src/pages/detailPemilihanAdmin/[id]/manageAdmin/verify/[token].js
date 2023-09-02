@@ -11,7 +11,7 @@ export default function Home() {
   const router = useRouter();
 
   useEffect(() => {
-    const delay = 5000;
+    const delay = 3000;
 
     const fetchData = async () => {
       const token = window.location.pathname.split('/verify/')[1];
@@ -29,7 +29,7 @@ export default function Home() {
     setTimeout(() => {
       fetchData();
     }, delay);
-  }, [router]);
+  }, []);
 
   return (
     <div className={styles.container}>

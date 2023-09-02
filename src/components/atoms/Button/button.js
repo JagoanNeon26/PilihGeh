@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import styles from 'components/atoms/Button/button.module.css';
 import { Button, Dropdown, Spinner } from 'react-bootstrap';
 
@@ -38,19 +38,22 @@ function BaseButton(props) {
 }
 export default BaseButton;
 
-export function CircleButton(props) {
+export const CircleButton = forwardRef((props, ref) => {
   const { variant = 'white', children } = props;
 
   return (
     <Dropdown.Toggle
+      ref={ref}
       variant={variant}
       className={[
         styles.circleButton,
         variant === 'white' ? styles.white : '',
-        styles.hideCaret, // Add the hideCaret class
+        styles.hideCaret,
       ]}
     >
       {children}
     </Dropdown.Toggle>
   );
-}
+});
+
+CircleButton.displayName = 'CircleButton';

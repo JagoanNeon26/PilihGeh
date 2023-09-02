@@ -26,6 +26,7 @@
         "react/jsx-props-no-spreading": "off",
         "import/no-unresolved": "off",
         "camelcase": "off",
-        "react/no-unstable-nested-components": ["warn", { "allowAsProps": true }]
+        "react/no-unstable-nested-components": ["warn", { "allowAsProps": true }],
+        "no-nested-ternary": "off"
     }
 }

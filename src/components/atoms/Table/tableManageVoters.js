@@ -23,77 +23,61 @@ function TableManageVoters({ onDataReady }) {
   const { id } = router.query;
 
   useEffect(() => {
-    if (id) {
-      const fetchData = async () => {
-        try {
-          const response = await votingServices.getAllVoters(id);
-          const userData = response.data.user;
-          setData(userData);
-          onDataReady(userData);
+    const fetchData = async () => {
+      try {
+        if (!id) throw new Error('No ID provided');
 
-          if (selectedId !== null) {
-            setSelectedId((prevSelectedId) => {
-              const selectedRow = userData.find(
-                (row) => row.id === prevSelectedId
-              );
-              if (selectedRow) {
-                setSelectedEmail(selectedRow.email);
-              }
-              return prevSelectedId;
-            });
-          }
-        } catch (error) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops..',
-            text: error.message,
-          });
+        const response = await votingServices.getAllVoters(id);
+        const userData = response.data.user;
+        setData(userData);
+        onDataReady(userData);
+
+        if (selectedId !== null) {
+          const selectedRow = userData.find((row) => row.id === selectedId);
+          if (selectedRow) setSelectedEmail(selectedRow.email);
         }
-      };
-      fetchData();
-    }
-  }, [id, selectedId]);
-
-  const handleSendInvitation = (userId) => {
-    votingServices
-      .sendTokenVotersById(id, userId)
-      .then((response) => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Invitation sent!',
-          text: response.data.message,
-        });
-        router.reload();
-      })
-      .catch((error) => {
+      } catch (error) {
         Swal.fire({
           icon: 'error',
-          title: 'Oops...',
+          title: 'Oops..',
           text: error.message,
         });
+      }
+    };
+
+    if (id) fetchData();
+  }, [id, selectedId]);
+
+  const handleSendInvitation = async (userId) => {
+    try {
+      const response = await votingServices.sendTokenVotersById(id, userId);
+      Swal.fire({
+        icon: 'success',
+        title: 'Invitation sent!',
+        text: response.data.message,
       });
+      router.reload();
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: error.response?.data?.message,
+      });
+    }
   };
 
-  const sortCaret = (order) => {
-    if (order === 'asc') {
-      return <FontAwesomeIcon icon={faSortUp} className={styles.iconSort} />;
-    }
-    if (order === 'desc') {
-      return <FontAwesomeIcon icon={faSortDown} className={styles.iconSort} />;
-    }
-    return <FontAwesomeIcon icon={faSort} className={styles.iconSort} />;
-  };
+  const sortCaret = (order) => (
+    <FontAwesomeIcon
+      icon={order === 'asc' ? faSortUp : order === 'desc' ? faSortDown : faSort}
+      className={styles.iconSort}
+    />
+  );
 
   const columns = [
     {
       dataField: 'name',
       text: 'Name',
-      formatter: (cell) => {
-        if (!cell) {
-          return 'User belum terdaftar';
-        }
-        return cell;
-      },
+      formatter: (cell) => cell || 'User belum terdaftar',
       headerStyle: { width: '150px' },
       sort: true,
       sortCaret,
@@ -150,7 +134,7 @@ function TableManageVoters({ onDataReady }) {
           onKeyDown={(e) => {
             if (e.key === 'Enter') {
               setSelectedId(cell);
-              setShowModal(true);
+              handleSendInvitation(row.id);
             }
           }}
           type="button"
@@ -164,13 +148,9 @@ function TableManageVoters({ onDataReady }) {
   ];
 
   const renderNoDataMessage = () => {
-    if (data.length === 0) {
-      return 'Currently no data voters.';
-    }
-    if (id) {
-      return 'Loading data...';
-    }
-    return 'No ID provided.';
+    if (data.length === 0) return 'Currently no data voters.';
+    if (!id) return 'No ID provided.';
+    return 'Loading data...';
   };
 
   return (

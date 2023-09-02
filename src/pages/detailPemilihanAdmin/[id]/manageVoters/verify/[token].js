@@ -30,7 +30,7 @@ export default function Home() {
     setTimeout(() => {
       fetchData();
     }, delay);
-  }, [router]);
+  }, []);
 
   return (
     <div className={styles.container}>
