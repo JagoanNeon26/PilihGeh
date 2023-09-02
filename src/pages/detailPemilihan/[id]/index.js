@@ -5,6 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import HorizontalTimeline from 'components/atoms/Timeline/HorizontalTimeline';
 import { useRouter } from 'next/router';
 import votingServices from 'services/voting-services';
+import Swal from 'sweetalert2';
 import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihan() {
