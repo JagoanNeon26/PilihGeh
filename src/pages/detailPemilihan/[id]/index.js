@@ -13,6 +13,7 @@ function DetailPemilihan() {
   const [cardsData, setCardsData] = useState([]);
   const [votingId, setVotingId] = useState({ title: '', organization: '' });
   const [timelineItems, setTimelineItems] = useState([]);
+  const [totalVotes, setTotalVotes] = useState({});
   const { id } = router.query;
 
   useEffect(() => {
@@ -82,6 +83,21 @@ function DetailPemilihan() {
     }
   }, [id]);
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (id) {
+          const response = await votingServices.count(id);
+          setTotalVotes(response.data);
+        }
+      } catch (error) {
+        // Handle errors here
+      }
+    };
+
+    fetchData();
+  }, [id]);
+
   return (
     <div>
       <Navbar />
@@ -129,7 +145,9 @@ function DetailPemilihan() {
           gap: '27px',
         }}
       >
-        <div className={styles.realTimeCount} />
+        <div className={styles.realTimeCount}>
+          {totalVotes['Total Suara Masuk'] || '-'}
+        </div>
         <div className={styles.textRealTimeCount}>Total Suara Masuk</div>
       </Row>
       <Row className={styles.realTimeCountSmallWrapper}>
@@ -144,10 +162,10 @@ function DetailPemilihan() {
             }}
           >
             <div className={styles.realTimeCountSmall}>
-              {item.realtimecount}
+              {totalVotes[`Count Candidate ${item.candidateNumber}`] || '0'}
             </div>
             <div className={styles.textRealTimeCountSmall}>
-              Paslon {item.id}
+              Paslon {item.candidateNumber}
             </div>
           </Col>
         ))}

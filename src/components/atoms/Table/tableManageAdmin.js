@@ -16,39 +16,40 @@ import styles from './table.module.css';
 
 function TableManageAdmin({ onDataReady }) {
   const router = useRouter();
+  const { id } = router.query;
   const [data, setData] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedId, setSelectedId] = useState(null);
   const [selectedEmail, setSelectedEmail] = useState('');
-  const { id } = router.query;
 
   useEffect(() => {
-    if (id) {
-      const fetchData = async () => {
-        try {
-          const response = await votingServices.getAllAdmin(id);
-          const userData = response.data.admin;
-          setData(userData);
-          onDataReady(userData);
-          if (selectedId !== null) {
-            setSelectedId((prevSelectedId) => {
-              const selectedRow = userData.find(
-                (row) => row.user_id === prevSelectedId
-              );
-              if (selectedRow) {
-                setSelectedEmail(selectedRow.email);
-              }
-              return prevSelectedId;
-            });
-          }
-        } catch (error) {
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops..',
-            text: error.message,
-          });
+    const fetchData = async () => {
+      try {
+        if (!id) {
+          throw new Error('No ID provided.');
         }
-      };
+        const response = await votingServices.getAllAdmin(id);
+        const userData = response.data.admin;
+        setData(userData);
+        onDataReady(userData);
+        if (selectedId !== null) {
+          const selectedRow = userData.find(
+            (row) => row.user_id === selectedId
+          );
+          if (selectedRow) {
+            setSelectedEmail(selectedRow.email);
+          }
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops..',
+          text: error.message,
+        });
+      }
+    };
+
+    if (id) {
       fetchData();
     }
   }, [id, selectedId]);
@@ -58,25 +59,21 @@ function TableManageAdmin({ onDataReady }) {
       marginLeft: '8px',
       fontSize: '12px',
     };
-    if (order === 'asc') {
-      return <FontAwesomeIcon icon={faSortUp} style={iconStyle} />;
-    }
-    if (order === 'desc') {
-      return <FontAwesomeIcon icon={faSortDown} style={iconStyle} />;
-    }
-    return <FontAwesomeIcon icon={faSort} style={iconStyle} />;
+    return (
+      <FontAwesomeIcon
+        icon={
+          order === 'asc' ? faSortUp : order === 'desc' ? faSortDown : faSort
+        }
+        style={iconStyle}
+      />
+    );
   };
 
   const columns = [
     {
       dataField: 'name',
       text: 'Name',
-      formatter: (cell) => {
-        if (!cell) {
-          return 'User belum terdaftar';
-        }
-        return cell;
-      },
+      formatter: (cell) => (!cell ? 'User belum terdaftar' : cell),
       headerStyle: { width: '150px' },
       classes: styles.overflowCell,
       sort: true,
@@ -114,7 +111,7 @@ function TableManageAdmin({ onDataReady }) {
             }
           }}
           role="button"
-          tabIndex={0} // This makes the span focusable
+          tabIndex={0}
         >
           Delete
         </span>
@@ -127,10 +124,10 @@ function TableManageAdmin({ onDataReady }) {
     if (data.length === 0) {
       return 'Currently no data voters.';
     }
-    if (id) {
-      return 'Loading data...';
+    if (!id) {
+      return 'No ID provided.';
     }
-    return 'No ID provided.';
+    return 'Loading data...';
   };
 
   return (

@@ -237,6 +237,13 @@ const addVote = (id, no_kandidat, data) =>
     })
     .then((response) => response);
 
+const count = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/count`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
 const votingServices = {
   addVoting,
   getAdminVoting,
@@ -271,5 +278,6 @@ const votingServices = {
   getVoting,
   getVotingById,
   addVote,
+  count,
 };
 export default votingServices;
