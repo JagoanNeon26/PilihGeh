@@ -4,18 +4,18 @@ import { Card as BootstrapCard, Button, Col, Row } from 'react-bootstrap';
 import styles from './card.module.css';
 import ModalVote from '../Modal/modalVote';
 import ModalEditCandidate from '../Modal/modalEditCandidate';
+import ModalAddCandidatePhoto from '../Modal/modalAddCandidatePhoto';
 
 function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate, image }) {
   const [modalShow, setModalShow] = useState(false);
   const [modalAddShow, setModalAddShow] = useState(false);
-
+  const [modalPhotoShow, setModalPhotoShow] = useState(false);
   const handleShow = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
-
-  const handleAddShow = () => {
-    setModalAddShow(true);
-  };
+  const handleAddShow = () => setModalAddShow(true);
   const handleAddClose = () => setModalAddShow(false);
+  const handleAddPhotoShow = () => setModalPhotoShow(true);
+  const handleAddPhotoClose = () => setModalPhotoShow(false);
 
   return (
     <BootstrapCard className={styles.card}>
@@ -49,17 +49,28 @@ function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate, image }) {
             </BootstrapCard.Text>
           </Col>
         </Row>
-        <Row className={styles.cardFooterAdmin}>
+        <Row className={styles.cardFooter}>
           <Button className={styles.buttonModalEdit} onClick={handleAddShow}>
-            <div style={{ width: '60px' }}>Edit</div>
+            Edit Info
+          </Button>
+          <Button
+            className={styles.buttonModalEdit}
+            onClick={handleAddPhotoShow}
+          >
+            Edit Photo
           </Button>
           <Button className={styles.buttonModal} onClick={handleShow}>
-            <div style={{ width: '60px' }}>Info</div>
+            Info
           </Button>
         </Row>
         <ModalEditCandidate
           show={modalAddShow}
           onHide={handleAddClose}
+          candidateNumber={noCandidate}
+        />
+        <ModalAddCandidatePhoto
+          show={modalPhotoShow}
+          onHide={handleAddPhotoClose}
           candidateNumber={noCandidate}
         />
         <ModalVote show={modalShow} onHide={handleClose} />

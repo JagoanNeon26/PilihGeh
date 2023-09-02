@@ -1,11 +1,14 @@
 /* eslint-disable no-unused-vars */
 import { React } from 'react';
-import { Modal, Accordion, ModalFooter } from 'react-bootstrap';
-import BaseButton from 'components/atoms/Button/button';
+import { Modal, Accordion, ModalFooter, Button } from 'react-bootstrap';
+import { useRouter } from 'next/router';
 import styles from './modal.module.css';
 
 export default function ModalVote(props) {
-  const { show, onHide } = props;
+  const { show, onHide, visi, misi, noCandidate } = props;
+  const router = useRouter();
+  const { id } = router.query;
+
   return (
     <Modal
       show={show}
@@ -18,42 +21,38 @@ export default function ModalVote(props) {
     >
       <Modal.Header className={styles.modalHeader} closeButton>
         <div className={styles.headerEditProfile}>
-          Add Voting
+          Add Vote
           <div className={styles.headerEditDesc}>
-            Fill Form Below to Add Voting
+            Click the vote button to add vote
           </div>
         </div>
       </Modal.Header>
-      <Modal.Body className={styles.modalBody}>
-        <Accordion defaultActiveKey="0" className={styles.accordion}>
-          <Accordion.Item eventKey="0">
-            <Accordion.Header className={styles.accordionHeader}>
-              Visi
-            </Accordion.Header>
+      <Modal.Body className={styles.modalBodyVote}>
+        <Accordion className={styles.accordion}>
+          <Accordion.Item eventKey="0" className={styles.accordionHeader}>
+            <Accordion.Header>Visi</Accordion.Header>
             <Accordion.Body className={styles.accordionBody}>
-              Test
+              {visi}
             </Accordion.Body>
           </Accordion.Item>
-          <Accordion.Item eventKey="1">
-            <Accordion.Header className={styles.accordionHeader}>
-              Misi
-            </Accordion.Header>
+          <Accordion.Item eventKey="1" className={styles.accordionHeader}>
+            <Accordion.Header>Misi</Accordion.Header>
             <Accordion.Body className={styles.accordionBody}>
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-              eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut
-              enim ad minim veniam, quis nostrud exercitation ullamco laboris
-              nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
-              reprehenderit in voluptate velit esse cillum dolore eu fugiat
-              nulla pariatur. Excepteur sint occaecat cupidatat non proident,
-              sunt in culpa qui officia deserunt mollit anim id est laborum.
+              {misi}
             </Accordion.Body>
           </Accordion.Item>
         </Accordion>
       </Modal.Body>
-      <ModalFooter style={{ backgroundColor: '#0D1117', color: '#e6edf3' }}>
-        <BaseButton type="submit">
-          <div style={{ width: '100px' }}>Vote</div>
-        </BaseButton>
+      <ModalFooter className={styles.modalFooter}>
+        <Button
+          type="button"
+          className={styles.baseButton}
+          onClick={() => {
+            router.push(`${id}/verifPhotoVote/${noCandidate}`);
+          }}
+        >
+          Vote!
+        </Button>
       </ModalFooter>
     </Modal>
   );

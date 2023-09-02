@@ -4,7 +4,16 @@ import { Card as BootstrapCard, Button, Col, Row } from 'react-bootstrap';
 import styles from './card.module.css';
 import ModalVote from '../Modal/modalVote';
 
-function Card({ paslon1, paslon2, tag1, tag2 }) {
+function Card({
+  paslon1,
+  paslon2,
+  tag1,
+  tag2,
+  image,
+  visi,
+  misi,
+  noCandidate,
+}) {
   const [modalShow, setModalShow] = useState(false);
   const handleShow = () => setModalShow(true);
   const handleClose = () => setModalShow(false);
@@ -13,7 +22,7 @@ function Card({ paslon1, paslon2, tag1, tag2 }) {
     <BootstrapCard className={styles.card}>
       <BootstrapCard.Img
         variant="top"
-        src="/Paslon 1.png"
+        src={image || '/Paslon 1.png'}
         className={styles.cardImg}
       />
       <BootstrapCard.Body style={{ padding: '0' }}>
@@ -46,7 +55,13 @@ function Card({ paslon1, paslon2, tag1, tag2 }) {
             <div style={{ width: '60px' }}>Info</div>
           </Button>
         </Row>
-        <ModalVote show={modalShow} onHide={() => handleClose()} />
+        <ModalVote
+          show={modalShow}
+          onHide={() => handleClose()}
+          visi={visi}
+          misi={misi}
+          noCandidate={noCandidate}
+        />
       </BootstrapCard.Body>
     </BootstrapCard>
   );
@@ -57,6 +72,11 @@ Card.propTypes = {
   paslon2: PropTypes.string.isRequired,
   tag1: PropTypes.string.isRequired,
   tag2: PropTypes.string.isRequired,
+  image: PropTypes.string,
+};
+
+Card.defaultProps = {
+  image: '/Paslon 1.png',
 };
 
 export default Card;

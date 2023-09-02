@@ -75,17 +75,13 @@ function TableManageVoters({ onDataReady }) {
   };
 
   const sortCaret = (order) => {
-    const iconStyle = {
-      marginLeft: '8px',
-      fontSize: '12px',
-    };
     if (order === 'asc') {
-      return <FontAwesomeIcon icon={faSortUp} style={iconStyle} />;
+      return <FontAwesomeIcon icon={faSortUp} className={styles.iconSort} />;
     }
     if (order === 'desc') {
-      return <FontAwesomeIcon icon={faSortDown} style={iconStyle} />;
+      return <FontAwesomeIcon icon={faSortDown} className={styles.iconSort} />;
     }
-    return <FontAwesomeIcon icon={faSort} style={iconStyle} />;
+    return <FontAwesomeIcon icon={faSort} className={styles.iconSort} />;
   };
 
   const columns = [

@@ -9,10 +9,9 @@ import Swal from 'sweetalert2';
 import { useRouter } from 'next/router';
 import FormController from '../../atoms/Form/formController';
 import BaseButton from '../../atoms/Button/button';
-import ModalAddCandidatePhoto from './modalAddCandidatePhoto';
 import styles from './modal.module.css';
 
-function FormEditCandidate({ noCandidate, setShowAddPhotoModal }) {
+function FormEditCandidate({ noCandidate }) {
   const [isLoading, setIsLoading] = useState(false);
   const [submitLoadingButton, setSubmitLoadingButton] = useState(false);
   const [deleteLoadingButton, setDeleteLoadingButton] = useState(false);
@@ -103,11 +102,7 @@ function FormEditCandidate({ noCandidate, setShowAddPhotoModal }) {
       router.reload();
     } catch (error) {
       setDeleteLoadingButton(false);
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: error.response.data.message,
-      });
+      router.reload();
     }
   };
 
@@ -191,13 +186,6 @@ function FormEditCandidate({ noCandidate, setShowAddPhotoModal }) {
               >
                 <div style={{ width: '50px' }}>Delete</div>
               </Button>
-              <Button
-                type="button"
-                className={styles.buttonEditPhoto}
-                onClick={() => setShowAddPhotoModal(true)}
-              >
-                <div style={{ width: '100px' }}>Add/Edit Photo</div>
-              </Button>
               <BaseButton
                 type="submit"
                 isLoading={submitLoadingButton}
@@ -215,7 +203,6 @@ function FormEditCandidate({ noCandidate, setShowAddPhotoModal }) {
 
 export default function ModalEditCandidate(props) {
   const { show, onHide, candidateNumber } = props;
-  const [showAddPhotoModal, setShowAddPhotoModal] = useState(false);
   return (
     <Modal
       show={show}
@@ -236,18 +223,8 @@ export default function ModalEditCandidate(props) {
         </div>
       </Modal.Header>
       <Modal.Body className={styles.modalBody}>
-        {show && (
-          <FormEditCandidate
-            noCandidate={{ candidateNumber }}
-            setShowAddPhotoModal={setShowAddPhotoModal}
-          />
-        )}
+        <FormEditCandidate noCandidate={{ candidateNumber }} />
       </Modal.Body>
-      <ModalAddCandidatePhoto
-        show={showAddPhotoModal}
-        onHide={() => setShowAddPhotoModal(false)}
-        candidateNumber={candidateNumber}
-      />
     </Modal>
   );
 }

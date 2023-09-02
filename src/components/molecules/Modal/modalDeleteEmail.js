@@ -62,10 +62,10 @@ export default function ModalDeleteEmail(props) {
           <div className={styles.emailDelete}>{selectedEmail}</div>
         </div>
         <div style={{ display: 'flex', justifyContent: 'center', gap: '10px' }}>
-          <Button onClick={onHide} className={styles.buttonNoOnModal}>
+          <Button onClick={onHide} className={styles.baseButton}>
             <div style={{ width: '60px' }}>No</div>
           </Button>
-          <Button onClick={handleDelete} className={styles.buttonNoOnModal}>
+          <Button onClick={handleDelete} className={styles.baseButton}>
             <div style={{ width: '60px' }}>Yes</div>
           </Button>
         </div>

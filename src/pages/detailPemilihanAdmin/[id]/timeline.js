@@ -24,32 +24,32 @@ function TimelineAdmin() {
   const [deleteLoadingButton, setDeleteLoadingButton] = useState(false);
 
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await votingServices.getTimeline(id);
-        const timelineItem = response.data.timeline;
-        const formattedTimelineItems = [
-          {
-            title: 'Start Vote',
-            date: timelineItem.start_vote,
-          },
-          {
-            title: 'End Vote',
-            date: timelineItem.end_vote,
-          },
-          {
-            title: 'Show Count',
-            date: timelineItem.show_vote,
-          },
-        ];
-
-        setTimelineItems(formattedTimelineItems);
-      } catch (error) {
-        // Intentionally ignoring this error
-      }
-    };
-
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     if (id) {
+      const fetchData = async () => {
+        try {
+          const response = await votingServices.getTimeline(id, timezone);
+          const timelineItem = response.data.timeline;
+          const formattedTimelineItems = [
+            {
+              title: 'Start Vote',
+              date: timelineItem.start_vote,
+            },
+            {
+              title: 'End Vote',
+              date: timelineItem.end_vote,
+            },
+            {
+              title: 'Show Count',
+              date: timelineItem.show_vote,
+            },
+          ];
+
+          setTimelineItems(formattedTimelineItems);
+        } catch (error) {
+          // Handle the error here
+        }
+      };
       fetchData();
     }
   }, [id]);

@@ -10,9 +10,8 @@ import { useRouter } from 'next/router';
 import FormController from '../../atoms/Form/formController';
 import BaseButton from '../../atoms/Button/button';
 import styles from './modal.module.css';
-import ModalAddCandidatePhoto from './modalAddCandidatePhoto';
 
-function FormAddCandidate({ onAddCandidateSuccess }) {
+function FormAddCandidate() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
@@ -47,7 +46,7 @@ function FormAddCandidate({ onAddCandidateSuccess }) {
         title: 'Success',
         text: response.data.message,
       });
-      onAddCandidateSuccess(values.candidateNumber);
+      router.reload();
     } catch (error) {
       setIsLoading(false);
       Swal.fire({
@@ -144,13 +143,6 @@ function FormAddCandidate({ onAddCandidateSuccess }) {
 
 export default function ModalAddCandidate(props) {
   const { show, onHide } = props;
-  const [showPhotoModal, setShowPhotoModal] = useState(false);
-  const [candidateNumber, setCandidateNumber] = useState(null);
-
-  const handleAddCandidateSuccess = (number) => {
-    setCandidateNumber(number);
-    setShowPhotoModal(true);
-  };
 
   return (
     <Modal
@@ -172,15 +164,8 @@ export default function ModalAddCandidate(props) {
         </div>
       </Modal.Header>
       <Modal.Body className={styles.modalBody}>
-        <FormAddCandidate onAddCandidateSuccess={handleAddCandidateSuccess} />
+        <FormAddCandidate />
       </Modal.Body>
-      {showPhotoModal && (
-        <ModalAddCandidatePhoto
-          show={showPhotoModal}
-          onHide={() => setShowPhotoModal(false)}
-          candidateNumber={candidateNumber}
-        />
-      )}
     </Modal>
   );
 }

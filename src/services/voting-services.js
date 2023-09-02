@@ -64,9 +64,10 @@ const addTimeline = (id, data) =>
     })
     .then((response) => response);
 
-const getTimeline = (id) =>
+const getTimeline = (id, timezone) =>
   axios
     .get(`${API_URL}/admin/pemilihan/${id}/get-timeline`, {
+      params: { timezone },
       headers: authHeader(),
     })
     .then((response) => response);
@@ -219,6 +220,23 @@ const resetVote = (id) =>
     })
     .then((response) => response);
 
+const getVoting = () =>
+  axios
+    .get(`${API_URL}/users/get-pemilihan`, { headers: authHeader() })
+    .then((response) => response);
+
+const getVotingById = (id) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}`, { headers: authHeader() })
+    .then((response) => response);
+
+const addVote = (id, no_kandidat, data) =>
+  axios
+    .post(`${API_URL}/users/pemilihan/${id}/add-vote/${no_kandidat}`, data, {
+      headers: authHeaderFile(),
+    })
+    .then((response) => response);
+
 const votingServices = {
   addVoting,
   getAdminVoting,
@@ -250,5 +268,8 @@ const votingServices = {
   setEmergency,
   setStop,
   resetVote,
+  getVoting,
+  getVotingById,
+  addVote,
 };
 export default votingServices;

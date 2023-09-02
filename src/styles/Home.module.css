@@ -343,12 +343,13 @@
   .judulDetailPemilihan {
     font-size: 20px;
     width: 95vw;
-    margin-bottom: 0px;
+    margin-bottom: 0;
   }
 
   .timelineBox {
     width: 95vw;
     padding: 0;
+    margin-top: 20px;
   }
 
   .realTimeCount {
