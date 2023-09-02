@@ -3,8 +3,8 @@ import { Row, Col } from 'react-bootstrap';
 import NavbarAdmin from 'components/molecules/Navbar/navbarAdmin';
 import votingServices from 'services/voting-services';
 import { useRouter } from 'next/router';
-import styles from '../../../styles/Home.module.css';
 import Swal from 'sweetalert2';
+import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihan() {
   const [cardsData, setCardsData] = useState([]);
