@@ -5,7 +5,7 @@ import CardAdmin from 'components/molecules/Card/cardAdmin';
 import ModalAddCandidate from 'components/molecules/Modal/modalAddCandidate';
 import NavbarAdmin from 'components/molecules/Navbar/navbarAdmin';
 import votingServices from 'services/voting-services';
-import Swal from 'sweetalert2'; // Import SweetAlert2 library
+import Swal from 'sweetalert2';
 import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihanAdmin() {

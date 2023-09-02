@@ -9,11 +9,10 @@ import { useDropzone } from 'react-dropzone';
 import styles from './modal.module.css';
 import BaseButton from '../../atoms/Button/button';
 
-function FormAddCandidatePhoto({ candidateNumber }) {
+function FormAddCandidatePhoto({ noCandidate }) {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
-  const no_kandidat = candidateNumber;
 
   const onDrop = async (acceptedFiles) => {
     setIsLoading(true);
@@ -23,7 +22,7 @@ function FormAddCandidatePhoto({ candidateNumber }) {
       const response = await votingServices.addCandidatePhoto(
         id,
         formData,
-        no_kandidat
+        noCandidate
       );
       setIsLoading(false);
       Swal.fire({
@@ -103,7 +102,7 @@ export default function ModalAddCandidatePhoto(props) {
         <div className={styles.headerEditProfile}>Add/Edit Photo</div>
       </Modal.Header>
       <Modal.Body className={styles.modalBody}>
-        <FormAddCandidatePhoto candidateNumber={candidateNumber} />
+        <FormAddCandidatePhoto noCandidate={candidateNumber} />
       </Modal.Body>
     </Modal>
   );

@@ -70,6 +70,11 @@
   text-decoration: underline;
 }
 
+.iconSort {
+  margin-left: 8px;
+  font-size: 12px;
+}
+
 @media (max-width: 576px) {
   .tableBody {
     font-size: 12px;
