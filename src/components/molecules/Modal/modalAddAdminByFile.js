@@ -87,7 +87,7 @@ export default function ModalAddAdminByFile(props) {
     <Modal
       show={show}
       onHide={onHide}
-      dialogClassName={styles.modal}
+      dialogClassName={styles.modalDialog}
       contentClassName={styles.modal}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"

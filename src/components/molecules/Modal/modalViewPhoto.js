@@ -8,7 +8,7 @@ export default function ModalViewPhoto(props) {
   return (
     <Modal show={show} onHide={onHide} centered className={styles.modal}>
       <Modal.Body className={styles.modalBodyViewPhoto}>
-        <img src={selectedPhoto} />
+        <img src={selectedPhoto} className={styles.selectedPhotoVote} />
       </Modal.Body>
     </Modal>
   );

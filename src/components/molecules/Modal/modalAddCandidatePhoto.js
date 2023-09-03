@@ -89,9 +89,9 @@ export default function ModalAddCandidatePhoto(props) {
     <Modal
       show={show}
       onHide={onHide}
-      dialogClassName={styles.modal}
+      dialogClassName={styles.modalDialog}
       contentClassName={styles.modal}
-      size="md"
+      size="sm"
       aria-labelledby="contained-modal-title-vcenter"
       backdropClassName={styles.backdropModal}
       centered

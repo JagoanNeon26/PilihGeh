@@ -104,7 +104,7 @@ export default function ModalRejectVote(props) {
     <Modal
       show={show}
       onHide={onHide}
-      dialogClassName={styles.modal}
+      dialogClassName={styles.modalDialog}
       contentClassName={styles.modal}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"
