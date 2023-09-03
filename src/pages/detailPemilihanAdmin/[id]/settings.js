@@ -156,7 +156,7 @@ function DetailPemilihan() {
               className={styles.baseButton}
             >
               <div style={{ width: '60px' }}>
-                {isLoading ? (
+                {resetLoading ? (
                   <Spinner animation="border" role="status" size="sm" />
                 ) : (
                   'Reset'
@@ -179,7 +179,7 @@ function DetailPemilihan() {
               className={styles.baseButton}
             >
               <div style={{ width: '60px' }}>
-                {isLoading ? (
+                {stopIsLoading ? (
                   <Spinner animation="border" role="status" size="sm" />
                 ) : (
                   'Close'
