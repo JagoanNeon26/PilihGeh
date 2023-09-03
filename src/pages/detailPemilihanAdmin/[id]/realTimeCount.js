@@ -56,7 +56,7 @@ function DetailPemilihan() {
         style={{
           display: 'flex',
           justifyContent: 'center',
-          marginTop: '60px',
+          marginTop: '40px',
           gap: '27px',
         }}
       >
@@ -79,27 +79,28 @@ function DetailPemilihan() {
             alignItems: 'center',
             gap: '27px',
             justifyContent: 'space-around',
+            flexWrap: 'wrap',
           }}
         >
-          <div>
+          <div className={styles.realTimeCountSmallWrapper}>
             <div className={styles.realTimeCountSmall}>
               {totalVotes['Total Vote Sukses'] || '0'}
             </div>
             <div className={styles.textRealTimeCountSmall}>Success Vote</div>
           </div>
-          <div>
+          <div className={styles.realTimeCountSmallWrapper}>
             <div className={styles.realTimeCountSmall}>
               {totalVotes['Total Belum Vote'] || '0'}
             </div>
             <div className={styles.textRealTimeCountSmall}>Not Vote</div>
           </div>
-          <div>
+          <div className={styles.realTimeCountSmallWrapper}>
             <div className={styles.realTimeCountSmall}>
               {totalVotes['Total Vote Belum Verifikasi'] || '0'}
             </div>
             <div className={styles.textRealTimeCountSmall}>Pending Vote</div>
           </div>
-          <div>
+          <div className={styles.realTimeCountSmallWrapper}>
             <div className={styles.realTimeCountSmall}>
               {totalVotes['Total Vote Invalid'] || '0'}
             </div>
