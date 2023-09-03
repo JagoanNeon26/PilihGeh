@@ -58,7 +58,7 @@ function FormAddVotersByFile() {
         {isDragActive ? (
           <p>Drop the file here...</p>
         ) : (
-          <p>Drag and drop a file here, or click to select a file</p>
+          <p>Drag or Select File</p>
         )}
       </div>
       <div
@@ -87,7 +87,7 @@ export default function ModalAddVotersByFile(props) {
     <Modal
       show={show}
       onHide={onHide}
-      dialogClassName={styles.modal}
+      dialogClassName={styles.modalDialog}
       contentClassName={styles.modal}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"

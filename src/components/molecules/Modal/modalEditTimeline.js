@@ -100,13 +100,13 @@ export default function ModalEditTimeline(props) {
   const { show, onHide } = props;
   const router = useRouter();
   const { id } = router.query;
-
   const [timelineItems, setTimelineItems] = useState(null);
 
   useEffect(() => {
+    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const fetchData = async () => {
       try {
-        const response = await votingServices.getTimeline(id);
+        const response = await votingServices.getTimeline(id, timezone);
         setTimelineItems(response.data.timeline);
       } catch (error) {
         // Intentionally left blank
@@ -122,7 +122,7 @@ export default function ModalEditTimeline(props) {
     <Modal
       show={show}
       onHide={onHide}
-      dialogClassName={styles.modal}
+      dialogClassName={styles.modalDialog}
       contentClassName={styles.modal}
       size="md"
       aria-labelledby="contained-modal-title-vcenter"

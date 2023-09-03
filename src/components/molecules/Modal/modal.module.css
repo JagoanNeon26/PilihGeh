@@ -5,9 +5,13 @@
 }
 
 .modal {
-  width: 30vw;
+  width: 95vw;
   min-width: max-content;
   border-radius: 16px;
+}
+
+.modalDialog {
+  width: 100vw;
 }
 
 .modalAddCandidate {
@@ -84,10 +88,6 @@
   filter: none !important;
 }
 
-.accordion {
-  width: 30vw;
-}
-
 .accordionBody {
   visibility: visible;
   text-align: justify;
@@ -158,31 +158,23 @@
     width: 50vw;
   }
 
-  .accordion {
-    width: 50vw;
-    color: #e6edf3;
+  .selectedPhotoVote {
+    width: 60vw;
+    height: 100%;
   }
 }
 
 @media (max-width: 768px) {
-  .modal {
-    width: 95vw;
-  }
-
   .modalAddCandidate {
     width: 95vw;
-  }
-
-  .accordion {
-    width: 85vw;
-    color: #e6edf3;
   }
 
   .modalDelete {
     width: 95vw;
   }
 
-  .dropzone {
-    width: 80vw;
+  .selectedPhotoVote {
+    width: 82vw;
+    height: 100%;
   }
 }

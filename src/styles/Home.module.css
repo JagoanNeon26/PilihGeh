@@ -204,7 +204,7 @@
 
 .textRealTimeCountSmall {
   color: #e6edf3;
-  font-size: 36px;
+  font-size: 28px;
   font-style: normal;
   font-weight: 300;
   text-align: center;
@@ -213,9 +213,7 @@
 .realTimeCountSmallWrapper {
   display: 'flex';
   justify-content: 'center';
-  margin-top: 60px;
   gap: '27px';
-  margin-bottom: 30px;
 }
 
 /* Photo Verification */
@@ -363,24 +361,24 @@
     height: 150px;
     border-radius: 50%;
     font-size: 24px;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .textRealTimeCount {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .realTimeCountSmall {
     width: 100px;
     height: 100px;
     font-size: 18px;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .textRealTimeCountSmall {
     font-size: 16px;
-    font-weight: 500;
+    font-weight: 300;
   }
 
   .editButtonWrapper {

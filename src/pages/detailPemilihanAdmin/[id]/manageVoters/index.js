@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import React, { useState, useEffect } from 'react';
 import { Button, Row, Col } from 'react-bootstrap';
 import NavbarAdmin from 'components/molecules/Navbar/navbarAdmin';
@@ -27,7 +28,7 @@ function ManageVoters() {
   const handleUploadShow = () => setModalUploadShow(true);
   const handleClose = () => setModalShow(false);
   const handleUploadClose = () => setModalUploadShow(false);
-  const setIsLoading = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleDataReady = (data) => {
     setTableData(data);
