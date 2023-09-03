@@ -56,7 +56,7 @@ function DetailPemilihan() {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const fetchData = async () => {
       try {
-        const response = await votingServices.getTimeline(id, timezone);
+        const response = await votingServices.getTimelineUsers(id, timezone);
         const timelineItem = response.data.timeline;
         const formattedTimelineItems = [
           {

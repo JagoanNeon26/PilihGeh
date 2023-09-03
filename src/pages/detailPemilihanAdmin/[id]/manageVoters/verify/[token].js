@@ -18,10 +18,10 @@ export default function Home() {
       try {
         await votingServices.joinVoters(id, token);
         setIsLoading(false);
-        router.push(`/detailPemilihanAdmin/${id}/manageVoters`);
+        router.push(`/detailPemilihan/${id}`);
       } catch (error) {
         setIsLoading(false);
-        router.push(`/detailPemilihanAdmin/${id}/manageAdmin`);
+        router.push(`/detailPemilihan/${id}`);
       }
     };
 
