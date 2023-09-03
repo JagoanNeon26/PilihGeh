@@ -60,7 +60,7 @@ function FormAddCandidatePhoto({ noCandidate }) {
         {isDragActive ? (
           <p>Drop the file here...</p>
         ) : (
-          <p>Drag and drop a file here, or click to select a file</p>
+          <p>Drag or Select File</p>
         )}
       </div>
       <div
