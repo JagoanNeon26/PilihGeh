@@ -4,8 +4,8 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Navbar from 'components/molecules/Navbar/navbar';
 import votingServices from 'services/voting-services';
 import { useRouter } from 'next/router';
-import styles from '../../../../../styles/Home.module.css';
 import Swal from 'sweetalert2';
+import styles from '../../../../../styles/Home.module.css';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
