@@ -153,6 +153,10 @@
   background-color: rgba(0, 0, 0, 10);
 }
 
+.selectedPhotoVote {
+  width: 100vw;
+}
+
 @media (max-width: 1024px) {
   .modalAddCandidate {
     width: 50vw;

@@ -33,6 +33,11 @@ function DetailPemilihan() {
         text: 'The voting is now emergency stopping',
       });
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response?.data?.message,
+      });
       setIsLoading(false);
     } finally {
       setIsLoading(false);
@@ -49,6 +54,11 @@ function DetailPemilihan() {
         text: 'The voting is done resetting',
       });
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response?.data?.message,
+      });
       setResetLoading(false);
     } finally {
       setResetLoading(false);
@@ -65,6 +75,11 @@ function DetailPemilihan() {
         text: 'The voting is now stopping',
       });
     } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response?.data?.message,
+      });
       setStopIsLoading(false);
     } finally {
       setStopIsLoading(false);
@@ -156,7 +171,7 @@ function DetailPemilihan() {
               className={styles.baseButton}
             >
               <div style={{ width: '60px' }}>
-                {isLoading ? (
+                {resetLoading ? (
                   <Spinner animation="border" role="status" size="sm" />
                 ) : (
                   'Reset'
@@ -179,7 +194,7 @@ function DetailPemilihan() {
               className={styles.baseButton}
             >
               <div style={{ width: '60px' }}>
-                {isLoading ? (
+                {stopIsLoading ? (
                   <Spinner animation="border" role="status" size="sm" />
                 ) : (
                   'Close'
