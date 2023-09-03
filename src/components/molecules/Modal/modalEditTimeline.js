@@ -101,9 +101,9 @@ export default function ModalEditTimeline(props) {
   const router = useRouter();
   const { id } = router.query;
   const [timelineItems, setTimelineItems] = useState(null);
+  const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
 
   useEffect(() => {
-    const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const fetchData = async () => {
       try {
         const response = await votingServices.getTimeline(id, timezone);
@@ -144,6 +144,7 @@ export default function ModalEditTimeline(props) {
               start_vote: timelineItems.start,
               end_vote: timelineItems.end,
               show_count: timelineItems.show,
+              timezone,
             }}
           />
         ) : (
