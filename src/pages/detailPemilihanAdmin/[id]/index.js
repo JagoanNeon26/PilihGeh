@@ -36,7 +36,7 @@ function DetailPemilihanAdmin() {
               Swal.fire({
                 icon: 'error',
                 title: 'Error Fetching Candidates',
-                text: error.response.data.message,
+                text: error.response?.data?.message,
               });
             });
         })
@@ -44,7 +44,7 @@ function DetailPemilihanAdmin() {
           Swal.fire({
             icon: 'error',
             title: 'Error Fetching Data',
-            text: error.response.data.message,
+            text: error.response?.data?.message,
           });
         });
     }
