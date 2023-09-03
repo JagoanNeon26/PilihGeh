@@ -81,7 +81,7 @@ function FormAddTimeline() {
               control="input"
               name="end_vote"
               type="datetime-local"
-              label="Final Count Day"
+              label="End Vote Day"
               placeholder="12/12/2012"
               formikProps={formikProps}
               required
@@ -90,7 +90,7 @@ function FormAddTimeline() {
               control="input"
               name="show_count"
               type="datetime-local"
-              label="Closing Day"
+              label="Show Count Day"
               placeholder="12/12/2012"
               formikProps={formikProps}
               required

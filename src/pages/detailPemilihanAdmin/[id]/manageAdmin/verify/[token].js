@@ -4,6 +4,7 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Navbar from 'components/molecules/Navbar/navbar';
 import votingServices from 'services/voting-services';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 import styles from '../../../../../styles/Home.module.css';
 
 export default function Home() {
@@ -22,7 +23,12 @@ export default function Home() {
         setIsLoading(false);
         router.push(`/detailPemilihanAdmin/${id}/manageAdmin`);
       } catch (error) {
-        router.push(`/detailPemilihanAdmin/${id}/manageAdmin`);
+        setIsLoading(false);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response?.data?.message,
+        });
       }
     };
 

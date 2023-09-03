@@ -82,16 +82,10 @@
   width: 30vw;
 }
 
-.accordionHeader {
-  background-color: #0d1117;
-  color: #e6edf3;
-  border: 1px solid white;
-}
-
 .accordionBody {
   visibility: visible;
   text-align: justify;
-  background-color: #0d1117;
+  background-color: #070a0d;
   color: #e6edf3;
 }
 
@@ -174,7 +168,7 @@
   }
 
   .accordion {
-    width: 80vw;
+    width: 85vw;
     color: #e6edf3;
   }
 

@@ -1,6 +1,7 @@
 /* eslint-disable consistent-return */
 import React, { useEffect, useState } from 'react';
 import { Timeline } from 'flowbite-react';
+import uuid from 'utils/uuid';
 import styles from './timeline.module.css';
 
 export default function HorizontalTimeline({ timelineItems }) {
@@ -28,7 +29,7 @@ export default function HorizontalTimeline({ timelineItems }) {
   return (
     <Timeline horizontal={!isVerticalTimeline}>
       {timelineItems.map((item) => (
-        <Timeline.Item key={item.id}>
+        <Timeline.Item key={uuid()}>
           <Timeline.Point />
           <Timeline.Content className={styles.timeline}>
             <Timeline.Title className={styles.timelineTitle}>

@@ -1,5 +1,3 @@
-/* eslint-disable no-unused-vars */
-/* eslint-enable no-console */
 import { React, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 import votingServices from 'services/voting-services';
@@ -51,7 +49,7 @@ function FormAddCandidatePhoto({ noCandidate }) {
 
   const { getRootProps, getInputProps, isDragActive } = useDropzone({
     onDrop,
-    accept: '.jpg, .png',
+    accept: '.jpg,.png',
     multiple: false,
   });
 

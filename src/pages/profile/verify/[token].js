@@ -20,12 +20,12 @@ export default function Home() {
         setIsLoading(false);
         router.push('/profile');
       })
-      .catch((err) => {
+      .catch((error) => {
         setIsLoading(false);
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: err.message,
+          text: error.response?.data?.message,
         });
       });
   });

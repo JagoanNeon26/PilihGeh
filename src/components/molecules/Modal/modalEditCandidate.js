@@ -79,6 +79,7 @@ function FormEditCandidate({ noCandidate }) {
         title: 'Success',
         text: response.data.message,
       });
+      router.reload();
     } catch (error) {
       setSubmitLoadingButton(false);
       Swal.fire({
@@ -180,11 +181,12 @@ function FormEditCandidate({ noCandidate }) {
               <Button
                 type="button"
                 className={styles.buttonDelete}
-                isLoading={deleteLoadingButton}
                 disabled={deleteLoadingButton}
                 onClick={handleDelete}
               >
-                <div style={{ width: '50px' }}>Delete</div>
+                <div style={{ width: '50px' }}>
+                  {deleteLoadingButton ? 'Deleting...' : 'Delete'}
+                </div>
               </Button>
               <BaseButton
                 type="submit"

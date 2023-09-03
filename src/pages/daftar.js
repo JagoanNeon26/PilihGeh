@@ -1,7 +1,8 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { useState } from 'react';
-import { Button, Col, Container, Row, Stack } from 'react-bootstrap';
+import { Col, Container, Row, Stack } from 'react-bootstrap';
 import Image from 'next/image';
+import BaseButton from 'components/atoms/Button/button';
 import { Form, Formik } from 'formik';
 import * as Yup from 'yup';
 import Swal from 'sweetalert2';
@@ -89,11 +90,9 @@ function RegisterForm() {
               placeholder="Confirm your Password"
               formikProps={formikProps}
             />
-            <Button variant="primary" type="submit" disabled={isLoading}>
-              <div style={{ fontSize: '12px' }}>
-                {isLoading ? 'Loading...' : 'Sign Up'}
-              </div>
-            </Button>
+            <BaseButton variant="primary" type="submit" disabled={isLoading}>
+              <div style={{ fontSize: '12px' }}>Sign Up</div>
+            </BaseButton>
           </Stack>
         </Form>
       )}
@@ -114,7 +113,12 @@ export default function Daftar() {
           <Col style={{ display: 'flex', justifyContent: 'center' }}>
             <div className={styles.formLoginDaftarOTP}>
               <div className={styles.logoLoginRegisterOtp}>
-                <Image src="/Logo.png" alt="logo-login" layout="fill" />
+                <Image
+                  src="/Logo.png"
+                  alt="logo-login"
+                  layout="fill"
+                  priority
+                />
               </div>
               <div className={styles.TitleCenter}>Sign Up</div>
               <div className={styles.containerForm}>
