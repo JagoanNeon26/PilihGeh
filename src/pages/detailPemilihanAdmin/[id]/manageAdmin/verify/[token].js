@@ -4,38 +4,31 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Navbar from 'components/molecules/Navbar/navbar';
 import votingServices from 'services/voting-services';
 import { useRouter } from 'next/router';
-import Swal from 'sweetalert2';
 import styles from '../../../../../styles/Home.module.css';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
   const router = useRouter();
+  const { id } = router.query;
 
   useEffect(() => {
     const delay = 3000;
-
     const fetchData = async () => {
       const token = window.location.pathname.split('/verify/')[1];
-      const { id } = router.query;
-
       try {
         await votingServices.joinAdmin(id, token);
         setIsLoading(false);
         router.push(`/detailPemilihanAdmin/${id}/manageAdmin`);
       } catch (error) {
         setIsLoading(false);
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: error.response?.data?.message,
-        });
+        router.push(`/detailPemilihanAdmin/${id}/manageAdmin`);
       }
     };
 
     setTimeout(() => {
       fetchData();
     }, delay);
-  }, []);
+  }, [id]);
 
   return (
     <div className={styles.container}>

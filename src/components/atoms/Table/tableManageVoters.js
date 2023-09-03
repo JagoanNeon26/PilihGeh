@@ -99,7 +99,7 @@ function TableManageVoters({ onDataReady }) {
       sortCaret,
     },
     {
-      dataField: 'delete',
+      dataField: 'id',
       text: 'Delete',
       classes: styles.deleteCell,
       formatter: (cell) => (
