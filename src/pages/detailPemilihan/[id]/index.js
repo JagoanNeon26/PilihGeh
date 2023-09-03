@@ -17,35 +17,36 @@ function DetailPemilihan() {
   const { id } = router.query;
 
   useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (id) {
+          const response = await votingServices.getVotingById(id);
+          const fetchedData = response.data.pemilihan;
+          setVotingId({
+            title: fetchedData?.title,
+            organization: fetchedData?.organization,
+          });
+        }
+      } catch (error) {
+        // Handle errors here
+      }
+    };
+    fetchData();
+  }, [id]);
+
+  useEffect(() => {
     if (id) {
       votingServices
-        .getCandidateByIdUsers(id)
-        .then((response) => {
-          const fetchedData = response.data.getPemilihan;
-          setVotingId({
-            title: fetchedData.title,
-            organization: fetchedData.organization,
-          });
-
-          votingServices
-            .getCandidateUsers(id)
-            .then((candidateResponse) => {
-              const fetchedCandidates = candidateResponse.data.kandidat;
-              setCardsData(fetchedCandidates);
-            })
-            .catch((error) => {
-              Swal.fire({
-                icon: 'error',
-                title: 'Error Fetching Candidates',
-                text: error.response.data.message,
-              });
-            });
+        .getCandidateUsers(id)
+        .then((candidateResponse) => {
+          const fetchedCandidates = candidateResponse.data.kandidat;
+          setCardsData(fetchedCandidates);
         })
         .catch((error) => {
           Swal.fire({
             icon: 'error',
-            title: 'Error Fetching Data',
-            text: error.response.data.message,
+            title: 'Error Fetching Candidates',
+            text: error.response?.data?.message,
           });
         });
     }
@@ -55,7 +56,7 @@ function DetailPemilihan() {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const fetchData = async () => {
       try {
-        const response = await votingServices.getTimelineUsers(id, timezone);
+        const response = await votingServices.getTimeline(id, timezone);
         const timelineItem = response.data.timeline;
         const formattedTimelineItems = [
           {
