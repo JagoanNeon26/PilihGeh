@@ -88,24 +88,26 @@ function ManageVoters() {
       <Row>
         <Col className={styles.tableAdminWrapper}>
           {renderButtons()}
-          <Tabs
-            defaultActiveKey="vote"
-            id="uncontrolled-tab-example"
-            className={styles.tab}
-          >
-            <Tab eventKey="vote" title="All Vote">
-              <TableManageVote onDataReady={handleDataReady} />
-            </Tab>
-            <Tab eventKey="pendingVote" title="Pending Vote">
-              <TablePendingVote onDataReady={handleDataReady} />
-            </Tab>
-            <Tab eventKey="acceptVote" title="Accept Vote">
-              <TableAcceptVote onDataReady={handleDataReady} />
-            </Tab>
-            <Tab eventKey="rejectVote" title="Reject Vote">
-              <TableRejectVote onDataReady={handleDataReady} />
-            </Tab>
-          </Tabs>
+          <div className={styles.scrollableTabs}>
+            <Tabs
+              defaultActiveKey="vote"
+              id="uncontrolled-tab-example"
+              className={styles.tab}
+            >
+              <Tab eventKey="vote" title="All Vote">
+                <TableManageVote onDataReady={handleDataReady} />
+              </Tab>
+              <Tab eventKey="pendingVote" title="Pending Vote">
+                <TablePendingVote onDataReady={handleDataReady} />
+              </Tab>
+              <Tab eventKey="acceptVote" title="Accept Vote">
+                <TableAcceptVote onDataReady={handleDataReady} />
+              </Tab>
+              <Tab eventKey="rejectVote" title="Reject Vote">
+                <TableRejectVote onDataReady={handleDataReady} />
+              </Tab>
+            </Tabs>
+          </div>
         </Col>
       </Row>
       <ModalAddVoters show={modalShow} onHide={() => handleClose()} />
