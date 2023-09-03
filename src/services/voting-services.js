@@ -284,13 +284,6 @@ const getCandidateUsers = (id) =>
     })
     .then((response) => response);
 
-const getCandidateByIdUsers = (id, candidateNumber) =>
-  axios
-    .get(`${API_URL}/users/pemilihan/${id}/get-kandidat/${candidateNumber}`, {
-      headers: authHeader(),
-    })
-    .then((response) => response);
-
 const getTimelineUsers = (id, timezone) =>
   axios
     .get(`${API_URL}/users/pemilihan/${id}/get-timeline`, {
@@ -347,7 +340,6 @@ const votingServices = {
   getInvalidVote,
   verifyVote,
   getCandidateUsers,
-  getCandidateByIdUsers,
   getTimelineUsers,
   countUsers,
 };
