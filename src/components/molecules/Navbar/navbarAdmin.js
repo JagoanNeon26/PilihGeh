@@ -54,6 +54,8 @@ function NavbarAdmin() {
       setActiveTab('manageVoters');
     } else if (pathname.includes('manageAdmin')) {
       setActiveTab('manageAdmin');
+    } else if (pathname.includes('manageVote')) {
+      setActiveTab('manageVote');
     } else if (pathname.includes('settings')) {
       setActiveTab('settings');
     } else {
@@ -136,6 +138,13 @@ function NavbarAdmin() {
             onClick={() => setActiveTab('manageAdmin')}
           >
             Manage Admin
+          </TabButton>
+          <TabButton
+            to={`/detailPemilihanAdmin/${router.query.id}/manageVote`}
+            active={activeTab === 'manageVote'}
+            onClick={() => setActiveTab('manageVote')}
+          >
+            Manage Vote
           </TabButton>
           <TabButton
             to={`/detailPemilihanAdmin/${router.query.id}/settings`}

@@ -244,6 +244,39 @@ const count = (id) =>
     })
     .then((response) => response);
 
+const getVote = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/get-vote`, { headers: authHeader() })
+    .then((response) => response);
+
+const getPendingVote = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/pending-vote`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const getVerifiedVote = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/verified-vote`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const getInvalidVote = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/invalid-vote`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const verifyVote = (id, data) =>
+  axios
+    .put(`${API_URL}/admin/pemilihan/${id}/verify-vote`, data, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
 const votingServices = {
   addVoting,
   getAdminVoting,
@@ -279,5 +312,10 @@ const votingServices = {
   getVotingById,
   addVote,
   count,
+  getVote,
+  getPendingVote,
+  getVerifiedVote,
+  getInvalidVote,
+  verifyVote,
 };
 export default votingServices;

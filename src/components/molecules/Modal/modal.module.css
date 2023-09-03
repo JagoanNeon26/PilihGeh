@@ -45,6 +45,12 @@
   color: #e6edf3;
 }
 
+.modalBodyViewPhoto {
+  padding: 30px 30px 30px 30px;
+  background-color: #0d1117;
+  color: #e6edf3;
+}
+
 .modalFooter {
   background-color: #0d1117;
   color: #e6edf3;
