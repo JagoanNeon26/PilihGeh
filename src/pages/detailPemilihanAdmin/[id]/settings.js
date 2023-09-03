@@ -10,6 +10,8 @@ import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihan() {
   const [isLoading, setIsLoading] = useState(false);
+  const [resetLoading, setResetLoading] = useState(false);
+  const [stopIsLoading, setStopIsLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
   const router = useRouter();
   const { id } = router.query;
@@ -38,7 +40,7 @@ function DetailPemilihan() {
   };
 
   const handleResetVote = async () => {
-    setIsLoading(true);
+    setResetLoading(true);
     try {
       await votingServices.resetVote(id);
       Swal.fire({
@@ -47,14 +49,14 @@ function DetailPemilihan() {
         text: 'The voting is done resetting',
       });
     } catch (error) {
-      setIsLoading(false);
+      setResetLoading(false);
     } finally {
-      setIsLoading(false);
+      setResetLoading(false);
     }
   };
 
   const handleStopVote = async () => {
-    setIsLoading(true);
+    setStopIsLoading(true);
     try {
       await votingServices.setStop(id);
       Swal.fire({
@@ -63,9 +65,9 @@ function DetailPemilihan() {
         text: 'The voting is now stopping',
       });
     } catch (error) {
-      setIsLoading(false);
+      setStopIsLoading(false);
     } finally {
-      setIsLoading(false);
+      setStopIsLoading(false);
     }
   };
 
@@ -150,7 +152,7 @@ function DetailPemilihan() {
             <Button
               type="button"
               onClick={handleResetVote}
-              disabled={isLoading}
+              disabled={resetLoading}
               className={styles.baseButton}
             >
               <div style={{ width: '60px' }}>
@@ -173,7 +175,7 @@ function DetailPemilihan() {
             <Button
               type="button"
               onClick={handleStopVote}
-              disabled={isLoading}
+              disabled={stopIsLoading}
               className={styles.baseButton}
             >
               <div style={{ width: '60px' }}>

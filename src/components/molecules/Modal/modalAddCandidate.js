@@ -97,7 +97,7 @@ function FormAddCandidate() {
               name="candidate1Tag"
               type="input"
               label="Candidate 1 Tag"
-              placeholder="Joko Santoso"
+              placeholder="Ketua"
               formikProps={formikProps}
               required
             />
@@ -106,7 +106,7 @@ function FormAddCandidate() {
               name="candidate2Tag"
               type="input"
               label="Candidate 2 Tag"
-              placeholder="Joko Santoso"
+              placeholder="Wakil Ketua"
               formikProps={formikProps}
             />
             <FormController
