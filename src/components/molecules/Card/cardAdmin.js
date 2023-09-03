@@ -2,16 +2,12 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Card as BootstrapCard, Button, Col, Row } from 'react-bootstrap';
 import styles from './card.module.css';
-import ModalVote from '../Modal/modalVote';
 import ModalEditCandidate from '../Modal/modalEditCandidate';
 import ModalAddCandidatePhoto from '../Modal/modalAddCandidatePhoto';
 
 function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate, image }) {
-  const [modalShow, setModalShow] = useState(false);
   const [modalAddShow, setModalAddShow] = useState(false);
   const [modalPhotoShow, setModalPhotoShow] = useState(false);
-  const handleShow = () => setModalShow(true);
-  const handleClose = () => setModalShow(false);
   const handleAddShow = () => setModalAddShow(true);
   const handleAddClose = () => setModalAddShow(false);
   const handleAddPhotoShow = () => setModalPhotoShow(true);
@@ -53,14 +49,8 @@ function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate, image }) {
           <Button className={styles.buttonModalEdit} onClick={handleAddShow}>
             Edit Info
           </Button>
-          <Button
-            className={styles.buttonModalEdit}
-            onClick={handleAddPhotoShow}
-          >
+          <Button className={styles.buttonModal} onClick={handleAddPhotoShow}>
             Edit Photo
-          </Button>
-          <Button className={styles.buttonModal} onClick={handleShow}>
-            Info
           </Button>
         </Row>
         <ModalEditCandidate
@@ -73,7 +63,6 @@ function CardAdmin({ paslon1, paslon2, tag1, tag2, noCandidate, image }) {
           onHide={handleAddPhotoClose}
           candidateNumber={noCandidate}
         />
-        <ModalVote show={modalShow} onHide={handleClose} />
       </BootstrapCard.Body>
     </BootstrapCard>
   );

@@ -25,7 +25,8 @@ function TimelineAdmin() {
 
   useEffect(() => {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-    if (id) {
+
+    if (timezone && id) {
       const fetchData = async () => {
         try {
           const response = await votingServices.getTimeline(id, timezone);
@@ -104,10 +105,13 @@ function TimelineAdmin() {
               <Button
                 onClick={handleDelete}
                 className={styles.buttonDelete}
-                isLoading={deleteLoadingButton}
                 disabled={deleteLoadingButton}
               >
-                <div style={{ width: '60px' }}>Delete</div>
+                {deleteLoadingButton ? (
+                  'Deleting...'
+                ) : (
+                  <div style={{ width: '60px' }}>Delete</div>
+                )}
               </Button>
             </div>
             <div className={styles.timelineBox}>

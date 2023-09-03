@@ -29,13 +29,13 @@ export default function ModalVote(props) {
       </Modal.Header>
       <Modal.Body className={styles.modalBodyVote}>
         <Accordion className={styles.accordion}>
-          <Accordion.Item eventKey="0" className={styles.accordionHeader}>
+          <Accordion.Item eventKey="0">
             <Accordion.Header>Visi</Accordion.Header>
             <Accordion.Body className={styles.accordionBody}>
               {visi}
             </Accordion.Body>
           </Accordion.Item>
-          <Accordion.Item eventKey="1" className={styles.accordionHeader}>
+          <Accordion.Item eventKey="1">
             <Accordion.Header>Misi</Accordion.Header>
             <Accordion.Body className={styles.accordionBody}>
               {misi}

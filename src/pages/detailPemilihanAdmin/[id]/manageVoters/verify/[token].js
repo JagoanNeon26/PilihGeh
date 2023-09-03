@@ -5,6 +5,7 @@ import Navbar from 'components/molecules/Navbar/navbar';
 import votingServices from 'services/voting-services';
 import { useRouter } from 'next/router';
 import styles from '../../../../../styles/Home.module.css';
+import Swal from 'sweetalert2';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
@@ -23,7 +24,11 @@ export default function Home() {
         router.push(`/detailPemilihanAdmin/${id}/manageVoters`);
       } catch (error) {
         setIsLoading(false);
-        router.push(`/detailPemilihanAdmin/${id}/manageVoters`);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: error.response?.data?.message,
+        });
       }
     };
 

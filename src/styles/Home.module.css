@@ -279,6 +279,11 @@
   background-color: maroon;
 }
 
+.buttonDelete:disabled {
+  background-color: maroon;
+  cursor: not-allowed;
+}
+
 .tableAdminWrapper {
   margin-top: 20px;
   padding: 0 39px 0 39px;

@@ -42,3 +42,16 @@ input::-webkit-inner-spin-button {
 ::-webkit-scrollbar-thumb:hover {
   background: #555;
 }
+
+.accordion-button {
+  background-color: #0d1117 !important;
+  color: #ffffff;
+}
+
+.accordion-button:focus {
+  box-shadow: none;
+}
+
+.accordion-button:not(.collapsed) {
+  color: #ffffff;
+}

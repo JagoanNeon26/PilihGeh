@@ -12,6 +12,7 @@ import 'react-bootstrap-table-next/dist/react-bootstrap-table2.min.css';
 import votingServices from 'services/voting-services';
 import Swal from 'sweetalert2';
 import ModalDeleteEmail from 'components/molecules/Modal/modalDeleteEmail';
+import uuid from 'utils/uuid';
 import styles from './table.module.css';
 
 function TableManageVoters({ onDataReady }) {
@@ -98,7 +99,7 @@ function TableManageVoters({ onDataReady }) {
       sortCaret,
     },
     {
-      dataField: 'id',
+      dataField: 'delete',
       text: 'Delete',
       classes: styles.deleteCell,
       formatter: (cell) => (
@@ -122,11 +123,12 @@ function TableManageVoters({ onDataReady }) {
       headerStyle: { width: '70px' },
     },
     {
-      dataField: 'id',
+      dataField: 'sendToken',
       text: 'Send Token',
       classes: styles.sendCell,
       formatter: (cell, row) => (
         <button
+          key={uuid()}
           onClick={() => {
             setSelectedId(cell);
             handleSendInvitation(row.id);

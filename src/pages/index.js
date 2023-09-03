@@ -104,7 +104,12 @@ export default function Home() {
           <Col style={{ display: 'flex', justifyContent: 'center' }}>
             <div className={styles.formLoginDaftarOTP}>
               <div className={styles.logoLoginRegisterOtp}>
-                <Image src="/Logo.png" alt="logo-login" layout="fill" />
+                <Image
+                  src="/Logo.png"
+                  alt="logo-login"
+                  layout="fill"
+                  priority
+                />
               </div>
               <div className={styles.TitleCenter}>Sign In</div>
               <div className={styles.containerForm}>

@@ -1,10 +1,14 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '@sweetalert2/theme-dark/dark.css';
 import '../styles/globals.css';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import { config } from '@fortawesome/fontawesome-svg-core';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { SSRProvider } from 'react-bootstrap';
 
 function MyApp({ Component, pageProps }) {
+  config.autoAddCss = false;
   return (
     <>
       <Head>

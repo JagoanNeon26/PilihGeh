@@ -35,7 +35,6 @@ function DetailPemilihan() {
       try {
         if (id) {
           const response = await votingServices.count(id);
-          console.log(response.data);
           setTotalVotes(response.data);
         }
       } catch (error) {
