@@ -277,6 +277,35 @@ const verifyVote = (id, data) =>
     })
     .then((response) => response);
 
+const getCandidateUsers = (id) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}/get-kandidat`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const getCandidateByIdUsers = (id, candidateNumber) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}/get-kandidat/${candidateNumber}`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const getTimelineUsers = (id, timezone) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}/get-timeline`, {
+      params: { timezone },
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const countUsers = (id) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}/count`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
 const votingServices = {
   addVoting,
   getAdminVoting,
@@ -317,5 +346,9 @@ const votingServices = {
   getVerifiedVote,
   getInvalidVote,
   verifyVote,
+  getCandidateUsers,
+  getCandidateByIdUsers,
+  getTimelineUsers,
+  countUsers,
 };
 export default votingServices;
