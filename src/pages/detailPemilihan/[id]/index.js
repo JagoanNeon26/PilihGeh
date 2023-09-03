@@ -19,7 +19,7 @@ function DetailPemilihan() {
   useEffect(() => {
     if (id) {
       votingServices
-        .getAdminVotingById(id)
+        .getCandidateByIdUsers(id)
         .then((response) => {
           const fetchedData = response.data.getPemilihan;
           setVotingId({
@@ -28,7 +28,7 @@ function DetailPemilihan() {
           });
 
           votingServices
-            .getCandidate(id)
+            .getCandidateUsers(id)
             .then((candidateResponse) => {
               const fetchedCandidates = candidateResponse.data.kandidat;
               setCardsData(fetchedCandidates);
@@ -55,7 +55,7 @@ function DetailPemilihan() {
     const timezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
     const fetchData = async () => {
       try {
-        const response = await votingServices.getTimeline(id, timezone);
+        const response = await votingServices.getTimelineUsers(id, timezone);
         const timelineItem = response.data.timeline;
         const formattedTimelineItems = [
           {
@@ -87,7 +87,7 @@ function DetailPemilihan() {
     const fetchData = async () => {
       try {
         if (id) {
-          const response = await votingServices.count(id);
+          const response = await votingServices.countUsers(id);
           setTotalVotes(response.data);
         }
       } catch (error) {
