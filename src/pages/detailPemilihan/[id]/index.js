@@ -14,7 +14,7 @@ function DetailPemilihan() {
   const [votingId, setVotingId] = useState({ title: '', organization: '' });
   const [timelineItems, setTimelineItems] = useState([]);
   const [totalVotes, setTotalVotes] = useState({});
-  const id = router.query.id;
+  const { id } = router.query;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -31,7 +31,6 @@ function DetailPemilihan() {
         // Handle errors here
       }
     };
-
     fetchData();
   }, [id]);
 
