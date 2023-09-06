@@ -52,7 +52,7 @@ function Card({
         </Row>
         <Row className={styles.cardFooter}>
           <Button className={styles.buttonModal} onClick={handleShow}>
-            <div style={{ width: '60px' }}>Info</div>
+            <div style={{ width: '60px' }}>Vote</div>
           </Button>
         </Row>
         <ModalVote

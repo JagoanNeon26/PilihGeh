@@ -68,6 +68,16 @@
   margin-right: 20vw;
 }
 
+.resendOtpButton {
+  color: #e6edf3;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.resendOtpButton:hover {
+  text-decoration: underline;
+}
+
 /* MENU PEMILIHAN */
 .tabs {
   padding: 0 60px 0 39px;
@@ -229,7 +239,6 @@
   display: flex;
   justify-content: center;
   padding: 30px;
-  margin-bottom: 30px;
 }
 
 .webcam {

@@ -24,7 +24,7 @@ function DetailPemilihan() {
           Swal.fire({
             icon: 'error',
             title: 'Error Fetching Candidates',
-            text: error.response.data.message,
+            text: error.response?.data?.message,
           });
         });
     }

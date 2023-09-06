@@ -10,6 +10,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import BaseButton from 'components/atoms/Button/button';
 import Swal from 'sweetalert2';
+import jwt from 'jsonwebtoken';
 import styles from '../styles/Home.module.css';
 
 function LoginForm() {
@@ -22,7 +23,21 @@ function LoginForm() {
     if (!authToken) {
       router.push('/');
     } else {
-      router.push('/menuPemilihan');
+      try {
+        const decodedToken = jwt.decode(authToken);
+        if (!decodedToken || !decodedToken.verified) {
+          router.push('/otpLoginRegister');
+        } else {
+          router.push('/menuPemilihan');
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error verifying OTP',
+          text: error.response?.data?.message,
+        });
+        // Handle the error appropriately (e.g., log it or redirect to an error page)
+      }
     }
   }, []);
 
@@ -47,7 +62,7 @@ function LoginForm() {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error.response.data.message,
+        text: error.response?.data?.message,
       });
     }
   };

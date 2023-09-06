@@ -27,7 +27,7 @@ function ProfileForm() {
         Swal.fire({
           icon: 'error',
           title: 'Error fetching user data',
-          text: error.response.data.message,
+          text: error.response?.data?.message,
         });
       });
   }, []);
@@ -99,7 +99,7 @@ function ProfileForm() {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error.response.data.message,
+        text: error.response?.data?.message,
       });
     }
   };

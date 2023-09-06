@@ -31,7 +31,7 @@ function FormAddCandidatePhoto({ noCandidate }) {
       router.reload();
     } catch (error) {
       setIsLoading(false);
-      if (error.response.data.message) {
+      if (error.response?.data?.message) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
