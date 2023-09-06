@@ -25,6 +25,7 @@
     "flowbite": "^1.7.0",
     "flowbite-react": "^0.4.11",
     "formik": "2.2.9",
+    "jsonwebtoken": "^9.0.2",
     "next": "12.1.6",
     "postcss": "^8.4.26",
     "prop-types": "^15.8.1",

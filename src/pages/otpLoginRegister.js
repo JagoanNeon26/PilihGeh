@@ -13,6 +13,8 @@ import styles from '../styles/Home.module.css';
 function OtpForm() {
   const [otp, setOtp] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [resendDisabled, setResendDisabled] = useState(false);
+  const [remainingTime, setRemainingTime] = useState(0);
   const router = useRouter();
 
   const handleSubmit = async (e) => {
@@ -28,10 +30,35 @@ function OtpForm() {
       Swal.fire({
         icon: 'error',
         title: 'Error verifying OTP',
-        text: error.response.data.message,
+        text: error.response?.data?.message,
       });
     }
     setIsLoading(false);
+  };
+
+  const handleResendClick = async () => {
+    try {
+      await AuthService.resendOtp();
+      setResendDisabled(true);
+      let timeLeft = 60;
+      setRemainingTime(timeLeft);
+      const countdownInterval = setInterval(() => {
+        timeLeft -= 1;
+        setRemainingTime(timeLeft);
+        if (timeLeft === 0) {
+          clearInterval(countdownInterval);
+          setResendDisabled(false);
+        }
+      }, 1000);
+      setIsLoading(false);
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error resending OTP',
+        text: error.response?.data?.message,
+      });
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -62,6 +89,14 @@ function OtpForm() {
         <BaseButton type="submit" isLoading={isLoading} disabled={isLoading}>
           Submit
         </BaseButton>
+        <button
+          type="button"
+          onClick={handleResendClick}
+          disabled={resendDisabled}
+          className={styles.resendOtpButton}
+        >
+          Resend OTP {remainingTime > 0 ? `in ${remainingTime} seconds` : ''}
+        </button>
       </Stack>
     </form>
   );

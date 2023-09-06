@@ -34,7 +34,7 @@ function TableRejectVote({ onDataReady }) {
         Swal.fire({
           icon: 'error',
           title: 'Oops..',
-          text: error.message,
+          text: error.response?.data?.message,
         });
       }
     };

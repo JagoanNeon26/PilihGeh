@@ -29,6 +29,11 @@ const verifyOtp = (data) =>
       return response;
     });
 
+const resendOtp = () =>
+  axios
+    .get(`${API_URL}/users/resend-otp`, { headers: authHeader() })
+    .then((response) => response);
+
 const logout = () => {
   localStorage.removeItem('auth-token');
 };
@@ -37,6 +42,7 @@ const AuthService = {
   register,
   login,
   verifyOtp,
+  resendOtp,
   logout,
 };
 export default AuthService;

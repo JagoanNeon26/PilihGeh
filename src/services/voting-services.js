@@ -230,6 +230,13 @@ const getVotingById = (id) =>
     .get(`${API_URL}/users/pemilihan/${id}`, { headers: authHeader() })
     .then((response) => response);
 
+const checkVoteAvalaibility = (id) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}/check-vote-available`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
 const addVote = (id, no_kandidat, data) =>
   axios
     .post(`${API_URL}/users/pemilihan/${id}/add-vote/${no_kandidat}`, data, {
@@ -342,5 +349,6 @@ const votingServices = {
   getCandidateUsers,
   getTimelineUsers,
   countUsers,
+  checkVoteAvalaibility,
 };
 export default votingServices;

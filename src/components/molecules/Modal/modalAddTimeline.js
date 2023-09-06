@@ -43,17 +43,17 @@ function FormAddTimeline() {
       router.reload();
     } catch (error) {
       setIsLoading(false);
-      if (error.response.data.message) {
+      if (error.response?.data?.message) {
         Swal.fire({
           icon: 'error',
           title: 'Oops...',
-          text: error.response.data.message,
+          text: error.response?.data?.message,
         });
       } else {
         Swal.fire({
           icon: 'error',
           title: 'An error occurred',
-          text: error.response.data.message,
+          text: error.response?.data?.message,
         });
       }
     }

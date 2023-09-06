@@ -31,7 +31,7 @@ function FormEditCandidate({ noCandidate }) {
         Swal.fire({
           icon: 'error',
           title: 'Error fetching candidate data',
-          text: error.response.data.message,
+          text: error.response?.data?.message,
         });
         setIsLoading(false);
       });
@@ -85,7 +85,7 @@ function FormEditCandidate({ noCandidate }) {
       Swal.fire({
         icon: 'error',
         title: 'Oops...',
-        text: error.response.data.message,
+        text: error.response?.data?.message,
       });
     }
   };

@@ -1,13 +1,32 @@
 /* eslint-disable no-unused-vars */
-import { React } from 'react';
+import { React, useState } from 'react';
 import { Modal, Accordion, ModalFooter, Button } from 'react-bootstrap';
 import { useRouter } from 'next/router';
+import votingServices from 'services/voting-services';
+import Swal from 'sweetalert2';
 import styles from './modal.module.css';
 
 export default function ModalVote(props) {
   const { show, onHide, visi, misi, noCandidate } = props;
+  const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
   const { id } = router.query;
+
+  const handleVoteClick = async () => {
+    setIsLoading(true);
+    try {
+      await votingServices.checkVoteAvalaibility(id);
+      setIsLoading(false);
+      router.push(`${id}/verifPhotoVote/${noCandidate}`);
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error resending OTP',
+        text: error.response?.data?.message,
+      });
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Modal
@@ -47,11 +66,10 @@ export default function ModalVote(props) {
         <Button
           type="button"
           className={styles.baseButton}
-          onClick={() => {
-            router.push(`${id}/verifPhotoVote/${noCandidate}`);
-          }}
+          onClick={handleVoteClick}
+          disabled={isLoading}
         >
-          Vote!
+          {isLoading ? 'Voting...' : 'Vote!'}
         </Button>
       </ModalFooter>
     </Modal>

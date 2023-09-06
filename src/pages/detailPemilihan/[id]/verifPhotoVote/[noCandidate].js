@@ -59,7 +59,7 @@ function PhotoUploader() {
       Swal.fire({
         icon: 'error',
         title: 'Oops..',
-        text: error.message,
+        text: error.response?.data?.message,
       });
     } finally {
       setIsLoading(false);
@@ -77,9 +77,11 @@ function PhotoUploader() {
       )}
       <div>
         {!isPreviewMode && (
-          <Button className={styles.baseButton} onClick={capturePhoto}>
-            Capture Photo
-          </Button>
+          <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+            <Button className={styles.baseButton} onClick={capturePhoto}>
+              Capture Photo
+            </Button>
+          </div>
         )}
         {isPreviewMode && (
           <div
@@ -131,14 +133,14 @@ export default function Home() {
                 </div>
               </a>
               <div className={styles.TitleCenter}>Photo Verification</div>
+              <div className={styles.containerPhotoUploader}>
+                <PhotoUploader />
+              </div>
               <div className={styles.containerAlready}>
                 <div className={styles.teksAlready}>
                   Please take a photo using your ID card to verify that you are
                   voting.
                 </div>
-              </div>
-              <div className={styles.containerPhotoUploader}>
-                <PhotoUploader />
               </div>
             </div>
           </Col>
