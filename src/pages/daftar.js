@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Col, Container, Row, Stack } from 'react-bootstrap';
 import Image from 'next/image';
 import BaseButton from 'components/atoms/Button/button';
@@ -11,11 +11,36 @@ import Head from 'next/head';
 import AuthService from 'services/auth-services';
 import FormController from 'components/atoms/Form/formController';
 import { useRouter } from 'next/router';
+import jwt from 'jsonwebtoken';
 import styles from '../styles/Home.module.css';
 
 function RegisterForm() {
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
+
+  useEffect(() => {
+    const authToken = localStorage.getItem('auth-token');
+
+    if (!authToken) {
+      router.push('/daftar');
+    } else {
+      try {
+        const decodedToken = jwt.decode(authToken);
+        if (!decodedToken || !decodedToken.verified) {
+          router.push('/otpLoginRegister');
+        } else {
+          router.push('/menuPemilihan');
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error verifying OTP',
+          text: error.response?.data?.message,
+        });
+        // Handle the error appropriately (e.g., log it or redirect to an error page)
+      }
+    }
+  }, []);
 
   const initialValues = {
     email: '',
