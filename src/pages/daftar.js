@@ -34,6 +34,7 @@ function RegisterForm() {
 
           const currentTime = Math.floor(Date.now() / 1000); // Convert to seconds
           if (exp && exp < currentTime) {
+            localStorage.removeItem('auth-token');
             router.push('/');
           } else if (!decodedToken.verified) {
             router.push('/otpLoginRegister');

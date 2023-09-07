@@ -30,13 +30,10 @@ function OtpForm() {
         if (!decodedToken) {
           router.push('/otpLoginRegister');
         } else {
-          // Get the expiration time (exp) from the decoded token
           const { exp } = decodedToken;
-
-          // Check if the token has expired
-          const currentTime = Math.floor(Date.now() / 1000); // Convert to seconds
+          const currentTime = Math.floor(Date.now() / 1000);
           if (exp && exp < currentTime) {
-            // Token has expired, redirect to /index or any other page
+            localStorage.removeItem('auth-token');
             router.push('/');
           }
         }

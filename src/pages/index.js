@@ -33,6 +33,7 @@ function LoginForm() {
 
           const currentTime = Math.floor(Date.now() / 1000);
           if (exp && exp < currentTime) {
+            localStorage.removeItem('auth-token');
             router.push('/');
           } else if (!decodedToken.verified) {
             router.push('/otpLoginRegister');
