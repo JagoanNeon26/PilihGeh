@@ -153,7 +153,7 @@ export default function OtpVerif() {
               <div className={styles.containerAlready}>
                 <div className={styles.teksAlready}>
                   We have sent the code verification to Your WhatsApp Number or
-                  Email
+                  Email. See the spam folder if you do not receive the code
                 </div>
               </div>
               <div className={styles.containerForm}>
