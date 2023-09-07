@@ -25,10 +25,21 @@ function LoginForm() {
     } else {
       try {
         const decodedToken = jwt.decode(authToken);
-        if (!decodedToken || !decodedToken.verified) {
+
+        if (!decodedToken) {
           router.push('/otpLoginRegister');
         } else {
-          router.push('/menuPemilihan');
+          const { exp } = decodedToken;
+
+          const currentTime = Math.floor(Date.now() / 1000);
+          if (exp && exp < currentTime) {
+            localStorage.removeItem('auth-token');
+            router.push('/');
+          } else if (!decodedToken.verified) {
+            router.push('/otpLoginRegister');
+          } else {
+            router.push('/menuPemilihan');
+          }
         }
       } catch (error) {
         Swal.fire({

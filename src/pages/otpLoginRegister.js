@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Col, Container, Row, Stack } from 'react-bootstrap';
 import Image from 'next/image';
@@ -8,6 +8,7 @@ import Link from 'next/link';
 import BaseButton from 'components/atoms/Button/button';
 import OTPInput from 'react-otp-input';
 import Swal from 'sweetalert2';
+import jwt from 'jsonwebtoken';
 import styles from '../styles/Home.module.css';
 
 function OtpForm() {
@@ -17,9 +18,38 @@ function OtpForm() {
   const [remainingTime, setRemainingTime] = useState(0);
   const router = useRouter();
 
+  useEffect(() => {
+    const authToken = localStorage.getItem('auth-token');
+
+    if (!authToken) {
+      router.push('/');
+    } else {
+      try {
+        const decodedToken = jwt.decode(authToken);
+
+        if (!decodedToken) {
+          router.push('/otpLoginRegister');
+        } else {
+          const { exp } = decodedToken;
+          const currentTime = Math.floor(Date.now() / 1000);
+          if (exp && exp < currentTime) {
+            localStorage.removeItem('auth-token');
+            router.push('/');
+          }
+        }
+      } catch (error) {
+        Swal.fire({
+          icon: 'error',
+          title: 'Error verifying OTP',
+          text: error,
+        });
+        // Handle the error appropriately (e.g., log it or redirect to an error page)
+      }
+    }
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-
     setIsLoading(true);
     try {
       await AuthService.verifyOtp({ otp });
