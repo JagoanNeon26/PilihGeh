@@ -41,8 +41,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 58px;
+  height: max-content;
   margin-bottom: 20px;
+  padding: 10px;
 }
 
 .teksAlready {
