@@ -18,6 +18,11 @@ function OtpForm() {
   const [remainingTime, setRemainingTime] = useState(0);
   const router = useRouter();
 
+  const handleChangeEmailOrPhoneNumber = () => {
+    localStorage.removeItem('auth-token');
+    router.push('/');
+  };
+
   useEffect(() => {
     const authToken = localStorage.getItem('auth-token');
 
@@ -126,6 +131,13 @@ function OtpForm() {
           className={styles.resendOtpButton}
         >
           Resend OTP {remainingTime > 0 ? `in ${remainingTime} seconds` : ''}
+        </button>
+        <button
+          type="button"
+          onClick={handleChangeEmailOrPhoneNumber}
+          className={styles.resendOtpButton}
+        >
+          Change Email or Phone Number
         </button>
       </Stack>
     </form>

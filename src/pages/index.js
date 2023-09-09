@@ -53,19 +53,28 @@ function LoginForm() {
   }, []);
 
   const initialValues = {
-    email: '',
+    loginInput: '',
     password: '',
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required('Email is required'),
+    loginInput: Yup.string().required('Email/Phone Number is required'),
     password: Yup.string().required('Password is required'),
   });
 
   const onSubmit = async (values) => {
+    const { loginInput } = values;
     setIsLoading(true);
+
+    let formattedLoginInput = loginInput;
+
+    if (loginInput && loginInput[0] === '0') {
+      formattedLoginInput = `62${loginInput.slice(1)}`;
+    } else if (loginInput && loginInput[0] !== '6' && loginInput[1] !== '2') {
+      formattedLoginInput = `62${loginInput}`;
+    }
     try {
-      await AuthService.login(values);
+      await AuthService.login({ ...values, loginInput: formattedLoginInput });
       setIsLoading(false);
       router.push('/otpLoginRegister');
     } catch (error) {
@@ -89,10 +98,10 @@ function LoginForm() {
           <Stack gap={4}>
             <FormController
               control="input"
-              name="email"
-              type="email"
-              label="Email"
-              placeholder="Enter your Email"
+              name="loginInput"
+              type="input"
+              label="Email/Phone Number"
+              placeholder="Enter your Email/Phone Number"
               formikProps={formikProps}
             />
             <FormController

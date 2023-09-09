@@ -57,6 +57,17 @@ function ProfileForm() {
   };
 
   const validationSchema = Yup.object({
+    personal_data: Yup.string().test(
+      'required-personal-data',
+      'Personal ID is required',
+      function handleFromPersonalData(value) {
+        const personal_data_type = this.resolve(Yup.ref('personal_data_type'));
+        return (
+          !['NPM/NIM', 'NIS', 'NIK'].includes(personal_data_type) ||
+          (value && value.trim() !== '')
+        );
+      }
+    ),
     agency: Yup.string().test(
       'required-agency',
       'Agency is required',
@@ -75,10 +86,18 @@ function ProfileForm() {
     setIsLoading(true);
 
     const updatedEmail = email !== userData.email && userData.email !== '';
-    const updatedPhone = no_hp === userData.no_hp && userData.no_hp !== '';
+    const updatedPhone = no_hp !== userData.no_hp && userData.no_hp !== '';
+
+    let formattedNoHp = no_hp;
+
+    if (no_hp && no_hp[0] === '0') {
+      formattedNoHp = `62${no_hp.slice(1)}`;
+    } else if (no_hp && no_hp[0] !== '6' && no_hp[1] !== '2') {
+      formattedNoHp = `62${no_hp}`;
+    }
 
     try {
-      await UserService.editProfile(values);
+      await UserService.editProfile({ ...values, no_hp: formattedNoHp });
       setIsLoading(false);
 
       if (
@@ -132,7 +151,7 @@ function ProfileForm() {
             <FormController
               control="input"
               name="no_hp"
-              type="number"
+              type="input"
               label="Phone Number"
               placeholder="Enter your Phone Number"
               formikProps={formikProps}
