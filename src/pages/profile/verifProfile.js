@@ -25,7 +25,7 @@ export default function Home() {
               </div>
               <div className={styles.containerAlready}>
                 <div className={styles.teksAlready}>
-                  Please click the link in the email we sent.
+                  Please click the link in the email or WhatsApp we sent.
                 </div>
               </div>
             </div>
