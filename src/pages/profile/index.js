@@ -90,10 +90,13 @@ function ProfileForm() {
 
     let formattedNoHp = no_hp;
 
-    if (no_hp && no_hp[0] === '0') {
-      formattedNoHp = `62${no_hp.slice(1)}`;
-    } else if (no_hp && no_hp[0] !== '6' && no_hp[1] !== '2') {
-      formattedNoHp = `62${no_hp}`;
+    if (no_hp && /^[0-9]/.test(no_hp)) {
+      // If the first character is a digit, format as needed
+      if (no_hp.startsWith('0')) {
+        formattedNoHp = `62${no_hp.slice(1)}`;
+      } else if (!no_hp.startsWith('62')) {
+        formattedNoHp = `62${no_hp}`;
+      }
     }
 
     try {

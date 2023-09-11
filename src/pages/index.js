@@ -68,11 +68,15 @@ function LoginForm() {
 
     let formattedLoginInput = loginInput;
 
-    if (loginInput && loginInput[0] === '0') {
-      formattedLoginInput = `62${loginInput.slice(1)}`;
-    } else if (loginInput && loginInput[0] !== '6' && loginInput[1] !== '2') {
-      formattedLoginInput = `62${loginInput}`;
+    if (loginInput && /^[0-9]/.test(loginInput)) {
+      // If the first character is a digit, format as needed
+      if (loginInput.startsWith('0')) {
+        formattedLoginInput = `62${loginInput.slice(1)}`;
+      } else if (!loginInput.startsWith('62')) {
+        formattedLoginInput = `62${loginInput}`;
+      }
     }
+
     try {
       await AuthService.login({ ...values, loginInput: formattedLoginInput });
       setIsLoading(false);
