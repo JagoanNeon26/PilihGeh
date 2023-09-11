@@ -56,8 +56,16 @@ function TableRejectVote({ onDataReady }) {
 
   const columns = [
     {
-      dataField: 'user_photo',
-      text: 'Photo',
+      dataField: 'User.name',
+      text: 'Name',
+      headerStyle: { width: '150px' },
+      classes: styles.overflowCell,
+      sort: true,
+      sortCaret,
+    },
+    {
+      dataField: 'User.personal_data',
+      text: 'Personal Data ID',
       headerStyle: { width: '150px' },
       classes: styles.overflowCell,
       sort: true,
@@ -65,7 +73,7 @@ function TableRejectVote({ onDataReady }) {
     },
     {
       dataField: 'view',
-      text: 'View',
+      text: 'Photo',
       classes: styles.deleteCell,
       formatter: (cell, row) => (
         <button

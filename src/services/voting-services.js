@@ -306,6 +306,20 @@ const countUsers = (id) =>
     })
     .then((response) => response);
 
+const verifyVoteUsers = (id, token) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}/verify-vote/${token}`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
+const resendVerifyVoteUsers = (id) =>
+  axios
+    .get(`${API_URL}/users/pemilihan/${id}/resend-token-verify-vote`, {
+      headers: authHeader(),
+    })
+    .then((response) => response);
+
 const votingServices = {
   addVoting,
   getAdminVoting,
@@ -350,5 +364,7 @@ const votingServices = {
   getTimelineUsers,
   countUsers,
   checkVoteAvalaibility,
+  verifyVoteUsers,
+  resendVerifyVoteUsers,
 };
 export default votingServices;

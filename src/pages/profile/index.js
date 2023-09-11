@@ -105,7 +105,7 @@ function ProfileForm() {
 
       if (
         (updatedEmail || updatedPhone) &&
-        (email !== userData.email || no_hp !== userData.no_hp)
+        (email !== userData.email || no_hp === userData.no_hp || no_hp)
       ) {
         router.push('/profile/verifProfile');
       } else {

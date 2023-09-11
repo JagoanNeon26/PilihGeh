@@ -46,12 +46,7 @@ function PhotoUploader() {
           no_kandidat,
           formData
         );
-        Swal.fire({
-          icon: 'success',
-          title: 'Success',
-          text: response.data.message,
-        });
-        router.push(`/detailPemilihan/${id}`);
+        router.push(`/detailPemilihan/${id}/verify`);
       } else {
         // Handle the case when no photo is captured
       }

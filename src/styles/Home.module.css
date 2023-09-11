@@ -39,6 +39,7 @@
   border-radius: 10px;
   border: 1px solid #30363d;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   height: max-content;
