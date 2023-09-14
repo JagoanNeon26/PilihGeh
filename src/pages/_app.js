@@ -1,4 +1,3 @@
-require('dotenv').config();
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@sweetalert2/theme-dark/dark.css';
 import '../styles/globals.css';
@@ -7,6 +6,8 @@ import { config } from '@fortawesome/fontawesome-svg-core';
 import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { SSRProvider } from 'react-bootstrap';
+
+require('dotenv').config();
 
 function MyApp({ Component, pageProps }) {
   config.autoAddCss = false;
