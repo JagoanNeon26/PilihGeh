@@ -7,6 +7,8 @@ import PropTypes from 'prop-types';
 import Head from 'next/head';
 import { SSRProvider } from 'react-bootstrap';
 
+require('dotenv').config();
+
 function MyApp({ Component, pageProps }) {
   config.autoAddCss = false;
   return (

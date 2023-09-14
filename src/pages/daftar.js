@@ -12,6 +12,7 @@ import AuthService from 'services/auth-services';
 import FormController from 'components/atoms/Form/formController';
 import { useRouter } from 'next/router';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import styles from '../styles/Home.module.css';
 
 function RegisterForm() {
@@ -57,7 +58,6 @@ function RegisterForm() {
     email: '',
     name: '',
     password: '',
-    confirmPassword: '',
   };
 
   const validationSchema = Yup.object({
@@ -69,10 +69,34 @@ function RegisterForm() {
       .required('Confirm Password is required'),
   });
 
+  function encryptData(name, email, password) {
+    const algorithm = 'aes-256-cbc';
+    const key = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
+    const iv = crypto.randomBytes(16);
+
+    const cipher = crypto.createCipheriv(
+      algorithm,
+      Buffer.from(key, 'hex'),
+      iv
+    );
+    let encryptedData = cipher.update(
+      JSON.stringify({ name, email, password }),
+      'utf-8',
+      'hex'
+    );
+    encryptedData += cipher.final('hex');
+
+    return {
+      iv: iv.toString('hex'),
+      data: encryptedData,
+    };
+  }
+
   const onSubmit = async (values) => {
     setIsLoading(true);
+    const encryptedValues = encryptData(values);
     try {
-      await AuthService.register(values);
+      await AuthService.register(encryptedValues);
       setIsLoading(false);
       router.push('/otpLoginRegister');
     } catch (error) {
