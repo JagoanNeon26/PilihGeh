@@ -11,6 +11,7 @@ import { useRouter } from 'next/router';
 import BaseButton from 'components/atoms/Button/button';
 import Swal from 'sweetalert2';
 import jwt from 'jsonwebtoken';
+import crypto from 'crypto';
 import styles from '../styles/Home.module.css';
 
 function LoginForm() {
@@ -62,14 +63,36 @@ function LoginForm() {
     password: Yup.string().required('Password is required'),
   });
 
+  function encryptData(loginInput, password) {
+    const algorithm = 'aes-256-cbc';
+    const key = process.env.NEXT_PUBLIC_ENCRYPTION_KEY;
+    const iv = crypto.randomBytes(16);
+
+    const cipher = crypto.createCipheriv(
+      algorithm,
+      Buffer.from(key, 'hex'),
+      iv
+    );
+    let encryptedData = cipher.update(
+      JSON.stringify({ loginInput, password }),
+      'utf-8',
+      'hex'
+    );
+    encryptedData += cipher.final('hex');
+
+    return {
+      iv: iv.toString('hex'),
+      data: encryptedData,
+    };
+  }
+
   const onSubmit = async (values) => {
-    const { loginInput } = values;
     setIsLoading(true);
+    const { loginInput, password } = values;
 
     let formattedLoginInput = loginInput;
 
     if (loginInput && /^[0-9]/.test(loginInput)) {
-      // If the first character is a digit, format as needed
       if (loginInput.startsWith('0')) {
         formattedLoginInput = `62${loginInput.slice(1)}`;
       } else if (!loginInput.startsWith('62')) {
@@ -77,8 +100,10 @@ function LoginForm() {
       }
     }
 
+    const encryptedValues = encryptData(formattedLoginInput, password);
+
     try {
-      await AuthService.login({ ...values, loginInput: formattedLoginInput });
+      await AuthService.login(encryptedValues);
       setIsLoading(false);
       router.push('/otpLoginRegister');
     } catch (error) {

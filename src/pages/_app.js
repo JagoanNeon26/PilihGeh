@@ -1,3 +1,4 @@
+require('dotenv').config();
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '@sweetalert2/theme-dark/dark.css';
 import '../styles/globals.css';
