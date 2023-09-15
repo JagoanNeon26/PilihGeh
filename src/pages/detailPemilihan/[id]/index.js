@@ -49,7 +49,7 @@ function DetailPemilihan() {
         })
         .catch((error) => {
           if (error.response && error.response.status === 404) {
-            //Intentionally left empty
+            // Intentionally left empty
           } else {
             Swal.fire({
               icon: 'error',
@@ -85,7 +85,7 @@ function DetailPemilihan() {
         setTimelineItems(formattedTimelineItems);
       } catch (error) {
         if (error.response && error.response.status === 404) {
-          //Intentionally left empty
+          // Intentionally left empty
         } else {
           Swal.fire({
             icon: 'error',
@@ -110,7 +110,7 @@ function DetailPemilihan() {
         }
       } catch (error) {
         if (error.response && error.response.status === 404) {
-          //Intentionally left empty
+          // Intentionally left empty
         } else {
           Swal.fire({
             icon: 'error',
