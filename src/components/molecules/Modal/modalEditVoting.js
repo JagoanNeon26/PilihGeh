@@ -53,8 +53,13 @@ function FormEditVoting() {
   const onSubmit = async (values) => {
     setIsLoading(true);
     try {
-      await votingServices.editVoting(id, values);
+      const response = await votingServices.editVoting(id, values);
       setIsLoading(false);
+      Swal.fire({
+        icon: 'success',
+        title: 'Success',
+        text: response.data.message,
+      });
       router.reload();
     } catch (error) {
       setIsLoading(false);

@@ -45,6 +45,11 @@
   border-right: 0;
 }
 
+.buttonModal:disabled {
+  background-color: #161b22;
+  border: 0;
+}
+
 .buttonModalEdit {
   display: flex;
   flex-direction: row;

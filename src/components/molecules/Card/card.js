@@ -13,6 +13,7 @@ function Card({
   visi,
   misi,
   noCandidate,
+  votingStatus,
 }) {
   const [modalShow, setModalShow] = useState(false);
   const handleShow = () => setModalShow(true);
@@ -51,7 +52,14 @@ function Card({
           </Col>
         </Row>
         <Row className={styles.cardFooter}>
-          <Button className={styles.buttonModal} onClick={handleShow}>
+          <Button
+            className={styles.buttonModal}
+            onClick={handleShow}
+            disabled={
+              votingStatus === 'Emergency Stop Vote' ||
+              votingStatus === 'Tidak Bisa Diakses'
+            }
+          >
             <div style={{ width: '60px' }}>Vote</div>
           </Button>
         </Row>

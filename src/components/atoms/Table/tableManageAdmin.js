@@ -97,7 +97,7 @@ function TableManageAdmin({ onDataReady }) {
     {
       dataField: 'user_id',
       text: 'Delete',
-      classes: styles.deleteCell,
+      classes: styles.linkCell,
       formatter: (cell) => (
         <span
           onClick={() => {

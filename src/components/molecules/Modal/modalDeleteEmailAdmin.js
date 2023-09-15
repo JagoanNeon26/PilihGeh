@@ -12,8 +12,13 @@ export default function ModalDeleteEmailAdmin(props) {
   const router = useRouter();
   const user_id = selectedId;
   const { id } = router.query;
+  let hasDeleted = false;
 
   const handleDelete = async () => {
+    if (hasDeleted) {
+      return; // If already deleted once, do nothing
+    }
+
     try {
       const response = await votingServices.deleteAdmin(id, user_id);
       Swal.fire({
@@ -22,6 +27,7 @@ export default function ModalDeleteEmailAdmin(props) {
         text: response.data.message,
       });
       router.reload();
+      hasDeleted = true; // Set the flag to true to indicate deletion
     } catch (error) {
       Swal.fire({
         icon: 'error',

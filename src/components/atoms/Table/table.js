@@ -10,8 +10,10 @@ function TableVote() {
   const router = useRouter();
   const [data, setData] = useState([]);
 
-  const handleTableRowClick = (id) => {
-    router.push(`/detailPemilihan/${id}`);
+  const handleTableRowClick = (id, status) => {
+    if (status !== 'Tidak Bisa Diakses') {
+      router.push(`/detailPemilihan/${id}`);
+    }
   };
 
   useEffect(() => {
@@ -40,8 +42,8 @@ function TableVote() {
       headerStyle: { width: '150px' },
     },
     {
-      dataField: 'date',
-      text: 'Date',
+      dataField: 'status',
+      text: 'Status',
       headerStyle: { width: '100px' },
     },
     {
@@ -60,7 +62,7 @@ function TableVote() {
             data={data}
             columns={columns}
             rowEvents={{
-              onClick: (e, row) => handleTableRowClick(row.id),
+              onClick: (e, row) => handleTableRowClick(row.id, row.status),
             }}
             rowClasses={styles.tableBody}
             headerClasses={styles.tableHead}

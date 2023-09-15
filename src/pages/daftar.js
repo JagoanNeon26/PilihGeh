@@ -122,7 +122,7 @@ function RegisterForm() {
               control="input"
               name="email"
               type="email"
-              label="Email/Phone Number"
+              label="Email"
               placeholder="Enter your Email"
               formikProps={formikProps}
             />
@@ -164,7 +164,7 @@ export default function Daftar() {
   return (
     <div className={styles.container}>
       <Head>
-        <title>PilihGeh-Login</title>
+        <title>PilihGeh-Daftar</title>
         <link rel="icon" href="/Logo 3.png" />
       </Head>
 

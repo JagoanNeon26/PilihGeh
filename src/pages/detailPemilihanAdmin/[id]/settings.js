@@ -1,7 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import NavbarAdmin from 'components/molecules/Navbar/navbarAdmin';
 import { Button, Row, Spinner } from 'react-bootstrap';
-import BaseButton from 'components/atoms/Button/button';
 import ModalEditVoting from 'components/molecules/Modal/modalEditVoting';
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
@@ -9,6 +8,7 @@ import votingServices from 'services/voting-services';
 import styles from '../../../styles/Home.module.css';
 
 function DetailPemilihan() {
+  const [votingStatus, setVotingStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
   const [resetLoading, setResetLoading] = useState(false);
   const [stopIsLoading, setStopIsLoading] = useState(false);
@@ -23,6 +23,21 @@ function DetailPemilihan() {
     setIsModalVisible(false);
   };
 
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        if (id) {
+          const response = await votingServices.getAdminVotingById(id);
+          const fetchedData = response.data.getPemilihan;
+          setVotingStatus(fetchedData?.status);
+        }
+      } catch (error) {
+        // Handle errors here
+      }
+    };
+    fetchData();
+  }, [id]);
+
   const handleEmergencyStop = async () => {
     setIsLoading(true);
     try {
@@ -30,8 +45,14 @@ function DetailPemilihan() {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'The voting is now emergency stopping',
+        text:
+          votingStatus === 'Active'
+            ? 'The voting is emergency stopping'
+            : votingStatus === 'Emergency Stop Vote'
+            ? 'The voting is activated'
+            : 'Loading..',
       });
+      router.reload();
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -72,8 +93,14 @@ function DetailPemilihan() {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'The voting is now stopping',
+        text:
+          votingStatus === 'Active'
+            ? 'The voting is closing'
+            : votingStatus === 'Tidak Bisa Diakses'
+            ? 'The voting is opened'
+            : 'Loading..',
       });
+      router.reload();
     } catch (error) {
       Swal.fire({
         icon: 'error',
@@ -102,7 +129,7 @@ function DetailPemilihan() {
         }}
       >
         {/* Download */}
-        <div className={styles.containerSettings}>
+        {/* <div className={styles.containerSettings}>
           <div className={styles.judulContainerSettings}>Download Report</div>
           <div className={styles.descContainerSettings}>
             Download this vote report.
@@ -112,7 +139,7 @@ function DetailPemilihan() {
               <div style={{ width: '60px' }}>Add</div>
             </BaseButton>
           </div>
-        </div>
+        </div> */}
         {/* Change Name */}
         <div className={styles.containerSettings}>
           <div className={styles.judulContainerSettings}>
@@ -144,12 +171,20 @@ function DetailPemilihan() {
             <Button
               type="button"
               onClick={handleEmergencyStop}
-              disabled={isLoading}
+              disabled={
+                votingStatus === 'Uncompleted Data' ||
+                votingStatus === 'Tidak Bisa Diakses' ||
+                isLoading
+              }
               className={styles.baseButton}
             >
               <div style={{ width: '60px' }}>
                 {isLoading ? (
                   <Spinner animation="border" role="status" size="sm" />
+                ) : votingStatus === 'Active' ? (
+                  'Stop'
+                ) : votingStatus === 'Emergency Stop Vote' ? (
+                  'Activate'
                 ) : (
                   'Stop'
                 )}
@@ -196,6 +231,10 @@ function DetailPemilihan() {
               <div style={{ width: '60px' }}>
                 {stopIsLoading ? (
                   <Spinner animation="border" role="status" size="sm" />
+                ) : votingStatus === 'Active' ? (
+                  'Close'
+                ) : votingStatus === 'Tidak Bisa Diakses' ? (
+                  'Activate'
                 ) : (
                   'Close'
                 )}

@@ -42,10 +42,6 @@
   width: 15vw;
 }
 
-.buttonDelete:hover {
-  text-decoration: underline;
-}
-
 .overflowCell {
   white-space: nowrap;
   overflow: hidden;

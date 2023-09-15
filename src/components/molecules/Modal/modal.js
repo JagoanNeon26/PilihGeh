@@ -20,7 +20,7 @@ function FormAddVoting() {
   };
 
   const validationSchema = Yup.object({
-    title: Yup.string().required('Title is required'),
+    title: Yup.string().required('Voting Name is required'),
     organization: Yup.string().required('Organization is required'),
     detail: Yup.string().required('Description is required'),
   });
