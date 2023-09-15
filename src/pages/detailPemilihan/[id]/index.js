@@ -25,10 +25,15 @@ function DetailPemilihan() {
           setVotingId({
             title: fetchedData?.title,
             organization: fetchedData?.organization,
+            votingStatus: fetchedData?.status,
           });
         }
       } catch (error) {
-        // Handle errors here
+        if (error.response && error.response.status === 404) {
+          router.push('/menuPemilihan');
+        } else {
+          // Handle other errors here
+        }
       }
     };
     fetchData();
@@ -43,11 +48,15 @@ function DetailPemilihan() {
           setCardsData(fetchedCandidates);
         })
         .catch((error) => {
-          Swal.fire({
-            icon: 'error',
-            title: 'Error Fetching Candidates',
-            text: error.response?.data?.message,
-          });
+          if (error.response && error.response.status === 404) {
+            //Intentionally left empty
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error Fetching Candidates',
+              text: error.response?.data?.message,
+            });
+          }
         });
     }
   }, [id]);
@@ -75,7 +84,15 @@ function DetailPemilihan() {
 
         setTimelineItems(formattedTimelineItems);
       } catch (error) {
-        // Intentionally ignoring this error
+        if (error.response && error.response.status === 404) {
+          //Intentionally left empty
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error Fetching Timeline',
+            text: error.response?.data?.message,
+          });
+        }
       }
     };
 
@@ -92,7 +109,15 @@ function DetailPemilihan() {
           setTotalVotes(response.data);
         }
       } catch (error) {
-        // Handle errors here
+        if (error.response && error.response.status === 404) {
+          //Intentionally left empty
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Error Fetching Real Time Count',
+            text: error.response?.data?.message,
+          });
+        }
       }
     };
 
@@ -121,6 +146,7 @@ function DetailPemilihan() {
               image={item.photo}
               visi={item.visi}
               misi={item.misi}
+              votingStatus={votingId.votingStatus}
             />
           ))}
         </div>

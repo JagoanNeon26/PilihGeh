@@ -201,16 +201,18 @@ const editVoting = (id, data) =>
     })
     .then((response) => response);
 
-const setEmergency = (id) =>
+const setEmergency = (id, data) =>
   axios
-    .put(`${API_URL}/admin/pemilihan/${id}/set-emergency`, {
+    .put(`${API_URL}/admin/pemilihan/${id}/set-emergency`, data, {
       headers: authHeader(),
     })
     .then((response) => response);
 
-const setStop = (id) =>
+const setStop = (id, data) =>
   axios
-    .put(`${API_URL}/admin/pemilihan/${id}/set-stop`, { headers: authHeader() })
+    .put(`${API_URL}/admin/pemilihan/${id}/set-stop`, data, {
+      headers: authHeader(),
+    })
     .then((response) => response);
 
 const resetVote = (id) =>

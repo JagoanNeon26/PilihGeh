@@ -5,7 +5,7 @@ import { Row, Col, Dropdown, Image } from 'react-bootstrap';
 import AuthService from 'services/auth-services';
 import { useRouter } from 'next/router';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 import Link from 'next/link';
 import styles from './navbar.module.css';
 
@@ -49,9 +49,6 @@ function Navbar() {
       </Col>
       <Col className={styles.icon}>
         <div className={styles.iconWrapper}>
-          <CircleButton type="submit">
-            <FontAwesomeIcon icon={faBell} />
-          </CircleButton>
           <Dropdown show={isOpen} onToggle={handleDropdownToggle}>
             <Dropdown.Toggle
               as={CircleButton}

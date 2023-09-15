@@ -110,6 +110,11 @@
   border: 0;
 }
 
+.baseButton:disabled {
+  background-color: #161b22;
+  border: 0;
+}
+
 .widthButtonAddVote {
   width: 60px;
 }

@@ -173,7 +173,7 @@ function TablePendingVote({ onDataReady }) {
   ];
 
   const renderNoDataMessage = () => {
-    if (data.length === 0) return 'Currently no data voters.';
+    if (data.length === 0) return 'Currently no pending vote.';
     if (!id) return 'No ID provided.';
     return 'Loading data...';
   };

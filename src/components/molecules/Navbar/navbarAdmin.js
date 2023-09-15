@@ -3,7 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { CircleButton } from 'components/atoms/Button/button';
 import { Row, Col, Dropdown, Image } from 'react-bootstrap';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faBell, faGear } from '@fortawesome/free-solid-svg-icons';
+import { faGear } from '@fortawesome/free-solid-svg-icons';
 import TabButton from 'components/atoms/Button/tabNav';
 import { useRouter } from 'next/router';
 import Link from 'next/link';
@@ -80,9 +80,6 @@ function NavbarAdmin() {
         </Col>
         <Col className={styles.icon}>
           <div className={styles.iconWrapper}>
-            <CircleButton type="submit">
-              <FontAwesomeIcon icon={faBell} />
-            </CircleButton>
             <Dropdown show={isOpen} onToggle={handleDropdownToggle}>
               <Dropdown.Toggle
                 as={CircleButton}

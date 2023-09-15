@@ -101,7 +101,7 @@ function TableManageVoters({ onDataReady }) {
     {
       dataField: 'id',
       text: 'Delete',
-      classes: styles.deleteCell,
+      classes: styles.linkCell,
       formatter: (cell) => (
         <button
           onClick={() => {
@@ -125,7 +125,7 @@ function TableManageVoters({ onDataReady }) {
     {
       dataField: 'sendToken',
       text: 'Send Token',
-      classes: styles.sendCell,
+      classes: styles.linkCell,
       formatter: (cell, row) => (
         <button
           key={uuid()}

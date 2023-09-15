@@ -105,7 +105,7 @@ function TableManageVote({ onDataReady }) {
   ];
 
   const renderNoDataMessage = () => {
-    if (data.length === 0) return 'Currently no data voters.';
+    if (data.length === 0) return 'Currently no data vote.';
     if (!id) return 'No ID provided.';
     return 'Loading data...';
   };
