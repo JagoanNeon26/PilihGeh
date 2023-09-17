@@ -4,30 +4,41 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Navbar from 'components/molecules/Navbar/navbar';
 import votingServices from 'services/voting-services';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 import styles from '../../../../../styles/Home.module.css';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [verifStatus, setVerifStatus] = useState(null);
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    const delay = 5000;
-    const fetchData = async () => {
-      const token = window.location.pathname.split('/verify/')[1];
-      try {
-        await votingServices.joinVoters(id, token);
-        setIsLoading(false);
-        router.push(`/detailPemilihan/${id}`);
-      } catch (error) {
-        setIsLoading(false);
-        router.push(`/detailPemilihan/${id}`);
-      }
-    };
-
-    setTimeout(() => {
+    if (id) {
+      const fetchData = async () => {
+        const token = window.location.pathname.split('/verify/')[1];
+        try {
+          await votingServices.joinVoters(id, token);
+          setIsLoading(false);
+          router.push(`/detailPemilihan/${id}`);
+        } catch (error) {
+          setIsLoading(false);
+          if (error.response && error.response.status === 500) {
+            // intentionally left empty
+          } else {
+            Swal.fire({
+              icon: 'error',
+              title: 'Error',
+              text: error.response?.data?.message,
+            });
+          }
+          const fetchedData = error.response?.data;
+          setVerifStatus(fetchedData.message);
+          router.push(`/menuPemilihan`);
+        }
+      };
       fetchData();
-    }, delay);
+    }
   }, [id]);
 
   return (
@@ -50,7 +61,11 @@ export default function Home() {
                   </div>
                 ) : (
                   <div className={styles.teksAlready}>
-                    Your account has been join voting as voters successfully.
+                    {verifStatus ===
+                      'Tidak memiliki akses untuk join pemilihan!' ||
+                    verifStatus === 'jwt must be provided'
+                      ? 'Verification Failed'
+                      : ' Your account has been join voting as voters successfully.'}
                   </div>
                 )}
               </div>

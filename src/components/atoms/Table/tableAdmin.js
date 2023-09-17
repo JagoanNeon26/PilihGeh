@@ -40,11 +40,6 @@ function TableAdmin() {
       headerStyle: { width: '150px' },
     },
     {
-      dataField: 'date',
-      text: 'Date',
-      headerStyle: { width: '100px' },
-    },
-    {
       dataField: 'status',
       text: 'Voting Status',
       headerStyle: { width: '100px' },

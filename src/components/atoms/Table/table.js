@@ -24,7 +24,11 @@ function TableVote() {
         const formattedData = pemilihanData.map((item) => item.Pemilihan);
         setData(formattedData);
       } catch (error) {
-        // Intentionally ignoring this error
+        if (error.response && error.response.status === 500) {
+          router.push('/');
+        } else {
+          // Handle other errors if needed
+        }
       }
     };
     fetchData();
@@ -44,11 +48,6 @@ function TableVote() {
     {
       dataField: 'status',
       text: 'Status',
-      headerStyle: { width: '100px' },
-    },
-    {
-      dataField: 'status',
-      text: 'Voting Status',
       headerStyle: { width: '100px' },
     },
   ];
