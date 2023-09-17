@@ -4,30 +4,37 @@ import { Col, Container, Row } from 'react-bootstrap';
 import Navbar from 'components/molecules/Navbar/navbar';
 import votingServices from 'services/voting-services';
 import { useRouter } from 'next/router';
+import Swal from 'sweetalert2';
 import styles from '../../../../../styles/Home.module.css';
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(true);
+  const [verifStatus, setVerifStatus] = useState(null);
   const router = useRouter();
   const { id } = router.query;
 
   useEffect(() => {
-    const delay = 3000;
-    const fetchData = async () => {
-      const token = window.location.pathname.split('/verify/')[1];
-      try {
-        await votingServices.joinAdmin(id, token);
-        setIsLoading(false);
-        router.push(`/detailPemilihanAdmin/${id}/manageAdmin`);
-      } catch (error) {
-        setIsLoading(false);
-        router.push(`/detailPemilihanAdmin/${id}/manageAdmin`);
-      }
-    };
-
-    setTimeout(() => {
+    if (id) {
+      const fetchData = async () => {
+        const token = window.location.pathname.split('/verify/')[1];
+        try {
+          await votingServices.joinAdmin(id, token);
+          setIsLoading(false);
+          router.push(`/detailPemilihan/${id}`);
+        } catch (error) {
+          setIsLoading(false);
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: error.response?.data?.message,
+          });
+          const fetchedData = error.response?.data;
+          setVerifStatus(fetchedData.message);
+          // router.push(`/detailPemilihan/${id}`);
+        }
+      };
       fetchData();
-    }, delay);
+    }
   }, [id]);
 
   return (
@@ -50,7 +57,11 @@ export default function Home() {
                   </div>
                 ) : (
                   <div className={styles.teksAlready}>
-                    Your account has been join voting as admin successfully.
+                    {verifStatus ===
+                      'Tidak memiliki akses untuk join pemilihan!' ||
+                    verifStatus === 'jwt must be provided'
+                      ? 'Verification Failed'
+                      : ' Your account has been join voting as voters successfully.'}
                   </div>
                 )}
               </div>

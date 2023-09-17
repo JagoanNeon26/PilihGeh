@@ -2,7 +2,7 @@
 /* eslint-disable camelcase */
 import React, { useState, useEffect } from 'react';
 import Head from 'next/head';
-import { Col, Container, Row, Spinner, Stack } from 'react-bootstrap';
+import { Col, Row, Spinner, Stack } from 'react-bootstrap';
 import BaseButton from 'components/atoms/Button/button';
 import FormController from 'components/atoms/Form/formController';
 import { Form, Formik } from 'formik';
@@ -210,7 +210,7 @@ export default function Home() {
         <link rel="icon" href="/Logo 3.png" />
       </Head>
 
-      <Container fluid>
+      <div>
         <Row>
           <Navbar />
           <Col style={{ display: 'flex', justifyContent: 'center' }}>
@@ -224,7 +224,7 @@ export default function Home() {
             </div>
           </Col>
         </Row>
-      </Container>
+      </div>
     </div>
   );
 }
