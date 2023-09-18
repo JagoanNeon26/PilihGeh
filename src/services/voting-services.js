@@ -194,6 +194,14 @@ const addCandidatePhoto = (id, data, no_kandidat) =>
     )
     .then((response) => response);
 
+const downloadVote = (id) =>
+  axios
+    .get(`${API_URL}/admin/pemilihan/${id}/download-data`, {
+      headers: authHeader(),
+      responseType: 'arraybuffer', // Ensure the response type is set to arraybuffer
+    })
+    .then((response) => response);
+
 const editVoting = (id, data) =>
   axios
     .post(`${API_URL}/admin/pemilihan/${id}/change-title`, data, {
@@ -350,6 +358,7 @@ const votingServices = {
   joinAdmin,
   addCandidatePhoto,
   editVoting,
+  downloadVote,
   setEmergency,
   setStop,
   resetVote,
