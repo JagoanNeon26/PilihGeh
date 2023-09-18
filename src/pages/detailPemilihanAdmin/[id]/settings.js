@@ -10,6 +10,7 @@ import styles from '../../../styles/Home.module.css';
 function DetailPemilihan() {
   const [votingStatus, setVotingStatus] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+  const [downloadVote, setDownloadVote] = useState(null);
   const [resetLoading, setResetLoading] = useState(false);
   const [stopIsLoading, setStopIsLoading] = useState(false);
   const [isModalVisible, setIsModalVisible] = useState(false);
@@ -37,6 +38,28 @@ function DetailPemilihan() {
     };
     fetchData();
   }, [id]);
+
+  const handleDownload = async () => {
+    setDownloadVote(true);
+    try {
+      const response = await votingServices.downloadVote(id);
+      const url = window.URL.createObjectURL(new Blob([response.data]));
+      const link = document.createElement('a');
+      link.href = url;
+      link.setAttribute('download', 'Detail Pemilihan.csv');
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    } catch (error) {
+      Swal.fire({
+        icon: 'error',
+        title: 'Error',
+        text: error.response?.data?.message,
+      });
+    } finally {
+      setDownloadVote(false);
+    }
+  };
 
   const handleEmergencyStop = async () => {
     setIsLoading(true);
@@ -129,17 +152,28 @@ function DetailPemilihan() {
         }}
       >
         {/* Download */}
-        {/* <div className={styles.containerSettings}>
+        <div className={styles.containerSettings}>
           <div className={styles.judulContainerSettings}>Download Report</div>
           <div className={styles.descContainerSettings}>
             Download this vote report.
           </div>
           <div>
-            <BaseButton type="submit">
-              <div style={{ width: '60px' }}>Add</div>
-            </BaseButton>
+            <Button
+              className={styles.baseButton}
+              type="button"
+              onClick={handleDownload}
+              disabled={downloadVote}
+            >
+              <div style={{ width: '60px' }}>
+                {downloadVote ? (
+                  <Spinner animation="border" role="status" size="sm" />
+                ) : (
+                  'Download'
+                )}
+              </div>
+            </Button>
           </div>
-        </div> */}
+        </div>
         {/* Change Name */}
         <div className={styles.containerSettings}>
           <div className={styles.judulContainerSettings}>
