@@ -25,9 +25,9 @@ function FormAddTimeline() {
   };
 
   const validationSchema = Yup.object({
-    start_vote: Yup.date().required('Voting Day is required'),
-    end_vote: Yup.date().required('Final Count Day is required'),
-    show_count: Yup.date().required('Closing Day is required'),
+    start_vote: Yup.date().required('Voting Day perlu diisi!'),
+    end_vote: Yup.date().required('Final Count Day perlu diisi!'),
+    show_count: Yup.date().required('Closing Day perlu diisi!'),
   });
 
   const onSubmit = async (values) => {

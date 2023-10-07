@@ -70,9 +70,9 @@ function DetailPemilihan() {
         title: 'Success',
         text:
           votingStatus === 'Active'
-            ? 'The voting is emergency stopping'
+            ? 'Pemungutan suara telah dihentikan sementara'
             : votingStatus === 'Emergency Stop Vote'
-            ? 'The voting is activated'
+            ? 'Pemungutan suara telah berstatus diaktifkan kembali'
             : 'Loading..',
       });
       router.reload();
@@ -95,7 +95,7 @@ function DetailPemilihan() {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'The voting is done resetting',
+        text: 'Pemungutan suara telah direset',
       });
     } catch (error) {
       Swal.fire({
@@ -118,9 +118,9 @@ function DetailPemilihan() {
         title: 'Success',
         text:
           votingStatus === 'Active'
-            ? 'The voting is closing'
+            ? 'Pemungutan suara telah berstatus tidak dapat diakses'
             : votingStatus === 'Tidak Bisa Diakses'
-            ? 'The voting is opened'
+            ? 'Pemungutan suara telah berstatus dibuka'
             : 'Loading..',
       });
       router.reload();

@@ -122,7 +122,7 @@ function TableManageAdmin({ onDataReady }) {
 
   const renderNoDataMessage = () => {
     if (data.length === 0) {
-      return 'Currently no data voters.';
+      return 'Tidak ada pengguna admin.';
     }
     if (!id) {
       return 'No ID provided.';

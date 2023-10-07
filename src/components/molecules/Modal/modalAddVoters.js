@@ -21,7 +21,7 @@ function FormAddVoters() {
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required('Email is required'),
+    email: Yup.string().email().required('Email perlu diisi!'),
   });
 
   const onSubmit = async (values) => {

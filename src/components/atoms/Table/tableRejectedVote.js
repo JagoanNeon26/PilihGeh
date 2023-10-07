@@ -94,7 +94,7 @@ function TableRejectVote({ onDataReady }) {
   ];
 
   const renderNoDataMessage = () => {
-    if (data.length === 0) return 'Currently no rejected vote.';
+    if (data.length === 0) return 'Tidak ada vote yang berstatus ditolak.';
     if (!id) return 'No ID provided.';
     return 'Loading data...';
   };

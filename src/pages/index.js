@@ -59,8 +59,8 @@ function LoginForm() {
   };
 
   const validationSchema = Yup.object({
-    loginInput: Yup.string().required('Email/Phone Number is required'),
-    password: Yup.string().required('Password is required'),
+    loginInput: Yup.string().required('Email/Phone Number perlu diisi!'),
+    password: Yup.string().required('Password perlu diisi!'),
   });
 
   function encryptData(loginInput, password) {

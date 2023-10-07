@@ -105,7 +105,7 @@ function TableManageVote({ onDataReady }) {
   ];
 
   const renderNoDataMessage = () => {
-    if (data.length === 0) return 'Currently no data vote.';
+    if (data.length === 0) return 'Tidak ada vote yang telah masuk';
     if (!id) return 'No ID provided.';
     return 'Loading data...';
   };

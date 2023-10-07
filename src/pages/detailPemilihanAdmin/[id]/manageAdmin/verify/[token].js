@@ -26,7 +26,12 @@ export default function Home() {
           Swal.fire({
             icon: 'error',
             title: 'Error',
-            text: error.response?.data?.message,
+            text:
+              error.response?.data?.message === 'jwt must be provided'
+                ? 'Anda harus login/daftar terlebih dahulu'
+                : error.response?.data?.message === "You can't use this token!"
+                ? 'Link yang anda gunakan berbeda dengan email tujuan link'
+                : error.response?.data?.message,
           });
           const fetchedData = error.response?.data;
           setVerifStatus(fetchedData.message);
@@ -53,7 +58,8 @@ export default function Home() {
               <div className={styles.containerAlready}>
                 {isLoading ? (
                   <div className={styles.teksAlready}>
-                    Please wait, we are still verifying for join voting.
+                    Silahkan tunggu, saya sedang memverifikasi untuk join
+                    pemilihan sebagai admin.
                   </div>
                 ) : (
                   <div className={styles.teksAlready}>
@@ -61,7 +67,7 @@ export default function Home() {
                       'Tidak memiliki akses untuk join pemilihan!' ||
                     verifStatus === 'jwt must be provided'
                       ? 'Verification Failed'
-                      : ' Your account has been join voting as voters successfully.'}
+                      : ' Akun anda telah berhasil join pemilihan sebagai admin'}
                   </div>
                 )}
               </div>

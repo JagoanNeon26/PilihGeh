@@ -59,7 +59,7 @@ function ProfileForm() {
   const validationSchema = Yup.object({
     personal_data: Yup.string().test(
       'required-personal-data',
-      'Personal ID is required',
+      'Personal ID perlu diisi!',
       function handleFromPersonalData(value) {
         const personal_data_type = this.resolve(Yup.ref('personal_data_type'));
         return (
@@ -70,7 +70,7 @@ function ProfileForm() {
     ),
     agency: Yup.string().test(
       'required-agency',
-      'Agency is required',
+      'Agency perlu diisi!',
       function handleFromAgency(value) {
         const personal_data_type = this.resolve(Yup.ref('personal_data_type'));
         return (

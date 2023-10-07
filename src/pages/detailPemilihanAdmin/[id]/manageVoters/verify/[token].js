@@ -57,7 +57,8 @@ export default function Home() {
               <div className={styles.containerAlready}>
                 {isLoading ? (
                   <div className={styles.teksAlready}>
-                    Please wait, we are still verifying for join voting.
+                    Silahkan tunggu, saya sedang memverifikasi untuk join
+                    pemilihan.
                   </div>
                 ) : (
                   <div className={styles.teksAlready}>
@@ -65,7 +66,7 @@ export default function Home() {
                       'Tidak memiliki akses untuk join pemilihan!' ||
                     verifStatus === 'jwt must be provided'
                       ? 'Verification Failed'
-                      : ' Your account has been join voting as voters successfully.'}
+                      : 'Akun anda telah berhasil join pemilihan sebagai pemilih.'}
                   </div>
                 )}
               </div>

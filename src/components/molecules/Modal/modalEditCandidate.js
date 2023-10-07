@@ -98,7 +98,7 @@ function FormEditCandidate({ noCandidate }) {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'Candidate deleted successfully.',
+        text: 'Kandidat Berhasil Dihapus',
       });
       router.reload();
     } catch (error) {

@@ -94,7 +94,7 @@ function TableAcceptVote({ onDataReady }) {
   ];
 
   const renderNoDataMessage = () => {
-    if (data.length === 0) return 'Currently no accepted vote.';
+    if (data.length === 0) return 'Tidak ada vote yang berstatus diterima.';
     if (!id) return 'No ID provided.';
     return 'Loading data...';
   };
