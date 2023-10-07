@@ -61,12 +61,12 @@ function RegisterForm() {
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required('Email is required'),
-    name: Yup.string().required('Name is required'),
-    password: Yup.string().required('Password is required'),
+    email: Yup.string().email().required('Email perlu diisi!'),
+    name: Yup.string().required('Nama perlu diisi!'),
+    password: Yup.string().required('Password perlu diisi!'),
     confirmPassword: Yup.string()
       .oneOf([Yup.ref('password'), null], 'Passwords must match')
-      .required('Confirm Password is required'),
+      .required('Confirm Password perlu diisi!'),
   });
 
   function encryptData(name, email, password) {

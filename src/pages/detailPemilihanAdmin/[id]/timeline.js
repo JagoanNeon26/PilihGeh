@@ -63,7 +63,7 @@ function TimelineAdmin() {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'Timeline deleted successfully.',
+        text: 'Timeline berhasil dihapus.',
       });
       router.reload();
     } catch (error) {
@@ -88,7 +88,7 @@ function TimelineAdmin() {
         {timelineItems.length === 0 ? (
           <div className={styles.timelineBox}>
             <div className={styles.containerNoValue}>
-              <div>No timeline available</div>
+              <div>Timeline belum ditambahkan</div>
               <div className={styles.buttonNoValueWrapper}>
                 <Button onClick={handleShow} className={styles.baseButton}>
                   <div style={{ width: '60px' }}>Add</div>

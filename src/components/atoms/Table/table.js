@@ -70,7 +70,7 @@ function TableVote() {
         </div>
       ) : (
         <p style={{ textAlign: 'center', marginTop: '20px', color: 'white' }}>
-          You have not followed any voting.
+          Anda belum mengikuti voting apa pun.
         </p>
       )}
     </div>

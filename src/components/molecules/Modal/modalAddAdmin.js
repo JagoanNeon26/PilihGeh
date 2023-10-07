@@ -21,7 +21,7 @@ function FormAddAdmin() {
   };
 
   const validationSchema = Yup.object({
-    email: Yup.string().email().required('Email is required'),
+    email: Yup.string().email().required('Email perlu diisi!'),
   });
 
   const onSubmit = async (values) => {
@@ -32,7 +32,7 @@ function FormAddAdmin() {
       Swal.fire({
         icon: 'success',
         title: 'Success',
-        text: 'Check the email to can join voting as admin',
+        text: 'Cek email untuk dapat mengikuti pemungutan suara sebagai admin',
       });
     } catch (error) {
       setIsLoading(false);

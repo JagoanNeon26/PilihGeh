@@ -27,13 +27,13 @@ function FormAddCandidate() {
   };
 
   const validationSchema = Yup.object({
-    candidateNumber: Yup.number().required('Candidate Number is required!'),
-    candidate1Name: Yup.string().required('Candidate 1 Name is required!'),
+    candidateNumber: Yup.number().required('Candidate Number perlu diisi!'),
+    candidate1Name: Yup.string().required('Candidate 1 Name perlu diisi!'),
     candidate2Name: Yup.string(),
-    candidate1Tag: Yup.string().required('Candidate 1 Tag is required!'),
+    candidate1Tag: Yup.string().required('Candidate 1 Tag perlu diisi!'),
     candidate2Tag: Yup.string(),
-    visi: Yup.string().required('Vision is required!'),
-    misi: Yup.string().required('Mision is required!'),
+    visi: Yup.string().required('Vision perlu diisi!'),
+    misi: Yup.string().required('Mision perlu diisi!'),
   });
 
   const onSubmit = async (values) => {

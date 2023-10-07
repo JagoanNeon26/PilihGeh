@@ -18,7 +18,6 @@ export default function ModalDeleteEmailAdmin(props) {
     if (hasDeleted) {
       return; // If already deleted once, do nothing
     }
-
     try {
       const response = await votingServices.deleteAdmin(id, user_id);
       Swal.fire({
@@ -32,7 +31,10 @@ export default function ModalDeleteEmailAdmin(props) {
       Swal.fire({
         icon: 'error',
         title: 'Oops..',
-        text: error.response?.data?.message,
+        text:
+          error.response?.data?.message === "You can't delete yourself!"
+            ? 'Anda tidak dapat menghapus diri sendiri!'
+            : error.response?.data?.message,
       });
     }
   };
